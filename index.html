@@ -22,7 +22,7 @@
 
     <div class="row" aria-role="main" data-ng-controller="TimerController">
       <div class="small-6 large-centered columns text-center">
-        <div class="timer" tabindex="0" title="Click or SPACE BAR to start" data-ng-click="startTimer()">
+        <div class="timer" tabindex="0" title="Click or SPACE BAR to start" data-ng-click="toggleTimer()">
             <div class="progress-elapsed" aria-role="presentation" style="height: {{ progress }}%"></div>
             <div class="progress-indicator" aria-role="presentation"></div>
             <div class="time">{{ timeLeft.minutes }}:{{ timeLeft.seconds|padSeconds }}</div>

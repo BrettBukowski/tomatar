@@ -33,6 +33,10 @@ app.controller('TimerController', ['$scope', '$window', 'pomodoroService', funct
 
   var intervalId;
 
+  function isRunning() {
+    return !!intervalId;
+  }
+
   scope.updateTimer = function () {
     if (scope.timeLeft.seconds == 0) {
       scope.timeLeft.minutes--;
@@ -55,11 +59,24 @@ app.controller('TimerController', ['$scope', '$window', 'pomodoroService', funct
   };
 
   scope.resetTimer = function () {
-    if (intervalId !== null) {
+    scope.pauseTimer();
+    scope.timeLeft = pomodoroService.pomodoro();
+  };
+
+  scope.pauseTimer = function () {
+    if (isRunning()) {
       win.clearInterval(intervalId);
       intervalId = null;
     }
-    scope.timeLeft = pomodoroService.pomodoro();
+  };
+
+  scope.toggleTimer = function () {
+    if (isRunning()) {
+      scope.pauseTimer();
+    }
+    else {
+      scope.startTimer();
+    }
   };
 }]);
 
