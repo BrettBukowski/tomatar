@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en" data-ng-app="tomatar">
+<html class="no-js" lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
@@ -25,7 +25,7 @@
         <div class="timer" tabindex="0" title="Click or SPACE BAR to start" data-ng-click="toggleTimer()">
             <div class="progress-elapsed" aria-role="presentation" style="height: {{ progress }}%"></div>
             <div class="progress-indicator" aria-role="presentation"></div>
-            <div class="time">{{ timeLeft.minutes }}:{{ timeLeft.seconds|padSeconds }}</div>
+            <div class="time" data-ng-bind-template="{{ timeLeft.minutes }}:{{ timeLeft.seconds|padSeconds }}"></div>
         </div>
         <a href="javascript:;" data-ng-click="resetTimer()">reset</a>
       </div>
@@ -41,18 +41,6 @@
 
     <div class="row" data-ng-view>
     </div>
-
-  <script>
-  document.write('<script src=' +
-  ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
-  '.js><\/script>')
-  </script>
-  <script src="js/vendor/foundation.min.js"></script>
-  <script src="js/vendor/angular.min.js"></script>
-  <script src="js/main.js"></script>
-  <script>
-    $(document).foundation();
-  </script>
 
   <div id="settings" class="reveal-modal small">
     <h3>Settings</h3>
@@ -114,19 +102,11 @@
             <div class="row">
                 <div class="small-12 large-8">
                     <div class="row">
-                        <div class="small-6 large-6 columns">
-                            <label class="inline">Browser Notification</label>
+                        <div class="small-6 large-5 columns">
+                            <label class="">Browser Notification</label>
                         </div>
-                        <div class="small-3 large-3 columns">
-                            <div class="switch small">
-                              <input id="notif-off" name="notif" type="radio">
-                              <label for="notif-off" onclick="">Off</label>
-
-                              <input id="notif-on" name="notif" type="radio" checked>
-                              <label for="notif-on" onclick="">On</label>
-
-                              <span></span>
-                            </div>
+                        <div class="small-6 large-6 columns">
+                            <input id="notif-off" name="notif" type="checkbox" data-ng-click="toggleNotification(this)" data-ng-checked="alarms.notification.current">
                         </div>
                     </div>
                 </div>
@@ -135,19 +115,11 @@
             <div class="row">
                 <div class="small-12 large-8">
                     <div class="row">
-                        <div class="small-6 large-6 columns">
-                            <label class="inline">Buzzer</label>
+                        <div class="small-6 large-4 columns">
+                            <label class="">Buzzer</label>
                         </div>
-                        <div class="small-3 large-3 columns">
-                            <div class="switch small">
-                              <input id="sound-off" name="sound" type="radio">
-                              <label for="sound-off" onclick="">Off</label>
-
-                              <input id="sound-on" name="sound" type="radio" checked>
-                              <label for="sound-on" onclick="">On</label>
-
-                              <span></span>
-                            </div>
+                        <div class="small-6 large-6 columns">
+                            <input type="checkbox" data-ng-checked="alarms.sounds.current">
                         </div>
                     </div>
                 </div>
@@ -156,10 +128,10 @@
             <div class="row">
                 <div class="small-12 large-8">
                     <div class="row">
-                        <div class="small-6 large-6 columns">
-                            <label for="sound" class="inline">Sound effect:</label>
+                        <div class="small-6 large-4 columns">
+                            <label for="sound" class="">Sound effect:</label>
                         </div>
-                        <div class="small-3 large-6 columns">
+                        <div class="small-6 large-6 columns">
                             <select class="medium" id="sound">
                                 <option>Bell</option>
                                 <option>Buzzer</option>
@@ -171,8 +143,9 @@
             </div>
         </fieldset>
     </form>
-
     <a class="close-reveal-modal">&#215;</a>
   </div>
+
+  <script data-main="js/main" src="js/vendor/require.js"></script>
 </body>
 </html>
