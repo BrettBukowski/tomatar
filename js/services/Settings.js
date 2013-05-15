@@ -1,29 +1,28 @@
 define(['app'], function (app) {
   "use strict";
 
-  return app.factory('settingsService', function () {
-    var factory = {
-      'breaks': {
-        'pomodoro': {
-          'current': 25
-        },
-        'short': {
-          'current': 5
-        },
-        'long': {
-          'current': 15
-        }
+  var storageKey = 'settings';
+  var defaults = {
+    'breaks': {
+      'pomodoro': 25,
+      'short': 5,
+      'long': 15
+    },
+    'alarms': {
+      'notification': false,
+      'sounds': true
+    }
+  };
+
+  return app.factory('settingsService', ['storageService', function (storageService) {
+    return {
+      get: function () {
+        return storageService.getJSON(storageKey) || defaults;
       },
-      'alarms': {
-        'notification': {
-          'current': false
-        },
-        'sounds': {
-          'current': true
-        }
+
+      save: function (settings) {
+        storageService.setJSON(storageKey, settings);
       }
     };
-
-    return factory;
-  });
+  }]);
 });

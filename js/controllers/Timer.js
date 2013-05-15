@@ -53,7 +53,5 @@ define(['app'], function (app) {
         scope.startTimer();
       }
     };
-
-    scope.$apply();
   }]);
 });

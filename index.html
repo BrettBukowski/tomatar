@@ -45,7 +45,7 @@
   <div id="settings" class="reveal-modal small">
     <h3>Settings</h3>
 
-    <form class="custom" data-ng-controller="SettingsController">
+    <form class="" data-ng-controller="SettingsController">
         <fieldset>
             <legend>Time Intervals</legend>
 
@@ -56,7 +56,7 @@
                             <label for="pomodoro-length" class="inline">Pomodoro Length</label>
                         </div>
                         <div class="small-3 large-3 columns">
-                            <input id="pomodoro-length" type="number" min="1" max="60" value="{{ breaks.pomodoro.current }}">
+                            <input id="pomodoro-length" type="number" required min="1" max="60" data-ng-model="breaks.pomodoro">
                         </div>
                         <div class="small-3 large-3 columns">
                             <span class="postfix">minutes</span>
@@ -71,7 +71,7 @@
                             <label for="break-length" class="inline">Short Break Length</label>
                         </div>
                         <div class="small-3 large-3 columns">
-                            <input id="break-length" type="number" min="1" max="60" value="{{ breaks.short.current }}">
+                            <input id="break-length" type="number" required min="1" max="60" data-ng-model="breaks.short">
                         </div>
                         <div class="small-3 large-3 columns">
                             <span class="postfix">minutes</span>
@@ -86,7 +86,7 @@
                             <label for="longBreak-length" class="inline">Long Break Length</label>
                         </div>
                         <div class="small-3 large-3 columns">
-                            <input id="longBreak-length" type="number" min="1" max="60" value="{{ breaks.long.current }}">
+                            <input id="longBreak-length" type="number" required min="1" max="60" data-ng-model="breaks.long">
                         </div>
                         <div class="small-3 large-3 columns">
                             <span class="postfix">minutes</span>
@@ -103,23 +103,13 @@
                 <div class="small-12 large-8">
                     <div class="row">
                         <div class="small-6 large-5 columns">
-                            <label class="">Browser Notification</label>
+                            <label class="" for="notif">Browser Notification</label>
                         </div>
                         <div class="small-6 large-6 columns">
-                            <input id="notif-off" name="notif" type="checkbox" data-ng-click="toggleNotification(this)" data-ng-checked="alarms.notification.current">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="small-12 large-8">
-                    <div class="row">
-                        <div class="small-6 large-4 columns">
-                            <label class="">Buzzer</label>
-                        </div>
-                        <div class="small-6 large-6 columns">
-                            <input type="checkbox" data-ng-checked="alarms.sounds.current">
+                            <input id="notif" name="notif" type="checkbox"
+                                data-ng-change="toggleNotification()"
+                                data-ng-model="alarms.notification"
+                                data-ng-disabled="!notificationsAreAvailable()">
                         </div>
                     </div>
                 </div>
@@ -133,15 +123,20 @@
                         </div>
                         <div class="small-6 large-6 columns">
                             <select class="medium" id="sound">
+                                <option>None</option>
                                 <option>Bell</option>
                                 <option>Buzzer</option>
                                 <option>Triumph</option>
+                                <option>Blip</option>
                             </select>
                         </div>
                     </div>
                 </div>
             </div>
         </fieldset>
+        <div class="row">
+            <a href="javascript:;" class="small button success" data-ng-click="save()">Save</a>
+        </div>
     </form>
     <a class="close-reveal-modal">&#215;</a>
   </div>

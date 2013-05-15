@@ -1,23 +1,23 @@
-define(function () {
+define(['app'], function (app) {
   "use strict";
 
-  return {
-    name: 'storageService',
-    factory: ['$window', function (win) {
-      var factory = {
-        available: 'localStorage' in win,
+  return app.service('storageService', ['$window', function (win) {
+      this.available = 'localStorage' in win;
 
-        get: function (key) {
-          return win.localStorage.get(key);
-        },
-
-        set: function (key, value) {
-          return win.localStorage.set(key, value);
-        }
+      this.get = function (key) {
+        return win.localStorage.getItem(key);
       };
 
-      return factory;
-    }]
-  };
+      this.set = function (key, value) {
+        return win.localStorage.setItem(key, value);
+      };
+
+      this.setJSON = function (key, value) {
+        return this.set(key, win.JSON.stringify(value));
+      };
+
+      this.getJSON = function (key) {
+        return win.JSON.parse(this.get(key));
+      };
+  }]);
 });
-// app.factory('storageService', );

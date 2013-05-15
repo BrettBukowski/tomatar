@@ -8,10 +8,14 @@ define(['app'], function (app) {
     }
 
     var factory = {
+      available: function () {
+        return 'webkitNotifications' in win;
+      },
+
       requestPermission: function (callback) {
         if (permissionIsGranted()) return callback(true);
 
-        win.requestPermission(function () {
+        win.webkitNotifications.requestPermission(function () {
           callback(permissionIsGranted());
         });
       },

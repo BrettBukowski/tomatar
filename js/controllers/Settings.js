@@ -1,16 +1,35 @@
-define(['app'], function (app) {
+define(['app', 'jquery'], function (app, $) {
   "use strict";
 
-  return app.controller('SettingsController', ['$scope', 'settingsService', 'notificationService', function (scope, settingsService, notificationService) {
-    scope.breaks = settingsService.breaks;
-    scope.alarms = settingsService.alarms;
+  return app.controller('SettingsController',
+    ['$scope', 'settingsService', 'notificationService', function (scope, settingsService, notificationService) {
+    var settings = settingsService.get();
+    scope.breaks = settings.breaks;
+    scope.alarms = settings.alarms;
+
+    scope.notificationsAreAvailable = function () {
+      return notificationService.available();
+    };
 
     scope.toggleNotification = function () {
-      if (!scope.alarms.notification.current) {
+      if (scope.alarms.notification) {
+        // Turning on notifications: check for permissions
+        if (!notificationService.available()) {
+          return scope.alarms.notification = false;
+        }
         notificationService.requestPermission(function (granted) {
-          scope.alarms.notification.current = granted;
+          scope.alarms.notification = granted;
         });
       }
+    };
+
+    scope.save = function () {
+      settingsService.save({
+        breaks: scope.breaks,
+        alarms: scope.alarms
+      });
+
+      $('#settings .close-reveal-modal').click();
     };
   }]);
 });
