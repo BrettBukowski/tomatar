@@ -133,7 +133,9 @@ a:focus {
     font-size: 2em;
 }
 
-
+#settings form {
+    margin: 0;
+}
 
 
 
