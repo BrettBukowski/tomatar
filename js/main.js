@@ -15,6 +15,7 @@ require.config({
       exports: 'angular'
     }
   },
+  urlArgs: 'bust=' + (new Date()).getTime(),
   priority: ['angular']
 });
 
@@ -24,16 +25,16 @@ require(['jquery', 'foundation', 'angular', 'app'], function ($, foundation, ang
 
     function allComponents () {
       var components = {
-        routes:      ['routes/Routes'],
-        filter:      ['filters/Filter'],
-        controller:  ['controllers/History', 'controllers/Settings', 'controllers/Timer', 'controllers/Today'],
-        factory:     ['services/Notification', 'services/Pomodoro', 'services/Settings', 'services/Storage'],
+        routes:       ['Routes'],
+        filters:      ['Filter'],
+        controllers:  ['History', 'Settings', 'Timer', 'Today'],
+        services:     ['Notification', 'Pomodoro', 'Settings', 'Storage'],
       };
 
       var all = [];
       for (var i in components) {
         if (components.hasOwnProperty(i)) {
-          all = all.concat(components[i]);
+          all = all.concat(components[i].map(function (j) { return i + '/' + j; }));
         }
       }
 
