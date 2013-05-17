@@ -42,7 +42,7 @@
     <div class="row" data-ng-view>
     </div>
 
-  <div id="settings" class="reveal-modal small">
+  <div id="settings" class="reveal-modal small" role="dialog">
     <h3>Settings</h3>
 
     <form class="" data-ng-controller="SettingsController">
@@ -59,7 +59,7 @@
                             <input id="pomodoro-length" type="number" required min="1" max="60" data-ng-model="breaks.pomodoro">
                         </div>
                         <div class="small-3 large-3 columns">
-                            <span class="postfix">minutes</span>
+                            <span class="postfix"><ng-pluralize count="breaks.pomodoro" when="{'one': 'minute', 'other': 'minutes'}"></ng-pluralize></span>
                         </div>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                             <input id="break-length" type="number" required min="1" max="60" data-ng-model="breaks.short">
                         </div>
                         <div class="small-3 large-3 columns">
-                            <span class="postfix">minutes</span>
+                            <span class="postfix"><ng-pluralize count="breaks.short" when="{'one': 'minute', 'other': 'minutes'}"></ng-pluralize></span>
                         </div>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                             <input id="longBreak-length" type="number" required min="1" max="60" data-ng-model="breaks.long">
                         </div>
                         <div class="small-3 large-3 columns">
-                            <span class="postfix">minutes</span>
+                            <span class="postfix"><ng-pluralize count="breaks.long" when="{'one': 'minute', 'other': 'minutes'}"></ng-pluralize></span>
                         </div>
                     </div>
                 </div>
