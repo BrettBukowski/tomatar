@@ -4,7 +4,7 @@ define(['app'], function (app) {
   return app.controller('TimerController', ['$scope', '$rootScope', '$window', 'pomodoroService', function (scope, rootScope, win, pomodoroService) {
     var intervalId;
 
-    function isRunning() {
+    function isRunning () {
       return !!intervalId;
     }
 
@@ -27,6 +27,10 @@ define(['app'], function (app) {
 
       scope.$apply();
     }
+
+    scope.$watch('timeLeft', function (newVal) {
+      win.document.title = newVal.minutes + ':' + ((newVal.seconds < 10) ? '0' : '') + newVal.seconds;
+    }, true);
 
     scope.initialize = function (time) {
       scope.totalMinutes = time.minutes;
