@@ -28,7 +28,7 @@ require(['jquery', 'foundation', 'angular', 'app'], function ($, foundation, ang
         routes:       ['Routes'],
         filters:      ['Filter'],
         controllers:  ['History', 'Settings', 'Timer', 'Today'],
-        services:     ['Notification', 'Pomodoro', 'Settings', 'Storage'],
+        services:     ['Notification', 'Pomodoro', 'Settings', 'Storage', 'TimeMaster'],
       };
 
       var all = [];

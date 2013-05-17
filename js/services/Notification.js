@@ -19,6 +19,7 @@ define(['app'], function (app) {
           callback(permissionIsGranted());
         });
       },
+
       display: function (title, body) {
         if (permissionIsGranted()) {
           win.webkitNotifications.createNotification('icon.png', title, body);
