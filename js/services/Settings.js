@@ -5,12 +5,12 @@ define(['app'], function (app) {
   var defaults = {
     'breaks': {
       'pomodoro': 25,
-      'short': 5,
-      'long': 15
+      'short':    5,
+      'long':     15
     },
     'alarms': {
       'notification': false,
-      'sounds': true
+      'sounds':       true
     }
   };
 
