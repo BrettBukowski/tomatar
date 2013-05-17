@@ -8,6 +8,10 @@ define(['app'], function (app) {
       return !!intervalId;
     }
 
+    function percentComplete (timeLeft, totalTime) {
+      return Math.round(100 - (((timeLeft.minutes + (timeLeft.seconds / 60)) / totalTime) * 100));
+    }
+
     function updateTimer () {
       if (scope.timeLeft.seconds == 0) {
         scope.timeLeft.minutes--;
@@ -23,7 +27,7 @@ define(['app'], function (app) {
       else {
         scope.timeLeft.seconds--;
       }
-      scope.progress = Math.round(100 - (((scope.timeLeft.minutes + (scope.timeLeft.seconds / 60)) / scope.totalMinutes) * 100));
+      scope.progress = percentComplete(scope.timeLeft, scope.totalMinutes);
 
       scope.$apply();
     }
