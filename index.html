@@ -123,7 +123,7 @@
                         </div>
                         <div class="small-6 large-6 columns">
                             <select class="medium" id="sound">
-                                <option>None</option>
+                                <option ng-repeat="sound in alarms.sounds">{{ sound }}</option>
                                 <option>Bell</option>
                                 <option>Buzzer</option>
                                 <option>Triumph</option>

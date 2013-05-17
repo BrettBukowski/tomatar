@@ -10,7 +10,7 @@ define(['app'], function (app) {
     },
     'alarms': {
       'notification': false,
-      'sounds':       true
+      'sounds':       ['none', 'Bell', 'Tink', 'Triumph', 'Blip']
     }
   };
 

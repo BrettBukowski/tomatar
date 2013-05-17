@@ -12,7 +12,10 @@ define(['app'], function (app) {
     }
   };
 
-  return app.factory('timeService', ['$rootScope', 'pomodoroService', 'notificationService', function (rootScope, pomodoroService, notificationService) {
+  return app.factory('timeService',
+    ['$rootScope', 'pomodoroService', 'notificationService', 'soundService',
+      function (rootScope, pomodoroService, notificationService, soundService) {
+
     function TimedSession () {
       this.completed = 0;
       this.isPomo = true;
@@ -48,8 +51,10 @@ define(['app'], function (app) {
       timerFinished: function () {
         var copy = (session.isPomo) ? labels.pomodoro : labels['break'];
         notificationService.display(copy.title, copy.body);
+        soundService.play();
 
         session.complete();
+
         rootScope.$broadcast('timeInterval:complete');
         rootScope.$broadcast('timeInterval:new', session.timeInterval, session.autoStart);
       }
