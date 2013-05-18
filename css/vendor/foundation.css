@@ -20,9 +20,6 @@ body {
   line-height: 1;
   position: relative; }
 
-a:focus {
-  outline: none; }
-
 img,
 object,
 embed {
