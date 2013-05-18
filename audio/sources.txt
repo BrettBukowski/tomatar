@@ -13,7 +13,7 @@
 - <http://www.freesound.org/people/arioke/sounds/58695/>
 - [License](http://creativecommons.org/licenses/sampling+/1.0/)
 
-## bells
+## bell
 
 - <http://www.freesound.org/people/lth_stp/sounds/120502/>
 - [License](http://creativecommons.org/licenses/by-nc/3.0/)
