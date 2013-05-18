@@ -2,27 +2,20 @@ define(['app'], function (app) {
   "use strict";
 
   return app.factory('notificationService', ['$window', function (win) {
-    function permissionIsGranted () {
-      // 0 is PERMISSION_ALLOWED
-      return win.webkitNotifications.checkPermission() == 0;
-    }
-
     var factory = {
       available: function () {
-        return 'webkitNotifications' in win;
+        return 'Notification' in win;
       },
 
       requestPermission: function (callback) {
-        if (permissionIsGranted()) return callback(true);
-
-        win.webkitNotifications.requestPermission(function () {
-          callback(permissionIsGranted());
+        win.Notification.requestPermission(function (response) {
+          callback(response == 'granted');
         });
       },
 
       display: function (title, body) {
-        if (permissionIsGranted()) {
-          win.webkitNotifications.createNotification('icon.png', title, body);
+        if (this.available()) {
+          new win.Notification(title, { iconUrl: 'img/icon.png', body: body });
         }
       }
     };
