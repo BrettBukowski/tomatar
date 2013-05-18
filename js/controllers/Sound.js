@@ -27,9 +27,13 @@ define(['jquery', 'app'], function ($, app) {
       // Browsers don't download the new src unless the innerHTML of the audio
       // element is completely rewritten. So rather than just using regular ng binding,
       // forced to use unsafe-html binding.
-      scope.source = (source)
+      var newSource = (source)
         ? '<source type="' + source.type + '" src="' + source.path + '">'
         : '';
+
+      if (newSource != scope.source) {
+        scope.source = newSource;
+      }
     };
 
     scope.playSound = function () {
