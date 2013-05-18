@@ -1,2 +1,25 @@
-blip: <http://www.freesound.org/people/Kastenfrosch/sounds/113986/>
-tink: <http://www.freesound.org/people/hans/sounds/107785/>
+## blip
+
+- <http://www.freesound.org/people/Kastenfrosch/sounds/113986/>
+- [License](http://creativecommons.org/publicdomain/zero/1.0/)
+
+## tink
+
+- <http://www.freesound.org/people/hans/sounds/107785/>
+- [License](http://creativecommons.org/publicdomain/zero/1.0/)
+
+## kalimba
+
+- <http://www.freesound.org/people/arioke/sounds/58695/>
+- [License](http://creativecommons.org/licenses/sampling+/1.0/)
+
+## bells
+
+- <http://www.freesound.org/people/lth_stp/sounds/120502/>
+- [License](http://creativecommons.org/licenses/by-nc/3.0/)
+
+## triumph
+
+- <http://www.freesound.org/people/hammerklavier/sounds/46214/>
+- [License](http://creativecommons.org/licenses/by-nc/3.0/)
+
