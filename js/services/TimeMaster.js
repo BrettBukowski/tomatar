@@ -55,9 +55,10 @@ define(['app'], function (app) {
           notificationService.display(copy.title, copy.body);
         }
 
+        rootScope.$broadcast('timeInterval:complete', session.isPomo, session.timeInterval);
+
         session.complete();
 
-        rootScope.$broadcast('timeInterval:complete');
         rootScope.$broadcast('timeInterval:new', session.timeInterval, session.autoStart);
       }
     };

@@ -21,14 +21,12 @@ require.config({
 
 require(['jquery', 'foundation', 'angular', 'app'], function ($, foundation, angular) {
   $(function () {
-    $(document).foundation();
-
     function allComponents () {
       var components = {
         routes:       ['Routes'],
         filters:      ['Filter'],
         controllers:  ['History', 'Settings', 'Timer', 'Today', 'Sound'],
-        services:     ['Notification', 'Pomodoro', 'Settings', 'Storage', 'TimeMaster']
+        services:     ['Notification', 'Pomodoro', 'Settings', 'Storage', 'TimeMaster', 'History']
       };
 
       var all = [];

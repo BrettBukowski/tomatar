@@ -1,1 +1,25 @@
-<h2>Today</h2>
+<section>
+  <h2>Today</h2>
+
+
+</section>
+
+<div id="finishedDialog" class="reveal-modal small" role="dialog">
+  <form>
+    <div class="row">
+      <div class="large-12 columns">
+        <label for="finished">What did you get done?</label>
+        <textarea id="finished" data-ng-model="notes"></textarea>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-12 columns">
+        <a href="javascript:;" class="small button" data-ng-click="saveEntry()">Save</a>
+        or
+        <a href="javascript:;" data-ng-click="skipEntry()">Skip</a>
+      </div>
+    </div>
+  </form>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
