@@ -1,8 +1,12 @@
 define(['app'], function (app) {
   "use strict";
 
-  return app.factory('pomodoroService', ['settingsService', function (settings) {
+  return app.factory('pomodoroService', ['$rootScope', 'settingsService', function (rootScope, settings) {
     var defaults = settings.get().breaks;
+
+    rootScope.$on('settingsSaved', function (evt, settings) {
+      defaults = settings.breaks;
+    });
 
     var factory = {
       pomodoro: function() {
