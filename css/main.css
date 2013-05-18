@@ -133,7 +133,7 @@ a:focus {
     font-size: 2em;
 }
 
-#settings form {
+.reveal-modal.small form {
     margin: 0;
 }
 
