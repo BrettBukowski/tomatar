@@ -27,8 +27,8 @@ require(['jquery', 'foundation', 'angular', 'app'], function ($, foundation, ang
       var components = {
         routes:       ['Routes'],
         filters:      ['Filter'],
-        controllers:  ['History', 'Settings', 'Timer', 'Today'],
-        services:     ['Notification', 'Pomodoro', 'Settings', 'Storage', 'TimeMaster', 'Sound'],
+        controllers:  ['History', 'Settings', 'Timer', 'Today', 'Sound'],
+        services:     ['Notification', 'Pomodoro', 'Settings', 'Storage', 'TimeMaster']
       };
 
       var all = [];

@@ -10,11 +10,14 @@ define(['app'], function (app) {
     },
     'alarms': {
       'notification': false,
-      'sounds':       ['none', 'Bell', 'Tink', 'Triumph', 'Blip']
+      'sounds':       {
+        'available': ['Bell', 'Tink', 'Triumph', 'Blip', 'Kalimba'],
+        'current':   null
+      }
     }
   };
 
-  return app.factory('settingsService', ['storageService', function (storageService) {
+  return app.factory('settingsService', ['$rootScope', 'storageService', function (rootScope, storageService) {
     return {
       get: function () {
         return storageService.getJSON(storageKey) || defaults;
@@ -22,6 +25,8 @@ define(['app'], function (app) {
 
       save: function (settings) {
         storageService.setJSON(storageKey, settings);
+
+        rootScope.$broadcast('settingsSaved', settings);
       }
     };
   }]);

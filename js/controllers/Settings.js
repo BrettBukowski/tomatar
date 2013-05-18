@@ -2,7 +2,7 @@ define(['app', 'jquery'], function (app, $) {
   "use strict";
 
   return app.controller('SettingsController',
-    ['$scope', 'settingsService', 'notificationService', function (scope, settingsService, notificationService) {
+    ['$rootScope', '$scope', 'settingsService', 'notificationService', function (rootScope, scope, settingsService, notificationService) {
     var settings = settingsService.get();
     scope.breaks = settings.breaks;
     scope.alarms = settings.alarms;
@@ -21,6 +21,10 @@ define(['app', 'jquery'], function (app, $) {
           scope.alarms.notification = granted;
         });
       }
+    };
+
+    scope.playSound = function () {
+      rootScope.$broadcast('setSound', scope.alarms.sounds.current, 'playSoundToo');
     };
 
     scope.save = function () {

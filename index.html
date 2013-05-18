@@ -122,12 +122,11 @@
                             <label for="sound" class="">Sound effect:</label>
                         </div>
                         <div class="small-6 large-6 columns">
-                            <select class="medium" id="sound">
-                                <option ng-repeat="sound in alarms.sounds">{{ sound }}</option>
-                                <option>Bell</option>
-                                <option>Buzzer</option>
-                                <option>Triumph</option>
-                                <option>Blip</option>
+                            <select class="medium" id="sound"
+                                data-ng-model="alarms.sounds.current"
+                                data-ng-options="sound for sound in alarms.sounds.available"
+                                data-ng-change="playSound()">
+                              <option value="">None</option>
                             </select>
                         </div>
                     </div>
@@ -139,6 +138,10 @@
         </div>
     </form>
     <a class="close-reveal-modal">&#215;</a>
+  </div>
+
+  <div class="hidden" data-ng-controller="SoundController">
+    <audio preload="auto" id="soundNotification" data-ng-bind-html-unsafe="source"></audio>
   </div>
 
   <script data-main="js/main" src="js/vendor/require.js"></script>
