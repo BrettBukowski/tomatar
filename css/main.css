@@ -89,9 +89,6 @@ textarea {
 h1 {
     font-size: 1em;
 }
-a:focus {
-    outline: inherit !important;
-}
 
 .timer {
     cursor: pointer;
