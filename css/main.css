@@ -137,7 +137,23 @@ a:focus {
     margin: 0;
 }
 
-
+.completed-pomodori > li {
+}
+.completed-pomodori > li .pom {
+    background: red;
+    height: 50px;
+    width: 50px;
+    margin: auto;
+    border-radius: 50%;
+    margin-bottom: .4em;
+}
+.completed-pomodori > li span {
+    display: block;
+}
+.completed-pomodori > li .notes {
+    color: #858181;
+    font-size: smaller;
+}
 
 
 

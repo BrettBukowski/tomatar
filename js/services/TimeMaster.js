@@ -55,7 +55,7 @@ define(['app'], function (app) {
           notificationService.display(copy.title, copy.body);
         }
 
-        rootScope.$broadcast('timeInterval:complete', session.isPomo, session.timeInterval);
+        rootScope.$broadcast('timeInterval:complete', session.isPomo, session.timeInterval.minutes);
 
         session.complete();
 

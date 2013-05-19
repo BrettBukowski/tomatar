@@ -17,7 +17,7 @@ define(['jquery', 'app'], function ($, app) {
 
   return app.controller('TodayController', ['$rootScope', '$scope', 'historyService', function (rootScope, scope, historyService) {
     var dialog = new Dialog($('#finishedDialog'));
-    var alreadyCompleted = historyService.getToday();
+    scope.completed = historyService.getToday();
 
     function completedTimeInterval (evt, wasPomo, howLong) {
       if (!wasPomo) return; // TK show something on the UI?
@@ -28,10 +28,14 @@ define(['jquery', 'app'], function ($, app) {
 
 
     scope.saveEntry = function () {
-      historyService.saveToToday({
-        interval: scope.howLong,
-        notes: scope.notes
+      scope.completed = historyService.saveToToday({
+        notes:    scope.notes,
+        duration: scope.howLong
       });
+    };
+
+    scope.closeDialog = function () {
+      dialog.close();
     };
 
     scope.skipEntry = function () {

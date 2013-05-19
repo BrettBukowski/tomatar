@@ -1,7 +1,23 @@
 <section>
   <h2>Today</h2>
 
-
+  <div class="row">
+    <ul class="small-block-grid-4 large-block-grid-4 completed-pomodori">
+      <li class="text-center" data-ng-repeat="pomodori in completed">
+        <span class="pom" role="presentation"></span>
+        <span class="finished">
+          <span class="visuallyhidden">Time interval:</span>
+          {{ pomodori.finished|timeInterval:pomodori.duration|padSeconds }}
+          -
+          {{ pomodori.finished|padSeconds }}
+        </span>
+        <span class="notes">
+          <span class="visuallyhidden">Notes:</span>
+          {{ pomodori.notes|truncate }}
+        </span>
+      </li>
+    </ul>
+  </div>
 </section>
 
 <div id="finishedDialog" class="reveal-modal small" role="dialog">
@@ -15,7 +31,7 @@
 
     <div class="row">
       <div class="large-12 columns">
-        <a href="javascript:;" class="small button" data-ng-click="saveEntry()">Save</a>
+        <a href="javascript:;" class="small button" data-ng-click="closeDialog()">Save</a>
         or
         <a href="javascript:;" data-ng-click="skipEntry()">Skip</a>
       </div>
