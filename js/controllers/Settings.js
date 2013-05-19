@@ -3,9 +3,26 @@ define(['app', 'jquery'], function (app, $) {
 
   return app.controller('SettingsController',
     ['$rootScope', '$scope', 'settingsService', 'notificationService', function (rootScope, scope, settingsService, notificationService) {
-    var settings = settingsService.get();
-    scope.breaks = settings.breaks;
-    scope.alarms = settings.alarms;
+    var settingsKeys = [];
+
+    function populateScopeFromSettings (settings) {
+      for (var i in settings) {
+        if (settings.hasOwnProperty(i)) {
+          scope[i] = settings[i];
+          settingsKeys.push(i);
+        }
+      }
+    }
+
+    function populateSettingsFromScope (keys) {
+      var settings = {}, i;
+      for (var i = 0, len = keys.length, key; i < len; i++) {
+        key = keys[i];
+        settings[key] = scope[key];
+      }
+
+      return settings;
+    }
 
     scope.notificationsAreAvailable = function () {
       return notificationService.available();
@@ -28,12 +45,11 @@ define(['app', 'jquery'], function (app, $) {
     };
 
     scope.save = function () {
-      settingsService.save({
-        breaks: scope.breaks,
-        alarms: scope.alarms
-      });
+      settingsService.save(populateSettingsFromScope(settingsKeys));
 
       $('#settings .close-reveal-modal').click();
     };
+
+    populateScopeFromSettings(settingsService.get());
   }]);
 });

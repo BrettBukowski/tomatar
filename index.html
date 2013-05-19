@@ -120,7 +120,7 @@
                 <div class="small-12 large-8">
                     <div class="row">
                         <div class="small-6 large-4 columns">
-                            <label for="sound" class="">Sound effect:</label>
+                            <label for="sound" class="">Sound Effect</label>
                         </div>
                         <div class="small-6 large-6 columns">
                             <select class="medium" id="sound"
@@ -129,6 +129,32 @@
                                 data-ng-change="playSound()">
                               <option value="">None</option>
                             </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Interface</legend>
+
+            <div class="row">
+                <div class="small-12 large-8">
+                    <div class="row">
+                        <div class="small-6 large-4 columns">
+                            <label>Hour Format</label>
+                        </div>
+                        <div class="small-3 large-3 columns">
+                            <label for="12-hr" class="right">12 hour</label>
+                        </div>
+                        <div class="small-3 large-1 columns">
+                            <input id="12-hr" type="radio" name="hour-format" data-ng-model="ui.hours" value="12" data-ng-checked="ui.hours == 12">
+                        </div>
+                        <div class="small-3 large-3 columns">
+                            <label for="24-hr" class="right">24 hour</label>
+                        </div>
+                        <div class="small-3 large-1 columns">
+                            <input id="24-hr" type="radio" name="hour-format" data-ng-model="ui.hours" value="24" data-ng-checked="ui.hours == 24">
                         </div>
                     </div>
                 </div>
