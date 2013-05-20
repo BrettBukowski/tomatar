@@ -1,15 +1,19 @@
-<section>
-  <h2>Today</h2>
+<section class="today">
+  <h2 class="left">Today</h2>
+
+  <nav class="right">
+    <a href="#/history">History</a>
+  </nav>
 
   <div class="row">
-    <ul class="small-block-grid-4 large-block-grid-4 completed-pomodori">
-      <li class="text-center" data-ng-repeat="pomodori in completed">
-        <span class="pom" role="presentation"></span>
+    <ul class="small-block-grid-2 large-block-grid-4 completed-pomodori">
+      <li class="text-center" data-ng-repeat="pomodori in completed" tabindex="0" data-ng-click="showDetails()">
+        <span class="pom" role="presentation">✔</span>
         <span class="finished">
           <span class="visuallyhidden">Time interval:</span>
-          {{ pomodori.finished|timeInterval:pomodori.duration|padSeconds }}
+          {{ pomodori.finished|timeInterval:pomodori.duration|padSeconds|formatTime:hourFormat }}
           -
-          {{ pomodori.finished|padSeconds }}
+          {{ pomodori.finished|padSeconds|formatTime:hourFormat }}
         </span>
         <span class="notes">
           <span class="visuallyhidden">Notes:</span>
@@ -25,7 +29,7 @@
     <div class="row">
       <div class="large-12 columns">
         <label for="finished">What did you get done?</label>
-        <textarea id="finished" data-ng-model="notes"></textarea>
+        <textarea id="finished" data-ng-model="notes" data-ng-maxlength="250"></textarea>
       </div>
     </div>
 
@@ -37,5 +41,26 @@
       </div>
     </div>
   </form>
+  <a class="close-reveal-modal" aria-label="close">&#215;</a>
+</div>
+
+<div id="detailsDialog" class="reveal-modal small" role="dialog">
+  <div class="row">
+    <h3>Details</h3>
+    <div class="panel">
+      <span class="visuallyhidden">Notes:</span>
+      <p>{{ details.notes }}</p>
+    </div>
+    <div>
+      <span class="visuallyhidden">Time interval:</span>
+      {{ details.finished|timeInterval:details.duration|padSeconds|formatTime:hourFormat }}
+      -
+      {{ details.finished|padSeconds|formatTime:hourFormat }}
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <a href="javascript:;" class="small button" data-ng-click="closeDetails()">Close</a>
+  </div>
   <a class="close-reveal-modal" aria-label="close">&#215;</a>
 </div>

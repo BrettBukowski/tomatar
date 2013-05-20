@@ -15,35 +15,50 @@ define(['jquery', 'app'], function ($, app) {
   };
 
 
-  return app.controller('TodayController', ['$rootScope', '$scope', 'historyService', function (rootScope, scope, historyService) {
-    var dialog = new Dialog($('#finishedDialog'));
+  return app.controller('TodayController',
+    ['$rootScope', '$scope', 'historyService', 'settingsService',
+    function (rootScope, scope, historyService, settingsService) {
+    var finishedDialog = new Dialog($('#finishedDialog')),
+        detailsDialog = new Dialog($('#detailsDialog'));
+
+    scope.hourFormat = settingsService.get().ui.hours;
     scope.completed = historyService.getToday();
+    scope.notes = '';
+    scope.details = {};
 
     function completedTimeInterval (evt, wasPomo, howLong) {
       if (!wasPomo) return; // TK show something on the UI?
 
       scope.howLong = howLong;
-      dialog.open();
+      finishedDialog.open();
     }
-
 
     scope.saveEntry = function () {
       scope.completed = historyService.saveToToday({
         notes:    scope.notes,
         duration: scope.howLong
       });
+
+      scope.notes = '';
     };
 
     scope.closeDialog = function () {
-      dialog.close();
+      finishedDialog.close();
     };
 
     scope.skipEntry = function () {
       scope.notes = '';
-      dialog.close();
+      finishedDialog.close();
     };
 
-    scope.notes = '';
+    scope.showDetails = function () {
+      scope.details = this.pomodori;
+      detailsDialog.open();
+    };
+
+    scope.closeDetails = function () {
+      detailsDialog.close();
+    };
 
     rootScope.$on('timeInterval:complete', completedTimeInterval);
     rootScope.$on('finishedDialogClosed', scope.saveEntry);

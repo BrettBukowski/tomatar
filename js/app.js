@@ -11,7 +11,7 @@ define(['jquery', 'angular'], function ($, angular) {
         // Focus on the first input field when the dialog
         // displays.
         opened: function () {
-          $(this).find('input,textarea')[0].focus();
+          $(this).find('input,textarea,a')[0].focus();
         },
         // Broadcast an event for the specific dialog.
         close: function () {

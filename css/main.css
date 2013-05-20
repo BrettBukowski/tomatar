@@ -130,20 +130,55 @@ h1 {
     font-size: 2em;
 }
 
-.reveal-modal.small form {
+.reveal-modal form {
     margin: 0;
 }
+nav {
+    margin-top: 1em;
+}
+.label {
+    font-weight: bold;
+}
 
+.today h2 {
+    margin-bottom: 1em;
+}
 .completed-pomodori > li {
+    cursor: pointer;
+    margin-top: 1em;
+    padding: 1em;
+    word-wrap: break-word;
+}
+.completed-pomodori > li:focus,
+.completed-pomodori > li:hover {
+    background: #ebf2fc;
+}
+.completed-pomodori > li:focus .pom,
+.completed-pomodori > li:hover .pom {
+    background: #CF1E1E;
+    -webkit-transform: scale(1.1);
 }
 .completed-pomodori > li .pom {
-    background: red;
-    height: 50px;
-    width: 50px;
-    margin: auto;
+    background: rgba(207, 30, 30, 0.57);
+    border: 4px solid #FFF;
     border-radius: 50%;
-    margin-bottom: .4em;
+    box-shadow: 0 0 1px rgba(0, 0, 0, .4);
+    font-size: larger;
+    height: 60px;
+    margin: 0 auto .4em;
+    padding-top: 10px;
+    position: relative;
+    text-shadow: 0 -1px 0px rgba(255, 255, 255, .7);
+    width: 60px;
 }
+.completed-pomodori > li,
+.completed-pomodori > li .pom {
+    -webkit-transition: all .4s;
+    -ms-transition: all .4s;
+    -moz-transition: all .4s;
+    transition: all .4s;
+}
+
 .completed-pomodori > li span {
     display: block;
 }

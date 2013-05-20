@@ -5,8 +5,8 @@ define(['app'], function (app) {
     return (input < 10) ? '0' + input : input;
   }
 
-  function formatTime (hour, minute) {
-    return hour + ':' + minute;
+  function formatTime (hour, minute, suffix) {
+    return hour + ':' + minute + ((suffix) ? ' ' + suffix : '');
   }
 
   return app.filter('padSeconds', function () {
@@ -37,5 +37,19 @@ define(['app'], function (app) {
 
       return input.substr(0, (truncate || truncationLimit) - 1) + '…';
     };
+  }).filter('formatTime', function () {
+    return function (input, format) {
+      if (format == 12) {
+        var split = input.split(':');
+        if (split[0] > 12) {
+          return formatTime(split[0] - 12, split[1], 'pm');
+        }
+        else {
+          return formatTime(split[0], split[1], 'am');
+        }
+      }
+
+      return input;
+    }
   });
 });
