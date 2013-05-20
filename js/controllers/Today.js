@@ -24,7 +24,7 @@ define(['jquery', 'app'], function ($, app) {
     scope.hourFormat = settingsService.get().ui.hours;
     scope.completed = historyService.getToday();
     scope.notes = '';
-    scope.details = {};
+    scope.details = { finished: '', notes: '' };
 
     function completedTimeInterval (evt, wasPomo, howLong) {
       if (!wasPomo) return; // TK show something on the UI?
