@@ -10,13 +10,13 @@ define(['app'], function (app) {
 
     var factory = {
       pomodoro: function() {
-        return { minutes: defaults.pomodoro, seconds: 0 };
+        return { minutes: defaults.pomodoro, seconds: 0, label: 'Focus' };
       },
       shortBreak: function() {
-        return { minutes: defaults['short'], seconds: 0 };
+        return { minutes: defaults['short'], seconds: 0, label: 'Break' };
       },
       longBreak: function() {
-        return { minutes: defaults['long'], seconds: 0 };
+        return { minutes: defaults['long'], seconds: 0, label: 'Break' };
       }
     };
 

@@ -33,7 +33,8 @@ define(['app'], function (app) {
     }
 
     scope.$watch('timeLeft', function (newVal) {
-      win.document.title = newVal.minutes + ':' + ((newVal.seconds < 10) ? '0' : '') + newVal.seconds;
+      win.document.title = newVal.minutes + ':' + ((newVal.seconds < 10) ? '0' : '') + newVal.seconds +
+        ' - ' + newVal.label;
     }, true);
 
     scope.initialize = function (time) {
