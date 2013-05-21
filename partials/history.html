@@ -1,12 +1,32 @@
 <section class="history">
-  <h2 class="left">History</h2>
-
-  <nav class="right">
-    <a href="#/today">Today</a>
-  </nav>
-
   <div class="row">
-    <ul class="small-block-grid-2 large-block-grid-4 completed-pomodori">
-    </ul>
+    <h2 class="left">History</h2>
+
+    <nav class="right clearfix">
+      <a href="#/today">Today</a>
+    </nav>
+  </div>
+
+  <div class="row clearfix">
+    <div data-ng-repeat="(date, completed) in entries">
+      <h3>{{ date|formatDate }}</h3>
+      <ul class="small-block-grid-2 large-block-grid-4 completed-pomodori">
+        <li class="text-center" data-ng-repeat="pomodori in completed" tabindex="0" data-ng-click="showDetails()">
+          <span class="pom" role="presentation">✔</span>
+          <span class="finished">
+            <span class="visuallyhidden">Time interval:</span>
+            {{ pomodori.finished|timeInterval:pomodori.duration|padSeconds|formatTime:hourFormat }}
+            -
+            {{ pomodori.finished|padSeconds|formatTime:hourFormat }}
+          </span>
+          <span class="notes">
+            <span class="visuallyhidden">Notes:</span>
+            {{ pomodori.notes|truncate }}
+          </span>
+        </li>
+      </ul>
+    </div>
   </div>
 </section>
+
+<div data-ng-include="'partials/pomodoriDetails.html'"></div>

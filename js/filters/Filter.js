@@ -50,6 +50,16 @@ define(['app'], function (app) {
       }
 
       return input;
-    }
+    };
+  }).filter('formatDate', function () {
+    var months = ['January', 'February', 'March', 'April', 'May',
+     'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    // Expecting YYYY-MM-DD
+    return function (input) {
+      var split = input.split('-');
+
+      return months[parseInt(split[1], 10) - 1] + ' ' + split[2] + ', ' + split[0];
+    };
   });
 });

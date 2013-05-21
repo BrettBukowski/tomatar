@@ -1,25 +1,11 @@
 define(['jquery', 'app'], function ($, app) {
   "use strict";
 
-  function Dialog (el) {
-    this.el = el;
-  }
-  Dialog.prototype._reveal = function (action) {
-    this.el.foundation('reveal', action);
-  };
-  Dialog.prototype.close = function () {
-    this._reveal('close');
-  };
-  Dialog.prototype.open = function () {
-    this._reveal('open');
-  };
-
-
   return app.controller('TodayController',
-    ['$rootScope', '$scope', 'historyService', 'settingsService',
-    function (rootScope, scope, historyService, settingsService) {
+    ['$rootScope', '$scope', 'historyService', 'settingsService', 'dialogService',
+    function (rootScope, scope, historyService, settingsService, Dialog) {
     var finishedDialog = new Dialog($('#finishedDialog')),
-        detailsDialog = new Dialog($('#detailsDialog'));
+        detailsDialog;
 
     scope.hourFormat = settingsService.get().ui.hours;
     scope.completed = historyService.getToday();
@@ -62,5 +48,8 @@ define(['jquery', 'app'], function ($, app) {
 
     rootScope.$on('timeInterval:complete', completedTimeInterval);
     rootScope.$on('finishedDialogClosed', scope.saveEntry);
+    scope.$on('$includeContentLoaded', function () {
+      detailsDialog = new Dialog($('#detailsDialog'));
+    });
   }]);
 });
