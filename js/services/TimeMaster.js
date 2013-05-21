@@ -12,6 +12,17 @@ define(['app'], function (app) {
     }
   };
 
+  function clone (obj) {
+    var result = {};
+    for (var i in obj) {
+      if (obj.hasOwnProperty(i)) {
+        result[i] = obj[i];
+      }
+    }
+
+    return result;
+  }
+
   return app.factory('timeService',
     ['$rootScope', 'pomodoroService', 'notificationService', 'settingsService',
     function (rootScope, pomodoroService, notificationService, settingsService) {
@@ -59,7 +70,7 @@ define(['app'], function (app) {
 
         session.complete();
 
-        rootScope.$broadcast('timeInterval:new', session.timeInterval, session.autoStart);
+        rootScope.$broadcast('timeInterval:new', clone(session.timeInterval), session.autoStart);
       }
     };
   }]);
