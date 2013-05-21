@@ -29,6 +29,11 @@
         </div>
         <a href="javascript:;" data-ng-click="resetTimer()">reset</a>
       </div>
+
+      <div class="text-right current-mode" data-ng-cloak role="contentinfo" aria-live="polite">
+        Currently:
+        <em data-ng-bind-template="{{timeLeft.label}} Mode"></em>
+      </div>
     </div>
 
     <hr>

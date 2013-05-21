@@ -189,6 +189,9 @@ nav {
 .history h3 {
     color: #3F3E3E;
 }
+.current-mode {
+    font-size: small;
+}
 
 
 
