@@ -1,0 +1,124 @@
+<div id="settings" class="reveal-modal small" role="dialog">
+  <h3>Settings</h3>
+
+  <form>
+    <fieldset>
+      <legend>Time Intervals</legend>
+
+      <div class="row">
+        <div class="small-12 large-8">
+          <div class="row collapse">
+            <div class="small-6 large-6 columns">
+              <label for="pomodoro-length" class="inline">Pomodoro Length</label>
+            </div>
+            <div class="small-3 large-3 columns">
+              <input id="pomodoro-length" type="number" required min="1" max="60" data-ng-model="breaks.pomodoro">
+            </div>
+            <div class="small-3 large-3 columns">
+              <span class="postfix"><ng-pluralize count="breaks.pomodoro" when="{'one': 'minute', 'other': 'minutes'}"></ng-pluralize></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="small-12 large-8">
+          <div class="row collapse">
+            <div class="small-6 large-6 columns">
+              <label for="break-length" class="inline">Short Break Length</label>
+            </div>
+            <div class="small-3 large-3 columns">
+              <input id="break-length" type="number" required min="1" max="60" data-ng-model="breaks.short">
+            </div>
+            <div class="small-3 large-3 columns">
+              <span class="postfix"><ng-pluralize count="breaks.short" when="{'one': 'minute', 'other': 'minutes'}"></ng-pluralize></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="small-12 large-8">
+          <div class="row collapse">
+            <div class="small-6 large-6 columns">
+                <label for="longBreak-length" class="inline">Long Break Length</label>
+            </div>
+            <div class="small-3 large-3 columns">
+                <input id="longBreak-length" type="number" required min="1" max="60" data-ng-model="breaks.long">
+            </div>
+            <div class="small-3 large-3 columns">
+                <span class="postfix"><ng-pluralize count="breaks.long" when="{'one': 'minute', 'other': 'minutes'}"></ng-pluralize></span>
+            </div>
+          </div>
+        </div>
+      </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Alarms</legend>
+
+    <div class="row">
+      <div class="small-12 large-8">
+        <div class="row">
+          <div class="small-6 large-5 columns">
+            <label class="" for="notif">Browser Notification</label>
+          </div>
+          <div class="small-6 large-6 columns">
+            <input id="notif" name="notif" type="checkbox"
+                data-ng-change="toggleNotification()"
+                data-ng-model="alarms.notification"
+                data-ng-disabled="!notificationsAreAvailable()">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="small-12 large-8">
+        <div class="row">
+          <div class="small-6 large-4 columns">
+            <label for="sound" class="">Sound Effect</label>
+          </div>
+          <div class="small-6 large-6 columns">
+            <select class="medium" id="sound"
+                data-ng-model="alarms.sounds.current"
+                data-ng-options="sound for sound in alarms.sounds.available"
+                data-ng-change="playSound()">
+              <option value="">None</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Interface</legend>
+
+    <div class="row">
+      <div class="small-12 large-8">
+        <div class="row">
+          <div class="small-6 large-4 columns">
+            <label>Hour Format</label>
+          </div>
+          <div class="small-3 large-3 columns">
+            <label for="12-hr" class="right">12 hour</label>
+          </div>
+          <div class="small-3 large-1 columns">
+            <input id="12-hr" type="radio" name="hour-format" data-ng-model="ui.hours" value="12" data-ng-checked="ui.hours == 12">
+          </div>
+          <div class="small-3 large-3 columns">
+            <label for="24-hr" class="right">24 hour</label>
+          </div>
+          <div class="small-3 large-1 columns">
+            <input id="24-hr" type="radio" name="hour-format" data-ng-model="ui.hours" value="24" data-ng-checked="ui.hours == 24">
+          </div>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+
+    <div class="row">
+        <a href="javascript:;" class="small button" data-ng-click="save()">Save</a>
+    </div>
+  </form>
+  <a class="close-reveal-modal" aria-label="close">&#215;</a>
+</div>
