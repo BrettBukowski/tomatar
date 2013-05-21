@@ -25,7 +25,7 @@
         <div class="timer" tabindex="0" title="Click or SPACE BAR to start" data-ng-click="toggleTimer()">
             <div class="progress-elapsed" aria-role="presentation" style="height: {{ progress }}%"></div>
             <div class="progress-indicator" aria-role="presentation"></div>
-            <div class="time" data-ng-bind-template="{{ timeLeft.minutes }}:{{ timeLeft.seconds|padSeconds }}"></div>
+            <div class="time" data-ng-bind-template="{{ timeLeft.minutes }}:{{ timeLeft.seconds|padSeconds }}" aria-live="polite"></div>
         </div>
         <a href="javascript:;" data-ng-click="resetTimer()">reset</a>
       </div>
@@ -33,7 +33,7 @@
 
     <hr>
 
-    <div class="row" data-ng-view>
+    <div class="row" data-ng-view aria-live="polite">
     </div>
 
   <div id="settings" class="reveal-modal small" role="dialog">
