@@ -61,7 +61,7 @@ define(['app'], function (app) {
 
     scope.resetTimer = function () {
       scope.pauseTimer();
-      scope.timeLeft = { minutes: scope.totalMinutes, seconds: 0 };
+      scope.timeLeft = { minutes: scope.totalMinutes, seconds: 0, label: scope.timeLeft.label };
       scope.progress = 0;
     };
 
