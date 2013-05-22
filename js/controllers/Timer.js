@@ -12,7 +12,12 @@ define(['app'], function (app) {
     }
 
     function updateFavicon (percentComplete) {
-      favicon.refresh(percentComplete);
+      if (percentComplete == 'pause') {
+        favicon.pause();
+      }
+      else {
+        favicon.refresh(percentComplete);
+      }
     }
 
     function isRunning () {
@@ -69,6 +74,7 @@ define(['app'], function (app) {
       if (isRunning()) {
         win.clearInterval(intervalId);
         intervalId = null;
+        updateFavicon('pause');
       }
     };
 

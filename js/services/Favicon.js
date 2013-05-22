@@ -24,13 +24,39 @@ define(['app'], function (app) {
         }
 
         if (directive.tier !== this._currentTier) {
-          this._drawCanvas(directive);
-          this.link.href = this.canvas.toDataURL();
+          this._drawTimeInterval(directive);
+          this._refreshFavicon();
           this._currentTier = directive.tier;
         }
       },
 
-      _drawCanvas: function (directive) {
+      pause: function () {
+        this._drawPause();
+        this._refreshFavicon();
+        this._currentTier = null;
+      },
+
+      _refreshFavicon: function () {
+        this.link.href = this.canvas.toDataURL();
+      },
+
+      _drawPause: function () {
+        var canvas = this.canvas,
+            context = canvas.getContext('2d'),
+            width = canvas.width,
+            height = canvas.height,
+            centerX = width / 2,
+            yOffset = 12,
+            xOffset = 10;
+
+        context.clearRect(0, 0, width, height);
+
+        context.fillStyle = this._bgColor;
+        context.fillRect(0, yOffset, centerX - xOffset, height - yOffset);
+        context.fillRect(centerX + xOffset, yOffset, width, height - yOffset);
+      },
+
+      _drawTimeInterval: function (directive) {
         var canvas = this.canvas,
             context = canvas.getContext('2d'),
             x = canvas.width / 2,
@@ -49,7 +75,7 @@ define(['app'], function (app) {
 
         // Filled arc
         context.beginPath();
-        context.fillStyle = '#ff4700';
+        context.fillStyle = this._bgColor;
         context.arc(x, y, radius, directive.start * pi, directive.end * pi, 'anticlockwise' in directive);
         context.fill();
       },
@@ -61,6 +87,8 @@ define(['app'], function (app) {
 
         return document.head.appendChild(link);
       },
+
+      _bgColor: '#ff4700',
 
       _updateIntervals: [
         { tier: 0, start: 0, end: 2 },
