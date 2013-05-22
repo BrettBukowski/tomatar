@@ -27,7 +27,7 @@ require(['jquery', 'foundation', 'angular', 'app'], function ($, foundation, ang
         filters:      ['Filter'],
         controllers:  ['History', 'Settings', 'Timer', 'Today', 'Sound'],
         services:     ['Notification', 'Pomodoro', 'Settings', 'Storage', 'TimeMaster',
-                        'History', 'Dialog']
+                        'History', 'Dialog', 'Favicon']
       };
 
       var all = [];

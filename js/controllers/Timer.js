@@ -1,8 +1,19 @@
 define(['app'], function (app) {
   "use strict";
 
-  return app.controller('TimerController', ['$scope', '$rootScope', '$window', 'pomodoroService', function (scope, rootScope, win, pomodoroService) {
-    var intervalId;
+  return app.controller('TimerController',
+    ['$scope', '$rootScope', '$window', 'pomodoroService', 'faviconService',
+    function (scope, rootScope, win, pomodoroService, Favicon) {
+    var intervalId,
+        favicon = new Favicon();
+
+    function updateTitle (minutes, seconds, label) {
+      win.document.title = minutes + ':' + ((seconds < 10) ? '0' : '') + seconds + ' - ' + label;
+    }
+
+    function updateFavicon (percentComplete) {
+      favicon.refresh(percentComplete);
+    }
 
     function isRunning () {
       return !!intervalId;
@@ -33,9 +44,10 @@ define(['app'], function (app) {
     }
 
     scope.$watch('timeLeft', function (newVal) {
-      win.document.title = newVal.minutes + ':' + ((newVal.seconds < 10) ? '0' : '') + newVal.seconds +
-        ' - ' + newVal.label;
+      updateTitle(newVal.minutes, newVal.seconds, newVal.label);
     }, true);
+
+    scope.$watch('progress', updateFavicon);
 
     scope.initialize = function (time) {
       scope.totalMinutes = time.minutes;
