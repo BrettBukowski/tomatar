@@ -1,4 +1,4 @@
-define(['app'], function (app) {
+define(['app', 'utils'], function (app, utils) {
   "use strict";
 
   var labels = {
@@ -11,17 +11,6 @@ define(['app'], function (app) {
       'body':  'Back to work.'
     }
   };
-
-  function clone (obj) {
-    var result = {};
-    for (var i in obj) {
-      if (obj.hasOwnProperty(i)) {
-        result[i] = obj[i];
-      }
-    }
-
-    return result;
-  }
 
   return app.factory('timeService',
     ['$rootScope', 'pomodoroService', 'notificationService', 'settingsService',
@@ -70,7 +59,7 @@ define(['app'], function (app) {
 
         session.complete();
 
-        rootScope.$broadcast('timeInterval:new', clone(session.timeInterval), session.autoStart);
+        rootScope.$broadcast('timeInterval:new', utils.clone(session.timeInterval), session.autoStart);
       }
     };
   }]);

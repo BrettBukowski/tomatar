@@ -1,4 +1,4 @@
-define(['app'], function (app) {
+define(['app', 'utils'], function (app, utils) {
   "use strict";
 
   var storageKey = 'settings';
@@ -20,28 +20,6 @@ define(['app'], function (app) {
     }
   };
 
-  function isArray (obj) {
-    return Array.isArray
-      ? Array.isArray(obj)
-      : Object.prototype.toString.call(obj).indexOf('Array') > -1;
-  }
-
-  // Allows for adding new settings keys in future versions
-  // that will get auto-merged in on the client.
-  function mergeDefaults (receiver, provider) {
-    for (var i in provider) {
-      if (!provider.hasOwnProperty(i)) continue;
-      if (provider[i] && typeof provider[i] === 'object' && !isArray(provider[i])) {
-        receiver[i] = mergeDefaults(receiver[i] || {}, provider[i]);
-      }
-      else if (!(i in receiver)) {
-        receiver[i] = provider[i];
-      }
-    }
-
-    return receiver;
-  }
-
   return app.factory('settingsService', ['$rootScope', 'storageService', function (rootScope, storageService) {
     var settings;
 
@@ -51,7 +29,7 @@ define(['app'], function (app) {
 
         var retrieved = storageService.getJSON(storageKey);
         settings = (retrieved)
-          ? mergeDefaults(retrieved, defaults)
+          ? utils.mergeDefaults(retrieved, defaults)
           : defaults;
 
         return settings;
