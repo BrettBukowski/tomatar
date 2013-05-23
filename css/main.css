@@ -91,6 +91,7 @@ h1 {
 }
 footer > div {
     font-size: smaller;
+    margin-bottom: 3em;
 }
 .timer {
     cursor: pointer;
