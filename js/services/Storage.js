@@ -1,4 +1,4 @@
-define(['app'], function (app) {
+define(['app', 'angular'], function (app, angular) {
   "use strict";
 
   return app.service('storageService', ['$window', function (win) {
@@ -13,11 +13,11 @@ define(['app'], function (app) {
       };
 
       this.setJSON = function (key, value) {
-        return this.set(key, win.JSON.stringify(value));
+        return this.set(key, angular.toJson(value));
       };
 
       this.getJSON = function (key) {
-        return win.JSON.parse(this.get(key));
+        return angular.fromJson(this.get(key));
       };
   }]);
 });
