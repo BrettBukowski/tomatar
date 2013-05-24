@@ -7,11 +7,6 @@ define(['jquery', 'app'], function ($, app) {
     var finishedDialog = new Dialog($('#finishedDialog')),
         detailsDialog;
 
-    scope.hourFormat = settingsService.get().ui.hours;
-    scope.completed = historyService.getToday();
-    scope.notes = '';
-    scope.details = { finished: '', notes: '' };
-
     function completedTimeInterval (evt, wasPomo, howLong) {
       if (!wasPomo) return; // TK show something on the UI?
 
@@ -19,14 +14,14 @@ define(['jquery', 'app'], function ($, app) {
       finishedDialog.open();
     }
 
-    scope.saveEntry = function () {
+    function saveEntry () {
       scope.completed = historyService.saveToToday({
         notes:    scope.notes,
         duration: scope.howLong
       });
 
       scope.notes = '';
-    };
+    }
 
     scope.closeDialog = function () {
       finishedDialog.close();
@@ -46,8 +41,13 @@ define(['jquery', 'app'], function ($, app) {
       detailsDialog.close();
     };
 
-    rootScope.$on('timeInterval:complete', completedTimeInterval);
-    rootScope.$on('finishedDialogClosed', scope.saveEntry);
+    scope.hourFormat = settingsService.get().ui.hours;
+    scope.completed = historyService.getToday();
+    scope.notes = '';
+    scope.details = { finished: '', notes: '' };
+
+    scope.$on('timeInterval:complete', completedTimeInterval);
+    scope.$on('finishedDialogClosed', saveEntry);
     scope.$on('$includeContentLoaded', function () {
       detailsDialog = new Dialog($('#detailsDialog'));
     });
