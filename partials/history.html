@@ -12,7 +12,7 @@
       <h3 class="sticky">{{ date|formatDate }}</h3>
       <ul class="small-block-grid-2 large-block-grid-4 completed-pomodori">
         <li class="text-center" data-ng-repeat="pomodori in completed" tabindex="0" data-ng-click="showDetails()">
-          <span class="pom" role="presentation">✔</span>
+          <span class="pom" role="presentation"><i class="icon-ok"></i></span>
           <span class="finished">
             <span class="visuallyhidden">Time interval:</span>
             {{ pomodori.finished|timeInterval:pomodori.duration|padSeconds|formatTime:hourFormat }}
