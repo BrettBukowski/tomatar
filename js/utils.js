@@ -47,17 +47,5 @@ define(function (app) {
     return result;
   };
 
-  // Shallow object clone
-  exports.clone = function (obj) {
-    var result = {};
-    for (var i in obj) {
-      if (obj.hasOwnProperty(i)) {
-        result[i] = obj[i];
-      }
-    }
-
-    return result;
-  };
-
   return exports;
 });

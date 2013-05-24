@@ -50,6 +50,9 @@ define(['app'], function (app) {
 
     scope.$watch('timeLeft', function (newVal) {
       updateTitle(newVal.minutes, newVal.seconds, newVal.label);
+      if (newVal.minutes == 0 && newVal.seconds == 5) {
+        rootScope.$emit('timerWarning');
+      }
     }, true);
 
     scope.$watch('progress', updateFavicon);

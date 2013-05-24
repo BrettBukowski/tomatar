@@ -1,6 +1,7 @@
 define(['app', 'utils'], function (app, utils) {
   "use strict";
 
+  // Labels for notification
   var labels = {
     'pomodoro': {
       'title': 'Pomodoro finished!',
@@ -12,55 +13,52 @@ define(['app', 'utils'], function (app, utils) {
     }
   };
 
-  return app.factory('timeService',
-    ['$rootScope', 'pomodoroService', 'notificationService', 'settingsService',
-    function (rootScope, pomodoroService, notificationService, settingsService) {
-
+  return app.factory('timeService', ['pomodoroService', function (pomodoroService) {
     function TimedSession () {
-      this.completed = 0;
+      this._completed = 0;
       this.isPomo = true;
       this.autoStart = true;
       this.timeInterval = pomodoroService.pomodoro();
+      this.labels = labels.pomodoro;
     }
-    TimedSession.prototype.complete = function () {
-      if (this.isPomo) {
-        this.autoStart = true;
-        this.timeInterval = this.finishedPomo();
-      }
-      else {
-        this.autoStart = false;
-        this.timeInterval = this.finishedBreak();
-      }
 
+    TimedSession.prototype.complete = function () {
+      var directions = this._whenComplete[(this.isPomo) ? 'pomo' : 'break'];
+
+      this.autoStart = directions.autoStart;
+      this.timeInterval = this[directions.timeInterval]();
+      this.labels = labels[directions.labels];
       this.isPomo = !this.isPomo;
     };
-    TimedSession.prototype.finishedPomo = function () {
-      this.completed++;
 
-      return (this.completed % 4 === 0)
+    TimedSession.prototype._whenComplete = {
+      // Labels are reversed, since they're displayed
+      // when the interval ends and before a new
+      // interval starts.
+      'pomo': {
+        'autoStart':    true,
+        'timeInterval': '_finishedPomo',
+        'labels':       'break'
+      },
+      'break': {
+        'autoStart':    false,
+        'timeInterval': '_finishedBreak',
+        'labels':       'pomodoro'
+      }
+    };
+
+    TimedSession.prototype._finishedPomo = function () {
+      this._completed++;
+
+      return (this._completed % 4 === 0)
         ? pomodoroService.longBreak()
         : pomodoroService.shortBreak();
     };
-    TimedSession.prototype.finishedBreak = function () {
+
+    TimedSession.prototype._finishedBreak = function () {
       return pomodoroService.pomodoro();
     };
 
-    var session = new TimedSession();
-
-    return {
-      timerFinished: function () {
-        var copy = (session.isPomo) ? labels.pomodoro : labels['break'];
-
-        if (settingsService.get().alarms.notification) {
-          notificationService.display(copy.title, copy.body);
-        }
-
-        rootScope.$broadcast('timeInterval:complete', session.isPomo, session.timeInterval.minutes);
-
-        session.complete();
-
-        rootScope.$broadcast('timeInterval:new', utils.clone(session.timeInterval), session.autoStart);
-      }
-    };
+    return TimedSession;
   }]);
 });

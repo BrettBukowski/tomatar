@@ -13,9 +13,12 @@ define(['app'], function (app) {
         });
       },
 
-      display: function (title, body) {
+      display: function (labels) {
         if (this.available()) {
-          new win.Notification(title, { iconUrl: 'img/icon.png', body: body });
+          new win.Notification(labels.title || 'Error Title', {
+            iconUrl: 'img/icon.png',
+            body:     labels.body || 'Error Body'
+          });
         }
       }
     };

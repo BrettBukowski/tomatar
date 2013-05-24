@@ -2,8 +2,26 @@ define(['jquery', 'angular'], function ($, angular) {
   "use strict";
 
   return angular.module('tomatar', [])
-    .run(['$rootScope', 'timeService', function (rootScope, TimeMaster) {
-      rootScope.$on('timer', TimeMaster.timerFinished);
+    .run(['$rootScope', 'timeService', 'notificationService', 'settingsService', '$route', '$location',
+      function (rootScope, TimeMaster, notificationService, settingsService, route, location) {
+        var session = new TimeMaster();
+
+        function timeIntervalComplete () {
+          if (settingsService.get().alarms.notification) {
+            notificationService.display(session.labels);
+          }
+
+          rootScope.$broadcast('timeInterval:complete', session.isPomo, session.timeInterval.minutes);
+          session.complete();
+          rootScope.$broadcast('timeInterval:new', angular.copy(session.timeInterval), session.autoStart);
+        }
+
+        rootScope.$on('timer', timeIntervalComplete);
+        rootScope.$on('timerWarning', function () {
+          if (session.isPomo && route.current.controller == 'HistoryController') {
+            location.url('/');
+          }
+        });
 
       // Initialize foundation. Options for ea. component aren't
       // granular, hence the workaround.
