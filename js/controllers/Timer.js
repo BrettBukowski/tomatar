@@ -2,8 +2,8 @@ define(['app'], function (app) {
   "use strict";
 
   return app.controller('TimerController',
-    ['$scope', '$rootScope', '$window', 'pomodoroService', 'faviconService',
-    function (scope, rootScope, win, pomodoroService, Favicon) {
+    ['$scope', '$rootScope', '$window', '$document', 'pomodoroService', 'faviconService',
+    function (scope, rootScope, win, doc, pomodoroService, Favicon) {
     var intervalId,
         favicon = new Favicon();
 
@@ -95,6 +95,15 @@ define(['app'], function (app) {
       scope.initialize(time);
       if (autoStart) {
         scope.startTimer();
+      }
+    });
+
+    doc.keypress(function (e) {
+      var target = e.target.tagName.toLowerCase();
+      if (e.keyCode == 32 && target != 'input' && target != 'textarea'
+        && !e.shiftKey && !e.ctrlKey) {
+        scope.toggleTimer();
+        e.preventDefault();
       }
     });
 
