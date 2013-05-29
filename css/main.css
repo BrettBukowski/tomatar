@@ -102,6 +102,12 @@ footer > div {
     font-size: smaller;
     margin-bottom: 3em;
 }
+/* Foundation's -10 margin causes
+   overflow scrollbar for small
+   viewports. */
+[class*="block-grid-"] {
+  margin: 0;
+}
 .settings {
   color: #818181;
   font-size: smaller;

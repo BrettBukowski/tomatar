@@ -1,31 +1,33 @@
 <section class="history">
   <div class="row">
-    <h2 class="left">History</h2>
+    <div class="columns large-10 small-9">
+      <h2>History</h2>
+    </div>
 
-    <nav class="right clearfix">
+    <nav class="columns large-2 small-3 text-right">
       <a href="#/today">Today</a>
     </nav>
   </div>
 
-  <div class="row clearfix">
-    <div data-ng-repeat="(date, completed) in entries">
+  <div data-ng-repeat="(date, completed) in entries" class="row">
+    <div class="large-12 small-12 columns">
       <h3 class="sticky">{{ date|formatDate }}</h3>
-      <ul class="small-block-grid-2 large-block-grid-4 completed-pomodori">
-        <li class="text-center" data-ng-repeat="pomodori in completed" tabindex="0" data-ng-click="showDetails()">
-          <span class="pom" role="presentation"><i class="icon-ok"></i></span>
-          <span class="finished">
-            <span class="visuallyhidden">Time interval:</span>
-            {{ pomodori.finished|timeInterval:pomodori.duration|padSeconds|formatTime:hourFormat }}
-            -
-            {{ pomodori.finished|padSeconds|formatTime:hourFormat }}
-          </span>
-          <span class="notes">
-            <span class="visuallyhidden">Notes:</span>
-            {{ pomodori.notes|truncate }}
-          </span>
-        </li>
-      </ul>
     </div>
+    <ul class="small-block-grid-2 large-block-grid-4 completed-pomodori">
+      <li class="text-center" data-ng-repeat="pomodori in completed" tabindex="0" data-ng-click="showDetails()">
+        <span class="pom" role="presentation"><i class="icon-ok"></i></span>
+        <span class="finished">
+          <span class="visuallyhidden">Time interval:</span>
+          {{ pomodori.finished|timeInterval:pomodori.duration|padSeconds|formatTime:hourFormat }}
+          -
+          {{ pomodori.finished|padSeconds|formatTime:hourFormat }}
+        </span>
+        <span class="notes">
+          <span class="visuallyhidden">Notes:</span>
+          {{ pomodori.notes|truncate }}
+        </span>
+      </li>
+    </ul>
   </div>
 </section>
 

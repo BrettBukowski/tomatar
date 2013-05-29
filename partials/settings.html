@@ -8,10 +8,10 @@
       <div class="row">
         <div class="small-12 large-8">
           <div class="row collapse">
-            <div class="small-6 large-6 columns">
+            <div class="small-7 large-6 columns">
               <label for="pomodoro-length" class="inline">Pomodoro Length</label>
             </div>
-            <div class="small-3 large-3 columns">
+            <div class="small-2 large-3 columns">
               <input id="pomodoro-length" type="number" required min="1" max="60" data-ng-model="breaks.pomodoro">
             </div>
             <div class="small-3 large-3 columns">
@@ -23,10 +23,10 @@
       <div class="row">
         <div class="small-12 large-8">
           <div class="row collapse">
-            <div class="small-6 large-6 columns">
+            <div class="small-7 large-6 columns">
               <label for="break-length" class="inline">Short Break Length</label>
             </div>
-            <div class="small-3 large-3 columns">
+            <div class="small-2 large-3 columns">
               <input id="break-length" type="number" required min="1" max="60" data-ng-model="breaks.short">
             </div>
             <div class="small-3 large-3 columns">
@@ -38,10 +38,10 @@
       <div class="row">
         <div class="small-12 large-8">
           <div class="row collapse">
-            <div class="small-6 large-6 columns">
+            <div class="small-7 large-6 columns">
                 <label for="longBreak-length" class="inline">Long Break Length</label>
             </div>
-            <div class="small-3 large-3 columns">
+            <div class="small-2 large-3 columns">
                 <input id="longBreak-length" type="number" required min="1" max="60" data-ng-model="breaks.long">
             </div>
             <div class="small-3 large-3 columns">
@@ -58,10 +58,10 @@
     <div class="row">
       <div class="small-12 large-8">
         <div class="row">
-          <div class="small-6 large-5 columns">
+          <div class="small-7 large-5 columns">
             <label class="" for="notif">Browser Notification</label>
           </div>
-          <div class="small-6 large-6 columns">
+          <div class="small-5 large-6 columns">
             <input id="notif" name="notif" type="checkbox"
                 data-ng-change="toggleNotification()"
                 data-ng-model="alarms.notification"
@@ -96,19 +96,19 @@
     <div class="row">
       <div class="small-12 large-8">
         <div class="row">
-          <div class="small-6 large-4 columns">
+          <div class="small-4 large-4 columns">
             <label>Hour Format</label>
           </div>
           <div class="small-3 large-3 columns">
             <label for="12-hr" class="right">12 hour</label>
           </div>
-          <div class="small-3 large-1 columns">
+          <div class="small-1 large-1 columns">
             <input id="12-hr" type="radio" name="hour-format" data-ng-model="ui.hours" value="12" data-ng-checked="ui.hours == 12">
           </div>
           <div class="small-3 large-3 columns">
             <label for="24-hr" class="right">24 hour</label>
           </div>
-          <div class="small-3 large-1 columns">
+          <div class="small-1 large-1 columns">
             <input id="24-hr" type="radio" name="hour-format" data-ng-model="ui.hours" value="24" data-ng-checked="ui.hours == 24">
           </div>
         </div>
