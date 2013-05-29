@@ -1,0 +1,16 @@
+<div class="row" aria-role="main">
+  <div class="small-centered large-centered columns text-center">
+    <div class="timer" tabindex="0" title="Click or SPACE BAR to start" data-ng-click="toggleTimer()">
+        <div class="progress-elapsed" aria-role="presentation" style="height: {{ progress }}%"></div>
+        <div class="progress-indicator" aria-role="presentation"></div>
+        <div class="time" data-ng-bind-template="{{ timeLeft.minutes }}:{{ timeLeft.seconds|padSeconds }}" aria-live="polite"></div>
+    </div>
+    <a href="javascript:;" data-ng-click="resetTimer()">reset</a>
+  </div>
+
+  <div class="large-offset-10 small-offset-8 current-mode" data-ng-cloak role="contentinfo" aria-live="polite">
+    Currently:
+    <em data-ng-bind-template="{{timeLeft.label}} Mode"></em>
+  </div>
+  <hr>
+</div>
