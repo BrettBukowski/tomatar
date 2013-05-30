@@ -83,9 +83,11 @@ define(['app'], function (app) {
 
     scope.toggleTimer = function () {
       if (isRunning()) {
+        scope.toggleStatus = 'pause';
         scope.pauseTimer();
       }
       else {
+        scope.toggleStatus = 'play';
         scope.startTimer();
       }
     };
@@ -103,6 +105,7 @@ define(['app'], function (app) {
       if (e.keyCode == 32 && target != 'input' && target != 'textarea'
         && !e.shiftKey && !e.ctrlKey) {
         scope.toggleTimer();
+        scope.$apply();
         e.preventDefault();
       }
     });

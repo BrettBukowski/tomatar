@@ -147,6 +147,41 @@ footer > div {
     -webkit-justify-content: center;
     justify-content: center;
 }
+.timer.play:before,
+.timer.pause:before {
+  color: #444;
+  font-family: fontello;
+  position: absolute;
+  -webkit-animation-name: fadeOut;
+  -webkit-animation-duration: .6s;
+  -webkit-animation-fill-mode: both;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-name: fadeOut;
+  -moz-animation-duration: .6s;
+  -moz-animation-fill-mode: both;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-timing-function: linear;
+  -ms-animation-name: fadeOut;
+  -ms-animation-duration: .6s;
+  -ms-animation-fill-mode: both;
+  -ms-animation-iteration-count: 1;
+  -ms-animation-timing-function: linear;
+  animation-name: fadeOut;
+  animation-duration: .6s;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  top: 30%;
+  left: 45%;
+  z-index: 10;
+}
+.timer.play:before {
+  content: attr(data-icon-play);
+}
+.timer.pause:before {
+  content: attr(data-icon-pause);
+}
 .timer:focus {
     box-shadow: 0 0 3px rgba(0, 0, 0, .5);
     outline: 0;
@@ -358,6 +393,83 @@ nav {
 .icon-bell:before { content: '\e80d'; } /* '' */
 .icon-cog:before { content: '\e808'; } /* '' */
 
+/** Animation **/
+
+@-webkit-keyframes fadeOut {
+    0% {
+        opacity: 0;
+        font-size: 1em;
+        -webkit-transform: translateY(0);
+    }
+
+    50% {
+      opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        font-size: 6em;
+        left: 40%;
+        -webkit-transform: translateY(-20px);
+    }
+}
+
+@-moz-keyframes fadeOut {
+    0% {
+        opacity: 0;
+        font-size: 1em;
+        -moz-transform: translateY(0);
+    }
+
+    50% {
+      opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        font-size: 6em;
+        left: 40%;
+        -moz-transform: translateY(0);
+    }
+}
+
+@-ms-keyframes fadeOut {
+    0% {
+        opacity: 0;
+        font-size: 1em;
+        -ms-transform: translateY(0);
+    }
+
+    50% {
+      opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        font-size: 6em;
+        left: 40%;
+        -ms-transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 0;
+        font-size: 1em;
+        transform: translateY(0);
+    }
+
+    50% {
+      opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        font-size: 6em;
+        left: 40%;
+        transform: translateY(0);
+    }
+}
 
 /* ==========================================================================
    Helper classes
