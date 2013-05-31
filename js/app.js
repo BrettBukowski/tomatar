@@ -1,4 +1,4 @@
-define(['jquery', 'angular'], function ($, angular) {
+define(['jquery', 'angular', 'foundation'], function ($, angular) {
   "use strict";
 
   return angular.module('tomatar', [])

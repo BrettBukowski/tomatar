@@ -19,7 +19,7 @@ require.config({
   priority: ['angular']
 });
 
-require(['jquery', 'foundation', 'angular', 'app'], function ($, foundation, angular) {
+require(['jquery', 'angular', 'app'], function ($, angular) {
   $(function () {
     function allComponents () {
       var components = {
