@@ -239,6 +239,20 @@ nav {
 .today h2 {
     margin-bottom: 1em;
 }
+.today img {
+  margin-top: 2em;
+  opacity: .1;
+}
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (   min--moz-device-pixel-ratio: 2),
+only screen and (        min-device-pixel-ratio: 2),
+only screen and (                min-resolution: 192dpi),
+only screen and (                min-resolution: 2dppx) {
+  .today img {
+    background: url(../img/graphic@2x.png) no-repeat;
+  }
+}
 .completed-pomodori > li {
     cursor: pointer;
     margin-top: 1em;
