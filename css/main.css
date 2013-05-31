@@ -151,6 +151,7 @@ footer > div {
 .timer.pause:before {
   color: #444;
   font-family: fontello;
+  opacity: 0;
   position: absolute;
   -webkit-animation-name: fadeOut;
   -webkit-animation-duration: .6s;
