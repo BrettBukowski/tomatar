@@ -1,17 +1,20 @@
 <div id="detailsDialog" class="reveal-modal small" role="dialog">
   <div class="row">
     <h3>Details</h3>
-    <div class="panel">
+    <article class="panel">
       <span class="visuallyhidden">Notes:</span>
-      <p>{{ details.notes }}</p>
-    </div>
-    <div>
+      <div data-ng-switch="details.notes">
+        <span data-ng-switch-when="">No notes</span>
+        <span data-ng-switch-default>{{ details.notes }}</span>
+      </div>
+    </article>
+    <aside>
       <i class="icon-clock"></i>
       <span class="visuallyhidden">Time interval:</span>
       {{ details.finished|timeInterval:details.duration|padSeconds|formatTime:hourFormat }}
       -
       {{ details.finished|padSeconds|formatTime:hourFormat }}
-    </div>
+    </aside>
   </div>
   <br>
   <div class="row">
