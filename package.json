@@ -1,0 +1,24 @@
+{
+  "name": "tomatar",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Pomodoro app",
+  "main": "index.js",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-watch": "~0.3.1",
+    "karma": "~0.8.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com:BrettBukowski/tomatar.git"
+  },
+  "author": "Brett Bukowski",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "scripts": {
+    "test": "grunt test"
+  }
+}

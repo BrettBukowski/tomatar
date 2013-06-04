@@ -1,5 +1,10 @@
-define(['app'], function (app) {
+define(['app', 'angular'], function (app, angular) {
   "use strict";
+
+  var truncationLimit = 40;
+  var months = ['January', 'February', 'March', 'April', 'May',
+   'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
 
   function pad (input) {
     return (input < 10) ? '0' + input : input;
@@ -9,15 +14,15 @@ define(['app'], function (app) {
     return hour + ':' + minute + ((suffix) ? ' ' + suffix : '');
   }
 
-  return app.filter('padSeconds', function () {
-    return function (input) {
+  var filters = {
+    padSeconds: function (input) {
       if (typeof input === 'number') return pad(input);
 
       var split = input.split(':');
       return formatTime(split[0], pad(split[1]));
-    };
-  }).filter('timeInterval', function () {
-    return function (endTime, minutesToSubtract) {
+    },
+
+    timeInterval: function (endTime, minutesToSubtract) {
       var split = endTime.split(':'),
           hour = split[0],
           minutes = split[1];
@@ -29,16 +34,15 @@ define(['app'], function (app) {
       }
 
       return formatTime(hour, minutes);
-    };
-  }).filter('truncate', function () {
-    var truncationLimit = 40;
-    return function (input, truncate) {
+    },
+
+    truncate: function (input, truncate) {
       if (input.length <= truncationLimit) return input;
 
       return input.substr(0, (truncate || truncationLimit) - 1) + '…';
-    };
-  }).filter('formatTime', function () {
-    return function (input, format) {
+    },
+
+    formatTime: function (input, format) {
       if (format == 12) {
         var split = input.split(':');
         if (split[0] > 12) {
@@ -50,16 +54,25 @@ define(['app'], function (app) {
       }
 
       return input;
-    };
-  }).filter('formatDate', function () {
-    var months = ['January', 'February', 'March', 'April', 'May',
-     'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    },
 
-    // Expecting YYYY-MM-DD
-    return function (input) {
+    formatDate: function (input) {
+      // Expecting YYYY-MM-DD
       var split = input.split('-');
 
       return months[parseInt(split[1], 10) - 1] + ' ' + split[2] + ', ' + split[0];
+    }
+  };
+
+  function wrap (func) {
+    return function () {
+      return func;
     };
+  }
+
+  angular.forEach(filters, function (func, name) {
+    app.filter(name, wrap(func));
   });
+
+  return app;
 });
