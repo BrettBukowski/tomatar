@@ -1,8 +1,8 @@
 define(['app', 'angular'], function (app, angular) {
   "use strict";
 
-  var truncationLimit = 40;
-  var months = ['January', 'February', 'March', 'April', 'May',
+  var TRUNCATION_LIMIT = 40;
+  var MONTHS = ['January', 'February', 'March', 'April', 'May',
    'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 
@@ -37,9 +37,11 @@ define(['app', 'angular'], function (app, angular) {
     },
 
     truncate: function (input, truncate) {
-      if (input.length <= truncationLimit) return input;
+      var limit = truncate || TRUNCATION_LIMIT;
 
-      return input.substr(0, (truncate || truncationLimit) - 1) + '…';
+      return (input.length <= limit)
+        ? input
+        : input.substr(0, limit - 1) + '…';
     },
 
     formatTime: function (input, format) {
@@ -60,7 +62,9 @@ define(['app', 'angular'], function (app, angular) {
       // Expecting YYYY-MM-DD
       var split = input.split('-');
 
-      return months[parseInt(split[1], 10) - 1] + ' ' + split[2] + ', ' + split[0];
+      if (split.length != 3) return input;
+
+      return MONTHS[parseInt(split[1], 10) - 1] + ' ' + split[2] + ', ' + split[0];
     }
   };
 
