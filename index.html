@@ -11,13 +11,14 @@
 <body>
 
   <header class="row">
-    <div class="large-9 small-8 columns">
+    <div class="large-9 small-6 columns">
         <h1>Tomatar</h1>
     </div>
-    <div class="large-3 small-4 columns text-right">
-        <a href="javascript:;" data-reveal-id="settings" class="settings">
-          <i class="icon-cog"></i>Settings
-        </a>
+    <div class="large-3 small-6 columns text-right header-links">
+      <a href="#" class="pull-1" data-dropdown="signIn">Sign in</a>
+      <a href="#" data-reveal-id="settings" class="settings">
+        <i class="icon-cog"></i>Settings
+      </a>
     </div>
     <hr>
   </header>
@@ -32,6 +33,7 @@
   </footer>
 
   <div data-ng-controller="SettingsController" data-ng-include="'partials/settings.html'"></div>
+  <div data-ng-controller="SignInController" data-ng-include="'partials/signIn.html'"></div>
 
   <div class="hidden" data-ng-controller="SoundController">
     <audio preload="auto" id="soundNotification" data-ng-bind-html-unsafe="source"></audio>

@@ -25,7 +25,7 @@ require(['jquery', 'angular', 'app'], function ($, angular) {
       var components = {
         routes:       ['Routes'],
         filters:      ['Filter'],
-        controllers:  ['History', 'Settings', 'Timer', 'Today', 'Sound'],
+        controllers:  ['History', 'Settings', 'Timer', 'Today', 'Sound', 'SignIn'],
         services:     ['Notification', 'Pomodoro', 'Settings', 'Storage', 'TimeMaster',
                         'History', 'Dialog', 'Favicon']
       };

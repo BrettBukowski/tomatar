@@ -35,7 +35,7 @@ define(['jquery', 'angular', 'foundation'], function ($, angular) {
         close: function () {
           rootScope.$broadcast($(this).attr('id') + 'Closed');
         }
-      });
+      }).foundation('dropdown');
 
     }]);
 });

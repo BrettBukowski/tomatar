@@ -108,11 +108,14 @@ footer > div {
 [class*="block-grid-"] {
   margin: 0;
 }
+.header-links {
+  font-size: smaller;
+  margin-top: 5px;
+
+}
 .settings {
   color: #818181;
-  font-size: smaller;
   display: inline-block;
-  margin-top: 5px;
 }
 .settings:hover,
 .settings:focus {
@@ -322,6 +325,7 @@ only screen and (                min-resolution: 2dppx) {
 .current-mode {
     font-size: small;
 }
+
 .sticky {
   position: -webkit-sticky;
   position: -moz-sticky;
@@ -329,6 +333,9 @@ only screen and (                min-resolution: 2dppx) {
   position: sticky;
   top: 0;
   z-index: 1;
+}
+.larger {
+  font-size: larger;
 }
 
 @font-face {
@@ -406,6 +413,11 @@ only screen and (                min-resolution: 2dppx) {
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
 
+
+
+.icon-google:before { content: '\e811'; } /* '' */
+.icon-twitter:before { content: '\e810'; } /* '' */
+.icon-github-circled:before { content: '\e80f'; } /* '' */
 .icon-website:before { content: '\e80e'; } /* '' */
 .icon-clock-circled:before { content: '\e80c'; } /* '' */
 .icon-clock:before { content: '\e80b'; } /* '' */
