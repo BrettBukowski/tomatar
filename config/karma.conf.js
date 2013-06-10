@@ -3,7 +3,7 @@
 
 
 // base path, that will be used to resolve files and exclude
-basePath = '';
+basePath = '../';
 
 
 // list of files / patterns to load in the browser
@@ -13,11 +13,11 @@ files = [
   REQUIRE,
   REQUIRE_ADAPTER,
 
-  { pattern: 'js/vendor/angular.min.js', included: true },
-  { pattern: 'test/lib/angular-mocks.js', included: true },
-  { pattern: 'js/**/*.js', included: false },
-  { pattern: 'test/specs/**/*.js', included: false },
-  'test/test-main.js'
+  { pattern: 'public/js/vendor/angular.min.js', included: true },
+  { pattern: 'test/client/lib/angular-mocks.js', included: true },
+  { pattern: 'public/js/**/*.js', included: false },
+  { pattern: 'test/client/specs/**/*.js', included: false },
+  'test/client/test-main.js'
 ];
 
 

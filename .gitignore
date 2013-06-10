@@ -1,3 +1,4 @@
 .DS_Store
 libpeerconnection.log
 node_modules
+/config/auth.json

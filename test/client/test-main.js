@@ -4,7 +4,7 @@ var tests = Object.keys(window.__karma__.files).filter(function (file) {
 
 requirejs.config({
     // Karma serves files from '/base'
-    baseUrl: '/base/js',
+    baseUrl: '/base/public/js',
       paths: {
         jquery:     'vendor/jquery',
         foundation: 'vendor/foundation.min',

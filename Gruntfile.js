@@ -3,7 +3,13 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     jshint: {
-      all: ['Gruntfile.js', 'js/**/*.js', 'test/**/*.js'],
+      all: [
+        'Gruntfile.js',
+        'public/js/**/*.js',
+        'test/client/**/*.js',
+        'lib/**/*.js',
+        'app.js'
+      ],
       options: {
         expr: true,
         browser: true,
@@ -13,18 +19,18 @@ module.exports = function(grunt) {
 
     watch: {
       scripts: {
-        files: ['js/**/*.js', 'test/**/*.js'],
+        files: ['public/js/**/*.js', 'test/client/**/*.js'],
         tasks: ['jshint']
       },
       karma: {
-        files: ['js/**/*.js', 'test/**/*.js'],
+        files: ['public/js/**/*.js', 'test/client/**/*.js'],
         tasks: ['karma:unit:run']
       }
     },
 
     karma: {
       unit: {
-        configFile: 'karma.conf.js',
+        configFile: 'config/karma.conf.js',
         background: true
       },
       continuous: {

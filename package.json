@@ -3,14 +3,24 @@
   "version": "0.0.1",
   "private": true,
   "description": "Pomodoro app",
-  "main": "index.js",
+  "dependencies": {
+    "union": "~0.3.5",
+    "flatiron": "~0.3.5",
+    "ecstatic": "~0.4.5",
+    "passport": "~0.1.17",
+    "passport-github": "~0.1.5",
+    "passport-twitter": "~0.1.4",
+    "passport-google": "~0.3.0"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.3.0",
     "grunt-contrib-uglify": "~0.2.0",
     "grunt-contrib-watch": "~0.3.1",
     "grunt-karma": "~0.4.4",
-    "karma": "~0.8.5"
+    "karma": "~0.8.5",
+    "api-easy": "0.3.2",
+    "vows": "0.6.x"
   },
   "repository": {
     "type": "git",
@@ -20,6 +30,7 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "start": "node app.js"
   }
 }
