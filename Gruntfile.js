@@ -33,9 +33,9 @@ module.exports = function(grunt) {
         configFile: 'config/karma.conf.js',
         background: true
       },
-      continuous: {
-        singleRun: true,
-        browsers: ['Firefox']
+      single: {
+        configFile: 'config/karma.conf.js',
+        singleRun: true
       },
       dev: {
         reporters: 'dots'
@@ -48,5 +48,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-karma');
 
-  grunt.registerTask('test', ['karma:continuous']);
+  grunt.registerTask('test', ['karma:single']);
 };
