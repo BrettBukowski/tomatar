@@ -2,30 +2,36 @@
 
 var flatiron = require('flatiron'),
     ecstatic = require('ecstatic'),
-    passport = require('passport'),
+    passport = require('flatiron-passport'),
+    connect = require('connect'),
+    RedisStore = require('connect-redis')(connect),
     authConfiguration = require('./lib/authConfiguration'),
-    path = require('path'),
+    secrets = require('./config/auth.json'),
     app = flatiron.app;
 
-app.config.file({ file: path.join(__dirname, 'config', 'config.json') });
+app.config.file({ file: __dirname + 'config/config.json' });
 
 app.use(flatiron.plugins.http, {
-  before: [ ecstatic({ root: __dirname + '/public', handleError: false }) ]
+  before: [
+    ecstatic(__dirname + '/public'),
+    connect.cookieParser(secrets.cookie),
+    connect.session({
+      key:      'sid',
+      store:    new RedisStore(),
+      secret:   secrets.session,
+      cookie:   { maxAge: 1000 * 60 * 60 * 24 * 365 /* one year */ }
+    })
+  ]
 });
+app.use(passport, { session: true });
 
-var passportConfig = {
-  successRedirect: '/',
-  failureRedirect: '/'
-};
 authConfiguration.configure();
-authConfiguration.strategies.forEach(function (strategy) {
-  app.router.get('/auth/' + strategy, passport.authenticate(strategy));
-  app.router.get('/auth/' + strategy + '/callback', passport.authenticate(strategy, passportConfig));
-});
 
-app.router.get('/foo', function () {
-  this.res.writeHead(200, { 'Content-Type': 'text/plain' });
-  this.res.end('Hello world!\n');
-});
+var routes = authConfiguration.strategyRoutes(function () {
+  this.res.redirect('/');
+}), route;
+for (route in routes) {
+  app.router.get(route, routes[route]);
+}
 
 app.start(5000);
