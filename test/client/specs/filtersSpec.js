@@ -1,3 +1,4 @@
+/* global describe,it,expect,inject,beforeEach,define */
 'use strict';
 
 define(['filters/Filter'], function () {

@@ -29,7 +29,7 @@ define(['app', 'angular'], function (app, angular) {
 
       minutes -= minutesToSubtract;
       while (minutes < 0) {
-        if (--hour == 0) hour = 12;
+        if (!--hour) hour = 12;
         minutes = 60 + minutes;
       }
 

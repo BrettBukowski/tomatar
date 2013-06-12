@@ -6,7 +6,7 @@ define(['app', 'utils'], function (app, utils) {
   function today () {
     var now = new Date();
 
-    return now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()
+    return now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
   }
 
   function timestamp () {
@@ -45,7 +45,7 @@ define(['app', 'utils'], function (app, utils) {
         return todaysEntries;
       },
       get: function () {
-        return storageService.getJSON(storageKey) || defaults;
+        return storageService.getJSON(storageKey) || {};
       }
     };
   }]);

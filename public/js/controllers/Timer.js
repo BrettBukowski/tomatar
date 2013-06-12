@@ -29,7 +29,7 @@ define(['app', 'jquery'], function (app, $) {
     }
 
     function updateTimer () {
-      if (scope.timeLeft.seconds == 0) {
+      if (!scope.timeLeft.seconds) {
         scope.timeLeft.minutes--;
         if (scope.timeLeft.minutes == -1) {
           scope.timeLeft.minutes = 0;
@@ -52,7 +52,7 @@ define(['app', 'jquery'], function (app, $) {
       if (!newVal) return;
 
       updateTitle(newVal.minutes, newVal.seconds, newVal.label);
-      if (newVal.minutes == 0 && newVal.seconds == 5) {
+      if (!newVal.minutes && newVal.seconds == 5) {
         rootScope.$emit('timerWarning');
       }
     }, true);

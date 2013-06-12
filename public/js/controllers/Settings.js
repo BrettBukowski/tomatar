@@ -15,7 +15,7 @@ define(['app', 'jquery'], function (app, $) {
     }
 
     function populateSettingsFromScope (keys) {
-      var settings = {}, i;
+      var settings = {};
       for (var i = 0, len = keys.length, key; i < len; i++) {
         key = keys[i];
         settings[key] = scope[key];
@@ -32,7 +32,7 @@ define(['app', 'jquery'], function (app, $) {
       if (scope.alarms.notification) {
         // Turning on notifications: check for permissions
         if (!notificationService.available()) {
-          return scope.alarms.notification = false;
+          return (scope.alarms.notification = false);
         }
         notificationService.requestPermission(function (granted) {
           scope.alarms.notification = granted;

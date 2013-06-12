@@ -1,3 +1,5 @@
+/* global require */
+
 /**
  * Main bootsrap file.
  */
@@ -28,12 +30,15 @@ require(['jquery', 'angular', 'app'], function ($, angular) {
         controllers:  ['History', 'Settings', 'Timer', 'Today', 'Sound', 'SignIn'],
         services:     ['Notification', 'Pomodoro', 'Settings', 'Storage', 'TimeMaster',
                         'History', 'Dialog', 'Favicon']
-      };
+      },
+      paths = function(i) {
+        return function (j) { return i + '/' + j; };
+      },
+      all = [];
 
-      var all = [];
       for (var i in components) {
         if (components.hasOwnProperty(i)) {
-          all = all.concat(components[i].map(function (j) { return i + '/' + j; }));
+          all = all.concat(components[i].map(paths(i)));
         }
       }
 

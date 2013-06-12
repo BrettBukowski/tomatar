@@ -5,15 +5,22 @@ module.exports = function(grunt) {
     jshint: {
       all: [
         'Gruntfile.js',
-        'public/js/**/*.js',
-        'test/client/**/*.js',
+        'public/js/*.js',
+        'public/js/controllers/*.js',
+        'public/js/filters/*.js',
+        'public/js/routes/*.js',
+        'public/js/services/*.js',
+        'test/client/specs/*.js',
         'lib/**/*.js',
         'app.js'
       ],
       options: {
         expr: true,
         browser: true,
-        node: true
+        node: true,
+        laxbreak: true,
+        eqeqeq: false,
+        boss: true
       }
     },
 
