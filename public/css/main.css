@@ -231,6 +231,9 @@ footer > div {
   font-size: small;
   margin-right: 3px;
 }
+#signIn {
+  margin-top: 8px;
+}
 .reveal-modal form {
     margin: 0;
 }
