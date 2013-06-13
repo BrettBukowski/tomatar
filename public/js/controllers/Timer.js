@@ -66,6 +66,7 @@ define(['app', 'jquery'], function (app, $) {
     };
 
     scope.startTimer = function () {
+      updateFavicon(scope.progress);
       intervalId = win.setInterval(updateTimer, 1000);
     };
 
