@@ -26,8 +26,8 @@ module.exports = function(grunt) {
 
     watch: {
       scripts: {
-        files: ['public/js/**/*.js', 'test/client/**/*.js'],
-        tasks: ['jshint']
+        files: ['public/js/**/*.js', 'test/**/*.js', 'lib/**/*.js'],
+        tasks: ['jshint', 'cafemocha']
       },
       karma: {
         files: ['public/js/**/*.js', 'test/client/**/*.js'],
@@ -47,6 +47,10 @@ module.exports = function(grunt) {
       dev: {
         reporters: 'dots'
       }
+    },
+
+    cafemocha: {
+      specs: { src: 'test/server/**/*.js' }
     }
 
   });
@@ -54,6 +58,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-cafe-mocha');
 
-  grunt.registerTask('test', ['karma:single']);
+  grunt.registerTask('test', ['karma:single', 'cafemocha']);
 };

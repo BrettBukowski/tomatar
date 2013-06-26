@@ -26,7 +26,10 @@
     "grunt-karma": "~0.4.4",
     "karma": "~0.8.5",
     "api-easy": "0.3.2",
-    "vows": "0.6.x"
+    "vows": "0.6.x",
+    "chai": "~1.7.1",
+    "mocha": "~1.11.0",
+    "grunt-cafe-mocha": "~0.1.7"
   },
   "repository": {
     "type": "git",
