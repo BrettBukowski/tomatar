@@ -42,26 +42,85 @@ describe('User', function () {
         done();
       });
     });
+
+    it('Errors on invalid input', function (done) {
+      User.create({ bananas: true }).fail(function (error) {
+        expect(error).not.to.be.undefined;
+        done();
+      });
+    });
   });
 
   describe('#saveStrategy()', function () {
-    it('Throws an error on an unsaved user', function () {
+    it('Errors on an unsaved user', function () {
       expect(function () { new User().saveStrategy(); }).to.throw();
     });
   });
 
-  describe('findOrCreate', function () {
+  describe('#findOrCreate()', function () {
+    it('Finds an existing user', function (done) {
+      User.findOrCreate(props).done(function (found) {
+        expect(found.id).not.to.be.null;
+        done();
+      });
+    });
 
+    it('Errors on invalid input', function (done) {
+      User.findOrCreate({ bananas: true }).fail(function (error) {
+        expect(error).not.to.be.undefined;
+        done();
+      });
+    });
   });
 
-  describe('update', function () {
+  describe('#update()', function () {
+    it('Updates an existing user', function (done) {
+      user.name = 'bananas';
+      User.update(user).done(function (result) {
+        expect(result.name).to.equal(user.name);
+        done();
+      });
+    });
 
+    it('Errors on new user', function (done) {
+      var newUser = new User({});
+      User.update(newUser).fail(function (error) {
+        expect(error).not.to.be.undefined;
+        done();
+      });
+    });
   });
 
+  describe('#save()', function () {
+    it('Updates an existing user', function (done) {
+      user.name = 'heeey';
+      user.save().done(function (result) {
+        expect(result.name).to.equal(user.name);
+        done();
+      });
+    });
+
+    it('Creates a new user', function (done) {
+      var newUser = new User({
+        provider:     'google',
+        id:           '2323491234a234',
+        displayName:  'time like',
+        email:        'df@fb.me'
+      });
+      newUser.save().done(function (result) {
+        expect(result.id).not.to.be.undefined;
+        User.destroy(newUser);
+        done();
+      });
+    });
+  });
 
   describe('#findById()', function () {
-    it('Finds existing users', function () {
-
+    it('Finds existing users', function (done) {
+      User.findById(user.id).done(function (result) {
+        expect(result.id).to.equal(user.id);
+        done();
+      });
     });
 
     it("Doesn't find non-existing users", function (done) {
@@ -82,6 +141,7 @@ describe('User', function () {
   describe('#findBy()', function () {
     it('Finds by given criteria without error', function (done) {
       User.findBy({ email: 'blah@bleck.me' }).done(function (result) {
+        expect(result).to.be.undefined;
         done();
       });
     });
