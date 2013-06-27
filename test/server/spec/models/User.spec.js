@@ -9,7 +9,7 @@ describe('User', function () {
     id:           '15212343229991231000',
     provider:     'github',
     displayName:  'a b',
-    email:        (+new Date()) + '.sit.down@human.ice'
+    emails:       [{ value: (+new Date()) + '.sit.down@human.ice' }]
   };
 
   describe('Constructor', function () {
@@ -20,7 +20,7 @@ describe('User', function () {
       expect(user.service_user_id).to.equal(props.id);
       expect(user.service).to.equal(props.provider);
       expect(user.name).to.equal(props.displayName);
-      expect(user.email).to.equal(props.email);
+      expect(user.email).to.equal(props.emails[0].value);
     });
 
     it('ignores other properties', function () {
@@ -105,7 +105,7 @@ describe('User', function () {
         provider:     'google',
         id:           '2323491234a234',
         displayName:  'time like',
-        email:        'df@fb.me'
+        emails:       [{ value: 'df@fb.me' }]
       });
       newUser.save().done(function (result) {
         expect(result.id).not.to.be.undefined;
