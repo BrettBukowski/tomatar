@@ -13,14 +13,14 @@ app.config.file({ file: __dirname + 'config/config.json' });
 
 app.use(flatiron.plugins.http, {
   before: [
-    ecstatic(__dirname + '/public'),
     connect.cookieParser(secrets.cookie),
     connect.session({
-      key:      'sid',
+      key:      'session',
       store:    new RedisStore(),
       secret:   secrets.session,
-      cookie:   { maxAge: 1000 * 60 * 60 * 24 * 365 /* one year */ }
-    })
+      cookie:   { httpOnly: false, maxAge: 1000 * 60 * 60 * 24 * 365 /* one year */ }
+    }),
+    ecstatic(__dirname + '/public')
   ]
 });
 app.use(passport, { session: true });
