@@ -7,7 +7,9 @@ var flatiron = require('flatiron'),
     RedisStore = require('connect-redis')(connect),
     authConfiguration = require('./lib/authConfiguration'),
     secrets = require('./config/auth.json'),
-    app = flatiron.app;
+    app = flatiron.app,
+    Cookies = require('cookies'),
+    cookieSettings = { maxAge: 1000 * 60 * 60 * 24 * 365 /* one year */ };
 
 app.config.file({ file: __dirname + 'config/config.json' });
 
@@ -18,7 +20,7 @@ app.use(flatiron.plugins.http, {
       key:      'session',
       store:    new RedisStore(),
       secret:   secrets.session,
-      cookie:   { httpOnly: false, maxAge: 1000 * 60 * 60 * 24 * 365 /* one year */ }
+      cookie:   cookieSettings
     }),
     ecstatic(__dirname + '/public')
   ]
@@ -28,6 +30,14 @@ app.use(passport, { session: true });
 authConfiguration.configure();
 
 var routes = authConfiguration.strategyRoutes(function () {
+  var cookies = new Cookies(this.req, this.res),
+      options = {
+        httpOnly: false,
+        expires: new Date(new Date().getTime() + cookieSettings.maxAge)
+      };
+
+  cookies.set('signin', 'true', options);
+
   this.res.redirect('/');
 }), route;
 for (route in routes) {

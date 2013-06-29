@@ -5,7 +5,11 @@ define(['app'], function (app) {
     };
 
     scope.signedIn = function () {
-      return User.loggedIn();
+      return User.signedIn();
+    };
+
+    scope.signOut = function () {
+      return User.signOut();
     };
   }]);
 });

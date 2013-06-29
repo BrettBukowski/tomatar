@@ -102,6 +102,9 @@ footer > div {
     font-size: smaller;
     margin-bottom: 3em;
 }
+[data-ng-cloak] {
+  display: none;
+}
 /* Foundation's -10 margin causes
    overflow scrollbar for small
    viewports. */

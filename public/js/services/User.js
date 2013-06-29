@@ -2,12 +2,12 @@ define(['app'], function (app) {
   "use strict";
 
   return app.service('userService', ['$http', '$cookies', function (http, cookies) {
-    this.loggedIn = function () {
-      return !!cookies['connect.sid'];
+    this.signedIn = function () {
+      return cookies.signin == 'true';
     };
 
-    this.logOut = function () {
-
+    this.signOut = function () {
+      http.post('/signout')
     };
   }]);
 });
