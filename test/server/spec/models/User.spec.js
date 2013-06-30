@@ -91,6 +91,21 @@ describe('User', function () {
     });
   });
 
+  describe('#set()', function () {
+    it('Sets a prop w/ name, val', function () {
+      var a = new User();
+      a.set('bananas', 'hey');
+      expect(a.bananas).to.equal('hey');
+    });
+
+    it('Sets multiple props w/ an object literal', function () {
+      var a = new User();
+      a.set({ bananas: true, concrete: 'no' });
+      expect(a.bananas).to.be.true;
+      expect(a.concrete).to.equal('no');
+    });
+  });
+
   describe('#save()', function () {
     it('Updates an existing user', function (done) {
       user.name = 'heeey';
