@@ -13,5 +13,9 @@ define(['app'], function (app) {
         signedIn = false;
       });
     };
+
+    this.savePrefs = function () {
+
+    };
   }]);
 });

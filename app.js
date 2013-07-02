@@ -26,7 +26,6 @@ app.use(flatiron.plugins.http, {
   ]
 });
 app.use(passport, { session: true });
-
 authConfiguration.configure();
 router(app.router);
 
