@@ -90,13 +90,10 @@ describe('Pomodoro', function () {
     it('Creates a new pom', function (done) {
       var newOne = new Pomodoro(props);
       newOne.user = user;
-      console.log(user);
       newOne.save(user).done(function (result) {
         expect(result.id).not.to.be.undefined;
         Pomodoro.destroy(result);
         done();
-      }, function (err) {
-        console.log(err);
       });
     });
 
