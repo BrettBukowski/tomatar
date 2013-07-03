@@ -106,11 +106,24 @@ describe('Pomodoro', function () {
     });
   });
 
-  describe('#getInDateRangeForUser()', function () {
+  describe('#getAllForUser()', function () {
+    it('gets all for a valid user', function (done) {
+      Pomodoro.getAllForUser(user).done(function (result) {
+        expect(result.rowCount).not.to.be.undefined;
+        expect(result.rows).to.be.an('array');
+        done();
+      });
+    });
 
+    it('Errors when not given a valid user', function (done) {
+      Pomodoro.getAllForUser({ id: 'bananas' }).fail(function (err) {
+        expect(err).not.to.be.undefined;
+        done();
+      });
+    });
   });
 
-  describe('#getAllForUser()', function () {
+  describe('#getInDateRangeForUser()', function () {
 
   });
 
