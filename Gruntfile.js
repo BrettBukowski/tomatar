@@ -20,7 +20,8 @@ module.exports = function(grunt) {
         node: true,
         laxbreak: true,
         eqeqeq: false,
-        boss: true
+        boss: true,
+        validthis: true
       }
     },
 
