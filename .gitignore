@@ -2,3 +2,5 @@
 libpeerconnection.log
 node_modules
 /config/auth.json
+
+config/tables.sql
