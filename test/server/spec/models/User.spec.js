@@ -76,8 +76,10 @@ describe('User', function () {
   describe('#update()', function () {
     it('Updates an existing user', function (done) {
       user.name = 'bananas';
+      user.preferences = {'bananas': true};
       User.update(user).done(function (result) {
         expect(result.name).to.equal(user.name);
+        expect(result.preferences).to.equal(user.preferences);
         done();
       });
     });
@@ -134,6 +136,7 @@ describe('User', function () {
     it('Finds existing users', function (done) {
       User.findById(user.id).done(function (result) {
         expect(result.id).to.equal(user.id);
+        expect(result).to.be.an.instanceof(User);
         done();
       });
     });
