@@ -7,13 +7,15 @@ define(['jquery', 'angular', 'angular-cookies', 'foundation'], function ($, angu
         var session = new TimeMaster();
 
         function timeIntervalComplete () {
-          if (settingsService.get().alarms.notification) {
-            notificationService.display(session.labels);
-          }
-
-          rootScope.$broadcast('timeInterval:complete', session.isPomo, session.timeInterval.minutes);
-          session.complete();
-          rootScope.$broadcast('timeInterval:new', angular.copy(session.timeInterval), session.autoStart);
+          settingsService.get().then(function (settings) {
+            if (settings.alarms.notification) {
+              notificationService.display(session.labels);
+            }
+            rootScope.$broadcast('timeInterval:complete', session.isPomo, session.timeInterval.minutes);
+            session.complete().then(function () {
+              rootScope.$broadcast('timeInterval:new', angular.copy(session.timeInterval), session.autoStart);
+            });
+          });
         }
 
         rootScope.$on('timer', timeIntervalComplete);

@@ -1,26 +1,49 @@
-define(['app'], function (app) {
+define(['app', 'angular'], function (app) {
   "use strict";
 
-  return app.factory('pomodoroService', ['$rootScope', 'settingsService', function (rootScope, settings) {
-    var defaults = settings.get().breaks;
+  var intervals = {
+    'pomodoro': {
+      seconds: 0,
+      label: 'Focus'
+    },
+    'short': {
+      seconds: 0,
+      label: 'Break'
+    },
+    'long': {
+      seconds: 0,
+      label: 'Break'
+    }
+  };
+
+  return app.factory('pomodoroService', ['$rootScope', 'settingsService', '$q', function (rootScope, settings) {
+    var defaults;
+
+    settings.get().then(function (prefs) {
+      defaults = prefs.breaks;
+    });
 
     rootScope.$on('settingsSaved', function (evt, settings) {
       defaults = settings.breaks;
     });
 
-    var factory = {
-      pomodoro: function() {
-        return { minutes: defaults.pomodoro, seconds: 0, label: 'Focus' };
-      },
-      shortBreak: function() {
-        return { minutes: defaults['short'], seconds: 0, label: 'Break' };
-      },
-      longBreak: function() {
-        return { minutes: defaults['long'], seconds: 0, label: 'Break' };
-      }
+    function getInterval (name) {
+      return function () {
+        return settings.get().then(function (prefs) {
+          var interval = intervals[name];
+          interval.minutes = prefs.breaks[name];
+
+          return angular.copy(interval);
+        });
+      };
+    }
+
+    return {
+      pomodoro:   getInterval('pomodoro'),
+      shortBreak: getInterval('short'),
+      longBreak:  getInterval('long')
     };
 
-    return factory;
   }]);
 });
 

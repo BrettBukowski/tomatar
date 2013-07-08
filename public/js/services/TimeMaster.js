@@ -18,7 +18,7 @@ define(['app', 'utils'], function (app, utils) {
       this._completed = 0;
       this.isPomo = true;
       this.autoStart = true;
-      this.timeInterval = pomodoroService.pomodoro();
+      this._setTimeInterval('pomodoro');
       this.labels = labels.pomodoro;
     }
 
@@ -26,9 +26,19 @@ define(['app', 'utils'], function (app, utils) {
       var directions = this._whenComplete[(this.isPomo) ? 'pomo' : 'break'];
 
       this.autoStart = directions.autoStart;
-      this.timeInterval = this[directions.timeInterval]();
       this.labels = labels[directions.labels];
       this.isPomo = !this.isPomo;
+      return this._setTimeInterval(this[directions.timeInterval]());
+    };
+
+    TimedSession.prototype._setTimeInterval = function (intervalName) {
+      var self = this;
+
+      return pomodoroService[intervalName]().then(function (interval) {
+        self.timeInterval = interval;
+
+        return self;
+      });
     };
 
     TimedSession.prototype._whenComplete = {
@@ -50,13 +60,11 @@ define(['app', 'utils'], function (app, utils) {
     TimedSession.prototype._finishedPomo = function () {
       this._completed++;
 
-      return (this._completed % 4 === 0)
-        ? pomodoroService.longBreak()
-        : pomodoroService.shortBreak();
+      return (this._completed % 4 === 0) ? 'longBreak' : 'shortBreak';
     };
 
     TimedSession.prototype._finishedBreak = function () {
-      return pomodoroService.pomodoro();
+      return 'pomodoro';
     };
 
     return TimedSession;

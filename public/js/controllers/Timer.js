@@ -1,4 +1,4 @@
-define(['app', 'jquery'], function (app, $) {
+define(['app', 'jquery', 'angular'], function (app, $, angular) {
   "use strict";
 
   return app.controller('TimerController',
@@ -113,6 +113,6 @@ define(['app', 'jquery'], function (app, $) {
       }
     });
 
-    scope.initialize(pomodoroService.pomodoro());
+    pomodoroService.pomodoro().then(angular.bind(scope, scope.initialize));
   }]);
 });

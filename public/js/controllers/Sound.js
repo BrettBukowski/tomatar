@@ -53,6 +53,9 @@ define(['jquery', 'app'], function ($, app) {
       scope.setSound(settings.alarms.sounds.current);
     });
 
-    scope.setSound(settingsService.get().alarms.sounds.current);
+    settingsService.get().then(function (settings) {
+      scope.setSound(settings.alarms.sounds.current);
+      !scope.$$phase && scope.$apply();
+    });
   }]);
 });

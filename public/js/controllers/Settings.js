@@ -12,6 +12,7 @@ define(['app', 'jquery'], function (app, $) {
           settingsKeys.push(i);
         }
       }
+      !scope.$$phase && scope.$apply();
     }
 
     function populateSettingsFromScope (keys) {
@@ -50,6 +51,6 @@ define(['app', 'jquery'], function (app, $) {
       $('#settings .close-reveal-modal').click();
     };
 
-    populateScopeFromSettings(settingsService.get());
+    settingsService.get().then(populateScopeFromSettings);
   }]);
 });

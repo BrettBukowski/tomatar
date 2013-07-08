@@ -1,4 +1,4 @@
-define(['app', 'utils'], function (app, utils) {
+define(['app', 'utils', 'angular'], function (app, utils, angular) {
   "use strict";
 
   var storageKey = 'settings';
@@ -20,25 +20,65 @@ define(['app', 'utils'], function (app, utils) {
     }
   };
 
-  return app.factory('settingsService', ['$rootScope', 'storageService', function (rootScope, storageService) {
-    var settings;
+  return app.factory('settingsService', ['$rootScope', 'storageService', 'userService', '$q',
+    function (rootScope, storageService, userService, Q) {
+    var settings,
+        fetchedRemoteSettings = false;
+
+    function saveLocally (toSave) {
+      storageService.setJSON(storageKey, toSave);
+    }
+
+    function saveToServer (toSave) {
+      if (userService.signedIn()) {
+        var save = angular.copy(toSave);
+        delete save.alarms.sounds.available;
+        userService.savePrefs(save);
+      }
+    }
+
+    function getLocallySaved () {
+      var retrieved = storageService.getJSON(storageKey);
+      if (retrieved) return utils.mergeDefaults(retrieved, defaults);
+      if (!userService.signedIn()) return defaults;
+    }
 
     return {
       get: function () {
-        if (settings) return settings;
+        var deferred = Q.defer();
 
-        var retrieved = storageService.getJSON(storageKey);
-        settings = (retrieved)
-          ? utils.mergeDefaults(retrieved, defaults)
-          : defaults;
+        if (!settings) {
+          var local = getLocallySaved();
+          if (local) {
+            settings = local;
+          }
+          else {
+            var self = this;
 
-        return settings;
+            var noRemotePreferences = function () {
+              settings = defaults;
+              deferred.resolve(settings);
+              saveLocally(settings);
+            };
+            userService.getPrefs().then(function (result) {
+              if (!result) return noRemotePreferences();
+
+              settings = utils.mergeDefaults(result, defaults);
+              deferred.resolve(settings);
+              saveLocally(settings);
+            }, noRemotePreferences);
+          }
+        }
+
+        if (settings) deferred.resolve(settings);
+
+        return deferred.promise;
       },
 
       save: function (modifiedSettings) {
         settings = modifiedSettings;
-        storageService.setJSON(storageKey, modifiedSettings);
-
+        saveLocally(modifiedSettings);
+        saveToServer(modifiedSettings);
         rootScope.$broadcast('settingsSaved', modifiedSettings);
       }
     };

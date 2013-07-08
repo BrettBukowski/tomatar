@@ -15,7 +15,8 @@ define(['app', 'utils'], function (app, utils) {
     return now.getHours() + ':' + now.getMinutes();
   }
 
-  return app.factory('historyService', ['$rootScope', 'storageService', function (rootScope, storageService) {
+  return app.factory('historyService', ['$rootScope', 'storageService', 'userService',
+    function (rootScope, storageService, userService) {
     var todayKey = today(),
         entries = storageService.getJSON(storageKey) || {};
 
@@ -41,6 +42,7 @@ define(['app', 'utils'], function (app, utils) {
         newEntry.finished = timestamp();
         todaysEntries.push(newEntry);
         save(entries);
+        userService.savePomodoro(newEntry);
 
         return todaysEntries;
       },
