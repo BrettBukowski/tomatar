@@ -95,6 +95,9 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
     font-size: 1em;
 }
+h1::first-letter {
+  letter-spacing: -1px;
+}
 header {
   padding-top: .4em;
 }
@@ -253,6 +256,9 @@ nav {
 
 .today h2 {
     margin-bottom: 1em;
+}
+.today h2::first-letter {
+  letter-spacing: -3px;
 }
 .today img {
   margin-top: 2em;
