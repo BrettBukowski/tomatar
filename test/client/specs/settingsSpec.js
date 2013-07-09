@@ -50,7 +50,7 @@ define(['services/Settings'], function () {
         storageService = { getJSON: function(){} };
         userService = {
           signedIn: function () { return true; },
-          getPrefs: function() { return { then: function() {} }}
+          getPrefs: function() { return { then: function() {} };}
         };
         spyOn(userService, 'getPrefs').andCallThrough();
         provideServices($provide);

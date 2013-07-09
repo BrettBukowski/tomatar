@@ -6,7 +6,9 @@ define(['jquery', 'app'], function ($, app) {
     function (scope, historyService, settingsService, Dialog) {
       var detailsDialog;
 
-      scope.hourFormat = settingsService.get().ui.hours;
+      settingsService.get().then(function (settings) {
+        scope.hourFormat = settings.ui.hours;
+      });
       scope.entries = historyService.getHistory();
       scope.details = { finished: '', notes: '' };
 

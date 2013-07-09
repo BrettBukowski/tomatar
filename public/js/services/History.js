@@ -25,10 +25,17 @@ define(['app', 'utils'], function (app, utils) {
     var todaysEntries = entries[todayKey],
         pastEntries = utils.omit(entries, todayKey);
 
-    function save (entries) {
+    function saveLocal (entries) {
       storageService.setJSON(storageKey, entries);
 
       rootScope.$broadcast(storageKey + 'Saved', entries);
+    }
+
+    function saveRemote (entry) {
+      if (userService.signedIn()) {
+        entry.date = today();
+        userService.savePomodoro(entry);
+      }
     }
 
     return {
@@ -41,8 +48,8 @@ define(['app', 'utils'], function (app, utils) {
       saveToToday: function (newEntry) {
         newEntry.finished = timestamp();
         todaysEntries.push(newEntry);
-        save(entries);
-        userService.savePomodoro(newEntry);
+        saveLocal(entries);
+        saveRemote(newEntry);
 
         return todaysEntries;
       },
