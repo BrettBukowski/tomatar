@@ -7,9 +7,11 @@ var expect = require('chai').expect,
 describe('Pomodoro', function () {
   var pom,
       user,
+      date = new Date(),
       props = {
         notes: 'bananas',
-        date: '7/2/13',
+        date: (date.getMonth() + 1) + '/' + date.getDate() + '/'
+          + (date.getFullYear() + '').substr(2),
         time: '7:11 PM',
         duration: 25
     };
@@ -109,8 +111,7 @@ describe('Pomodoro', function () {
   describe('#getAllForUser()', function () {
     it('gets all for a valid user', function (done) {
       Pomodoro.getAllForUser(user).done(function (result) {
-        expect(result.rowCount).not.to.be.undefined;
-        expect(result.rows).to.be.an('array');
+        expect(result).to.be.an('array');
         done();
       });
     });
@@ -124,7 +125,50 @@ describe('Pomodoro', function () {
   });
 
   describe('#getInDateRangeForUser()', function () {
+    it('Defaults to a month when end is not supplied', function (done) {
+      var now = new Date();
+      Pomodoro.getInDateRangeForUser({
+        start: now.getFullYear() + '-' + (now.getMonth() + 1)
+      }, user).then(function (result) {
+        expect(result).to.be.an('array');
+        expect(result[0].id).to.be.a('number');
+        done();
+      });
+    });
 
+    it('Honors the end range', function (done) {
+      var now = new Date(),
+          end;
+      if (now.getMonth()) {
+        end = now.getFullYear() + '-' + now.getMonth() + 2;
+      }
+      else {
+        end = (now.getFullYear() - 1) + '-12';
+      }
+
+      Pomodoro.getInDateRangeForUser({
+        start: now.getFullYear() + '-' + (now.getMonth() + 1),
+        end:  end
+      }, user).then(function (result) {
+        expect(result).to.be.an('array');
+        expect(result[0].id).to.be.a('number');
+        done();
+      });
+    });
+
+    it('Errors on invalid start date specification', function (done) {
+      Pomodoro.getInDateRangeForUser({ start: 'bananas' }, user).fail(function (err) {
+        expect(err).not.to.be.undefined;
+        done();
+      });
+    });
+
+    it('Errors on invalid end date specification', function (done) {
+      Pomodoro.getInDateRangeForUser({ start: '2013-01', end: 'bananas' }, user).fail(function (err) {
+        expect(err).not.to.be.undefined;
+        done();
+      });
+    });
   });
 
   describe('#destroy()', function () {
