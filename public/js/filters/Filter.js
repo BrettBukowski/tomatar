@@ -58,13 +58,41 @@ define(['app', 'angular'], function (app, angular) {
       return input;
     },
 
+    /**
+     * Month and year
+     * @param  {String} input YYYY-MM OR YYYY-MM-DDT00:00:00.000Z
+     * @return {String}       Month Year
+     */
+    formatMonthAndYear: function (input) {
+      var split = input.split('-');
+
+      if (split.length < 2) return input;
+
+      return MONTHS[parseInt(split[1], 10) - 1] + ' ' + split[0];
+    },
+
+    /**
+     * Month day year
+     * @param  {String} input YYYY-MM-DDT00:00:00.000Z
+     * @return {String}       Month day, year
+     */
     formatDate: function (input) {
-      // Expecting YYYY-MM-DD
       var split = input.split('-');
 
       if (split.length != 3) return input;
 
-      return MONTHS[parseInt(split[1], 10) - 1] + ' ' + split[2] + ', ' + split[0];
+      return MONTHS[parseInt(split[1], 10) - 1] + ' ' + parseInt(split[2], 10) + ', ' + split[0];
+    },
+
+    /**
+     * Day of month
+     * @param  {String} input YYYY-MM-DDT00:00:00.000Z
+     * @return {String}       d
+     */
+    formatDayOfMonth: function (input) {
+      var split = input.split('-');
+
+      return parseInt(split[2], 10) + '';
     }
   };
 

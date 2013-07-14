@@ -51,13 +51,30 @@ define(['filters/Filter'], function () {
       }));
     });
 
+    describe('formatMonthAndYear', function () {
+      it('Handles expected input', inject(function (formatMonthAndYearFilter) {
+        expect(formatMonthAndYearFilter('1902-01')).toEqual('January 1902');
+      }));
+
+      it('Returns what it does not know what to deal with', inject(function (formatMonthAndYearFilter) {
+        expect(formatMonthAndYearFilter('19020123')).toEqual('19020123');
+      }));
+    });
+
     describe('formatDate', function () {
       it('Handles expected input', inject(function (formatDateFilter) {
         expect(formatDateFilter('1902-01-23')).toEqual('January 23, 1902');
+        expect(formatDateFilter('1902-01-01')).toEqual('January 1, 1902');
       }));
 
       it('Returns what it does not know what to deal with', inject(function (formatDateFilter) {
         expect(formatDateFilter('19020123')).toEqual('19020123');
+      }));
+    });
+
+    describe('formatDayOfMonth', function () {
+      it('Handles expected input', inject(function (formatDayOfMonthFilter) {
+        expect(formatDayOfMonthFilter('2013-07-01T00:00:00.000Z')).toEqual('1');
       }));
     });
   });

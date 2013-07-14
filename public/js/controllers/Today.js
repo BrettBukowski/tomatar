@@ -45,7 +45,10 @@ define(['jquery', 'app'], function ($, app) {
       scope.hourFormat = settings.ui.hours;
       !scope.$$phase && scope.$apply();
     });
-    scope.completed = historyService.getToday();
+    historyService.getToday().then(function (completed) {
+      scope.completed;
+      !scope.$$phase && scope.$apply();
+    });
     scope.notes = '';
     scope.details = { finished: '', notes: '' };
 
