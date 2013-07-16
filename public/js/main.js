@@ -30,7 +30,7 @@ require(['jquery', 'angular', 'app'], function ($, angular) {
         filters:      ['Filter'],
         controllers:  ['History', 'Settings', 'Timer', 'Today', 'Sound', 'SignIn'],
         services:     ['Notification', 'Pomodoro', 'Settings', 'Storage', 'TimeMaster',
-                        'History', 'Dialog', 'Favicon', 'User']
+                        'History', 'Dialog', 'Favicon', 'User', 'Calendar']
       },
       paths = function(i) {
         return function (j) { return i + '/' + j; };

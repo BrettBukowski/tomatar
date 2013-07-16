@@ -11,13 +11,6 @@ define(['jquery', 'app'], function ($, app) {
       });
 
       historyService.getHistory().then(function (entries) {
-        // Format:
-        // [{
-        //    month: 'YYYY-MM',
-        //    days: [
-        //      { time: 'HH:MM', notes: String, duration: Number, date: 'YYYY-MM-DDTTTT' }
-        //    ]
-        // }]
         scope.entries = entries;
         !scope.$$phase && scope.$apply();
       }, function () {

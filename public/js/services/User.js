@@ -39,8 +39,8 @@ define(['app'], function (app) {
       return http.post('/user/pomodoro', pomodoro);
     });
 
-    this.getPomodoro = guardUser(function (interval) {
-      return http.get('/user/pomodoro/month/' + interval).then(function (response) {
+    this.getPomodoro = guardUser(function () {
+      return http.get('/user/pomodoro').then(function (response) {
         return response.data.result;
       });
     });
