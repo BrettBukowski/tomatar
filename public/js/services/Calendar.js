@@ -93,6 +93,8 @@ define(['app', 'angular'], function (app, angular) {
        * ]
        */
       partition: function (entries) {
+        if (!entries || !entries.length) return [];
+
         var calendar = new Calendar(entries);
         angular.forEach(entries, calendar.addEntry, calendar);
         return calendar.getMonths();

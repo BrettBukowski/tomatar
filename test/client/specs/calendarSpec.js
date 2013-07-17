@@ -7,6 +7,12 @@ define(['services/Calendar'], function () {
     beforeEach(module('tomatar'));
 
     describe('#partition', function () {
+      it('Handles empty input', inject(function (calendarService) {
+        expect(calendarService.partition()).toEqual([]);
+        expect(calendarService.partition(0)).toEqual([]);
+        expect(calendarService.partition([])).toEqual([]);
+      }));
+
       it('Partitions months', inject(function (calendarService) {
         var entries = [
           { date: '2013-07-01Tsdf', notes: 'bananas' },
