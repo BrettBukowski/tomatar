@@ -12,6 +12,10 @@ define(['app', 'angular'], function (app, angular) {
         return win.localStorage.setItem(key, value);
       };
 
+      this.remove = function (key) {
+        return win.localStorage.removeItem(key);
+      };
+
       this.setJSON = function (key, value) {
         return this.set(key, angular.toJson(value));
       };
