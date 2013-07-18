@@ -124,6 +124,31 @@ describe('Pomodoro', function () {
     });
   });
 
+  describe('#findOneForUser()', function () {
+    it('gets one for a valid user', function (done) {
+      Pomodoro.findOneForUser({}, user).done(function (result) {
+        expect(result).to.be.an('object');
+        expect(result.user_id).to.equal(user.id);
+        done();
+      });
+    });
+
+    it('filters on given criteria', function (done) {
+      Pomodoro.findOneForUser({ notes: pom.notes }, user).done(function (result) {
+        expect(result).to.be.an('object');
+        expect(result.notes).to.equal(pom.notes);
+        done();
+      });
+    });
+
+    it('Errors when not given a valid user', function (done) {
+      Pomodoro.findOneForUser({}, { id: 'bananas' }).fail(function (err) {
+        expect(err).not.to.be.undefined;
+        done();
+      });
+    });
+  });
+
   describe('#getInDateRangeForUser()', function () {
     it('Defaults to a month when end is not supplied', function (done) {
       var now = new Date();
