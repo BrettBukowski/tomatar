@@ -44,5 +44,9 @@ define(['app'], function (app) {
         return response.data.result;
       });
     });
+
+    this.syncPomodori = guardUser(function (pomodori) {
+      return http.post('/user/pomodoro/sync', { pomodori: pomodori });
+    });
   }]);
 });

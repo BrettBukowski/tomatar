@@ -23,7 +23,6 @@ define(['jquery', 'app'], function ($, app) {
         scope.dayDetail = { date: '', details: [] };
       };
 
-
       scope.showDetails = function () {
         scope.details = this.pomodori;
         scope.details.finished = this.pomodori.time;
