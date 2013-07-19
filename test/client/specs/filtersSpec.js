@@ -77,5 +77,26 @@ define(['filters/Filter'], function () {
         expect(formatDayOfMonthFilter('2013-07-01T00:00:00.000Z')).toEqual('1');
       }));
     });
+
+    describe('formatTime', function () {
+      it('Leaves alone 24 hr format', inject(function (formatTimeFilter) {
+        expect(formatTimeFilter('17:01')).toEqual('17:01');
+      }));
+
+      it('Handles am', inject(function (formatTimeFilter) {
+        expect(formatTimeFilter('9:01', 12)).toEqual('9:01 am');
+        expect(formatTimeFilter('1:59', 12)).toEqual('1:59 am');
+      }));
+
+      it('Handles pm', inject(function (formatTimeFilter) {
+        expect(formatTimeFilter('13:01', 12)).toEqual('1:01 pm');
+        expect(formatTimeFilter('18:01', 12)).toEqual('6:01 pm');
+        expect(formatTimeFilter('12:01', 12)).toEqual('12:01 pm');
+      }));
+
+      it('Removes zero pad on single digit am hour', inject(function (formatTimeFilter) {
+        expect(formatTimeFilter('09:01', 12)).toEqual('9:01 am');
+      }));
+    });
   });
 });

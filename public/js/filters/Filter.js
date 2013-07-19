@@ -47,11 +47,11 @@ define(['app', 'angular'], function (app, angular) {
     formatTime: function (input, format) {
       if (format == 12) {
         var split = input.split(':');
-        if (split[0] > 12) {
-          return formatTime(split[0] - 12, split[1], 'pm');
+        if (split[0] >= 12) {
+          return formatTime(split[0] == 12 ? 12 : split[0] - 12, split[1], 'pm');
         }
         else {
-          return formatTime(split[0], split[1], 'am');
+          return formatTime(split[0].charAt(0) == '0' ? split[0].charAt(1) : split[0], split[1], 'am');
         }
       }
 
