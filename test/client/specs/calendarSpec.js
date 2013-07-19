@@ -49,8 +49,8 @@ define(['services/Calendar'], function () {
         expect(month.days[0].dayOfMonth).toBe(1);
         expect(month.days[1].dayOfMonth).toBe(2);
         expect(month.days[0].finished.length).toBe(2);
-        expect(month.days[0].finished[0]).toEqual(entries[1]);
-        expect(month.days[0].finished[1]).toEqual(entries[2]);
+        expect(month.days[0].finished[0]).toEqual(entries[2]);
+        expect(month.days[0].finished[1]).toEqual(entries[1]);
         expect(month.days[1].finished.length).toBe(1);
         expect(month.days[1].finished[0]).toEqual(entries[0]);
       }));

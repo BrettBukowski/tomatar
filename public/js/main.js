@@ -18,7 +18,6 @@ require.config({
       exports: 'angular'
     }
   },
-  urlArgs: 'bust=' + (new Date()).getTime(),
   priority: ['angular']
 });
 

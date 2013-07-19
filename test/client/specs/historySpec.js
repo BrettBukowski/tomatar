@@ -28,7 +28,7 @@ define(['services/History'], function () {
           savePomodoro: function(){}
         };
         spyOn(userService, 'savePomodoro').andCallFake(function () {
-          return { then: function(a, b) { b(); } }
+          return { then: function(a, b) { b(); } };
         });
 
         provideServices($provide);
@@ -37,12 +37,10 @@ define(['services/History'], function () {
       it('Saves to local storage', inject(function (historyService) {
         var now = new Date(),
             expected = [{
-              bananas: true,
-              finished: now.getHours() + ':' + now.getMinutes(),
-              date: now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()
+              bananas: true
             }];
 
-        historyService.saveToToday({ bananas: true });
+        historyService.saveToToday(expected[0]);
         expect(storageService.setJSON).toHaveBeenCalledWith('local', expected);
       }));
 
@@ -66,7 +64,7 @@ define(['services/History'], function () {
           savePomodoro: function () {}
         };
         spyOn(userService, 'savePomodoro').andCallFake(function () {
-          return { then: function(a, b) { a(); } }
+          return { then: function(a, b) { a({ id: 'yes' }); } };
         });
 
         provideServices($provide);
@@ -74,15 +72,13 @@ define(['services/History'], function () {
 
       it('Saves to remote', inject(function (historyService) {
         var now = new Date(),
-            expected = {
-              bananas: true,
-              finished: now.getHours() + ':' + now.getMinutes(),
-              date: now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()
+            input = {
+              bananas: true
             };
 
-        historyService.saveToToday({ bananas: true });
-        expect(userService.savePomodoro).toHaveBeenCalledWith(expected);
-        expect(storageService.setJSON).toHaveBeenCalledWith('synced', [expected]);
+        historyService.saveToToday(input);
+        expect(userService.savePomodoro).toHaveBeenCalledWith(input);
+        expect(storageService.setJSON).toHaveBeenCalledWith('synced', [{ id: 'yes' }]);
 
       }));
     });

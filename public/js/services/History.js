@@ -4,18 +4,6 @@ define(['app', 'angular'], function (app, angular) {
   var localStorageKey = 'local',
       syncedStorageKey = 'synced';
 
-  function today () {
-    var now = new Date();
-
-    return [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('-');
-  }
-
-  function timestamp () {
-    var now = new Date();
-
-    return [now.getHours(), now.getMinutes()].join(':');
-  }
-
   function cleanRemoteEntries (entries) {
     return entries.map(function (entry) {
       return {
@@ -24,13 +12,13 @@ define(['app', 'angular'], function (app, angular) {
         duration: entry.duration,
         time:     entry.time.match(/[\d]{2}:[\d]{2}/)[0],
         date:     entry.date.match(/[\d]{4}-[\d]{2}-[\d]{2}/)[0]
-      }
+      };
     });
   }
 
   function Cache (storage) {
     this.entries = {};
-    this.storage = storage
+    this.storage = storage;
   }
   Cache.prototype.set = function (key, value) {
     this.entries[key] = value;
@@ -41,10 +29,11 @@ define(['app', 'angular'], function (app, angular) {
     return this.entries[key] || (this.entries[key] = this.storage.getJSON(key));
   };
   Cache.prototype.add = function (key, value) {
-    if (this.entries[key]) {
+    var cachedSet = this.entries[key];
+    if (cachedSet) {
       // Newest first.
-      this.entries[key].unshift(value);
-      this.storage.setJSON(key, value);
+      cachedSet.unshift(value);
+      this.storage.setJSON(key, cachedSet);
 
       return true;
     }
@@ -68,14 +57,20 @@ define(['app', 'angular'], function (app, angular) {
     }
 
     function saveRemote (entry) {
-      entry.date = today();
-      entry.finished = timestamp();
+      function problemSavingRemote () {
+        afterSaveRemote(localStorageKey, entry);
+        return entry;
+      }
 
-      return userService.savePomodoro(entry).then(function () {
-        afterSaveRemote(syncedStorageKey, entry);
+      return userService.savePomodoro(entry).then(function (saved) {
+        if (saved && saved.id) {
+          afterSaveRemote(syncedStorageKey, saved);
+          return saved;
+        }
+        return problemSavingRemote();
       }, function () {
         // User isn't signed in.
-        afterSaveRemote(localStorageKey, entry);
+        return problemSavingRemote();
       });
     }
 
@@ -90,9 +85,27 @@ define(['app', 'angular'], function (app, angular) {
       });
     }
 
-    this.getToday = function () {
+    // YYYY-MM-DD
+    this.getDate = function (date) {
+      var parts = date.split('-'),
+          month = parts.slice(0, 2).join('-'),
+          day = parts[2];
+
       return this.getHistory().then(function (history) {
-        return history[0].days[0].finished;
+        var requested = [];
+
+        history.some(function (currentMonth) {
+          if (currentMonth.month == month) {
+            currentMonth.days.some(function (currentDay) {
+              if (currentDay.dayOfMonth == day) {
+                requested = currentDay.finished;
+                return true;
+              }
+            });
+            return true;
+          }
+        });
+        return requested;
       });
     };
 
@@ -116,7 +129,7 @@ define(['app', 'angular'], function (app, angular) {
     };
 
     this.saveToToday = function (newEntry) {
-      saveRemote(newEntry);
+      return saveRemote(newEntry);
     };
   }]);
 });

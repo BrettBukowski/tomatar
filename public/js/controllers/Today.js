@@ -1,6 +1,23 @@
 define(['jquery', 'app'], function ($, app) {
   "use strict";
 
+  function doubleDigits (value) {
+    return (value < 10) ? '0' + value : value;
+  }
+
+  function today () {
+    var now = new Date();
+
+    return [now.getFullYear(), doubleDigits(now.getMonth() + 1),
+      doubleDigits(now.getDate())].join('-');
+  }
+
+  function timestamp () {
+    var now = new Date();
+
+    return [now.getHours(), now.getMinutes()].join(':');
+  }
+
   return app.controller('TodayController',
     ['$rootScope', '$scope', 'historyService', 'settingsService', 'dialogService',
     function (rootScope, scope, historyService, settingsService, Dialog) {
@@ -11,15 +28,29 @@ define(['jquery', 'app'], function ($, app) {
       if (!wasPomo) return; // TK show something on the UI?
 
       scope.howLong = howLong;
+
       finishedDialog.open();
+
+      scope.completed.push({
+        notes:    '',
+        duration: scope.howLong,
+        time:     timestamp()
+      });
     }
 
     function saveEntry () {
-      scope.completed = historyService.saveToToday({
+      var newEntry = scope.completed[scope.completed.length - 1];
+
+      historyService.saveToToday({
         notes:    scope.notes,
-        duration: scope.howLong
+        duration: newEntry.duration,
+        date:     today(),
+        time:     newEntry.time
       });
 
+      newEntry.notes = scope.notes;
+
+      // Reset dialog's notes field.
       scope.notes = '';
     }
 
@@ -45,12 +76,15 @@ define(['jquery', 'app'], function ($, app) {
       scope.hourFormat = settings.ui.hours;
       !scope.$$phase && scope.$apply();
     });
-    historyService.getToday().then(function (completed) {
-      scope.completed;
+    historyService.getDate(today()).then(function (completed) {
+      scope.completed = completed;
       !scope.$$phase && scope.$apply();
     });
+
+    // Dialog's notes field.
     scope.notes = '';
-    scope.details = { finished: '', notes: '' };
+    // Detail dialog's fields.
+    scope.details = { time: '', notes: '' };
 
     scope.$on('timeInterval:complete', completedTimeInterval);
     scope.$on('finishedDialogClosed', saveEntry);

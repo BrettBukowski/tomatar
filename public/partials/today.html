@@ -18,9 +18,9 @@
         <span class="pom" role="presentation"></span>
         <span class="finished">
           <span class="visuallyhidden">Time interval:</span>
-          {{ pomodori.finished|timeInterval:pomodori.duration|padSeconds|formatTime:hourFormat }}
+          {{ pomodori.time|timeInterval:pomodori.duration|padSeconds|formatTime:hourFormat }}
           -
-          {{ pomodori.finished|padSeconds|formatTime:hourFormat }}
+          {{ pomodori.time|formatTime:hourFormat }}
         </span>
         <span class="notes">
           <span class="visuallyhidden">Notes:</span>

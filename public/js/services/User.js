@@ -36,7 +36,9 @@ define(['app'], function (app) {
     });
 
     this.savePomodoro = guardUser(function (pomodoro) {
-      return http.post('/user/pomodoro', pomodoro);
+      return http.post('/user/pomodoro', pomodoro).then(function (response) {
+        return response.data.result;
+      });
     });
 
     this.getPomodoro = guardUser(function () {

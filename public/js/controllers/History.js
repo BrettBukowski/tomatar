@@ -17,7 +17,7 @@ define(['jquery', 'app'], function ($, app) {
         scope.entries = {};
       });
 
-      scope.details = { finished: '', notes: '' };
+      scope.details = { time: '', notes: '' };
 
       scope.initDayDetail = function () {
         scope.dayDetail = { date: '', details: [] };
@@ -25,7 +25,6 @@ define(['jquery', 'app'], function ($, app) {
 
       scope.showDetails = function () {
         scope.details = this.pomodori;
-        scope.details.finished = this.pomodori.time;
         detailsDialog.open();
       };
 

@@ -18,7 +18,7 @@ define(['app', 'angular'], function (app, angular) {
   function getMonthAndYear (timestamp) {
     var parts = timestamp.split('-');
 
-    return parts[0] + '-' + parts[1];
+    return parts[0] + '-' + ((parts[1].length == 1) ? '0' + parts[1] : parts[1]);
   }
 
   function Calendar () {
@@ -68,7 +68,8 @@ define(['app', 'angular'], function (app, angular) {
     this.finished = [];
   }
   Day.prototype.addEntry = function (entry) {
-    this.finished.push(entry);
+    // Newest to oldest time interval.
+    this.finished.unshift(entry);
   };
 
   return app.factory('calendarService', [function () {
@@ -95,7 +96,7 @@ define(['app', 'angular'], function (app, angular) {
       partition: function (entries) {
         if (!entries || !entries.length) return [];
 
-        var calendar = new Calendar(entries);
+        var calendar = new Calendar();
         angular.forEach(entries, calendar.addEntry, calendar);
         return calendar.getMonths();
       }

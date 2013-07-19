@@ -11,9 +11,9 @@
     <aside>
       <i class="icon-clock"></i>
       <span class="visuallyhidden">Time interval:</span>
-      {{ details.finished|timeInterval:details.duration|padSeconds|formatTime:hourFormat }}
+      {{ details.time|timeInterval:details.duration|padSeconds|formatTime:hourFormat }}
       -
-      {{ details.finished|padSeconds|formatTime:hourFormat }}
+      {{ details.time|formatTime:hourFormat }}
     </aside>
   </div>
   <br>
