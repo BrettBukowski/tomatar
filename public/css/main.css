@@ -114,6 +114,15 @@ footer > div {
 [class*="block-grid-"] {
   margin: 0;
 }
+.browsehappy {
+  background: #e64000;
+  color: #FFF;
+  text-align: center;
+}
+.browsehappy a {
+  color: #FFF;
+  text-decoration: underline;
+}
 .header-links {
   font-size: smaller;
   margin-top: 5px;
