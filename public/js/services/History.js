@@ -111,7 +111,9 @@ define(['app', 'angular'], function (app, angular) {
 
     this.getHistory = function () {
       var cachedEntries = cache.get(syncedStorageKey);
-      if (cachedEntries) return promise(calendarService.partition(cachedEntries));
+      if (cachedEntries) {
+        return promise(calendarService.partition(cachedEntries.concat(cache.get(localStorageKey))));
+      }
 
       return userService.getPomodoro().then(function (results) {
         cache.set(syncedStorageKey, cleanRemoteEntries(results));
@@ -124,7 +126,7 @@ define(['app', 'angular'], function (app, angular) {
         return calendarService.partition(results);
       }, function () {
         // User isn't signed in.
-        return calendarService.partition(cache.get(localStorageKey));
+        return calendarService.partition(cache.get(localStorageKey).concat(cache.get(syncedStorageKey)));
       });
     };
 

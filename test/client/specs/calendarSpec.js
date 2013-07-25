@@ -49,10 +49,30 @@ define(['services/Calendar'], function () {
         expect(month.days[0].dayOfMonth).toBe(1);
         expect(month.days[1].dayOfMonth).toBe(2);
         expect(month.days[0].finished.length).toBe(2);
-        expect(month.days[0].finished[0]).toEqual(entries[2]);
-        expect(month.days[0].finished[1]).toEqual(entries[1]);
+        expect(month.days[0].finished[1]).toEqual(entries[2]);
+        expect(month.days[0].finished[0]).toEqual(entries[1]);
         expect(month.days[1].finished.length).toBe(1);
         expect(month.days[1].finished[0]).toEqual(entries[0]);
+      }));
+
+      it('Sorts by time: oldest → newest', inject(function (calendarService) {
+        var entries = [
+          { date: '2013-07-02Tsdf', notes: 'fellow', time: '10:01' },
+          { date: '2013-07-02Tsdf', notes: 'cast', time: '12:27' },
+          { date: '2013-07-02Tsdf', notes: 'flick', time: '19:51' },
+          { date: '2013-07-02Tsdf', notes: 'sound', time: '09:01' }
+        ];
+        var result = calendarService.partition(entries);
+
+        expect(result.length).toBe(1);
+
+        var actual = result[0].days[0].finished;
+
+        expect(actual.length).toBe(4);
+        expect(actual[0]).toEqual(entries[3]);
+        expect(actual[1]).toEqual(entries[0]);
+        expect(actual[2]).toEqual(entries[1]);
+        expect(actual[3]).toEqual(entries[2]);
       }));
     });
 
