@@ -15,6 +15,10 @@ define(['app'], function (app) {
       };
     }
 
+    function defaultResponder (response) {
+      return response.data.result;
+    }
+
     this.signedIn = function () {
       return signedIn;
     };
@@ -30,25 +34,19 @@ define(['app'], function (app) {
     });
 
     this.getPrefs = guardUser(function () {
-      return http.get('/user/prefs').then(function (response) {
-        return response.data.result;
-      });
+      return http.get('/user/prefs').then(defaultResponder);
     });
 
     this.savePomodoro = guardUser(function (pomodoro) {
-      return http.post('/user/pomodoro', pomodoro).then(function (response) {
-        return response.data.result;
-      });
+      return http.post('/user/pomodoro', pomodoro).then(defaultResponder);
     });
 
     this.getPomodoro = guardUser(function () {
-      return http.get('/user/pomodoro').then(function (response) {
-        return response.data.result;
-      });
+      return http.get('/user/pomodoro').then(defaultResponder);
     });
 
     this.syncPomodori = guardUser(function (pomodori) {
-      return http.post('/user/pomodoro/sync', { pomodori: pomodori });
+      return http.post('/user/pomodoro/sync', { pomodori: pomodori }).then(defaultResponder);
     });
   }]);
 });
