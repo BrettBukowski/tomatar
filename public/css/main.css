@@ -249,6 +249,15 @@ footer > div {
 #signIn {
   margin-top: 8px;
 }
+#signIn .button {
+  margin-left: 10px;
+}
+#signIn .button i {
+  font-size: 1.3em;
+  left: -10px;
+  position: relative;
+  top: 2px;
+}
 .reveal-modal form {
     margin: 0;
 }
@@ -470,7 +479,7 @@ only screen and (                min-resolution: 2dppx) {
 
 .icon-google:before { content: '\e811'; } /* '' */
 .icon-facebook:before { content: '\e810'; } /* '' */
-.icon-github-circled:before { content: '\e80f'; } /* '' */
+.icon-github:before { content: '\e80f'; } /* '' */
 .icon-website:before { content: '\e80e'; } /* '' */
 .icon-clock-circled:before { content: '\e80c'; } /* '' */
 .icon-clock:before { content: '\e80b'; } /* '' */

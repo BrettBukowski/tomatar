@@ -1,7 +1,14 @@
 define(['app'], function (app) {
+  var services = [
+    { name: 'Facebook' },
+    { name: 'Github' },
+    { name: 'Google' }
+  ];
+
   return app.controller('SignInController', ['$scope', '$window', 'userService', function (scope, win, User) {
-    scope.signInWithStrategy = function (name) {
-      win.location = '/auth/' + name;
+    scope.services = services;
+    scope.signInWithStrategy = function () {
+      win.location = '/auth/' + this.service.name.toLowerCase();
     };
 
     scope.signedIn = function () {
