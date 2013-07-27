@@ -16,43 +16,74 @@ define(['services/Calendar'], function () {
       it('Partitions months', inject(function (calendarService) {
         var entries = [
           { date: '2013-07-01Tsdf', notes: 'bananas' },
-          { date: '2013-05-23Tsdf', notes: 'fry' }
+          { date: '2013-05-23Tsdf', notes: 'fry' },
+          { date: '2003-05-23Tsdf', notes: 'older' },
+          { date: '2013-08-12Tsdf', notes: 'voter' },
+          { date: '2013-06-12Tsdf', notes: 'some' }
         ];
-        var result = calendarService.partition(entries);
-        expect(result.length).toBe(2);
-        var firstItem = result[0];
-        expect(firstItem.month).toEqual('2013-07');
-        expect(firstItem.days.length).toBe(1);
-        expect(firstItem.days[0].dayOfMonth).toBe(1);
-        expect(firstItem.days[0].finished.length).toBe(1);
-        expect(firstItem.days[0].finished[0]).toEqual(entries[0]);
+        var result = calendarService.partition(entries),
+            item;
 
-        var secondItem = result[1];
-        expect(secondItem.month).toEqual('2013-05');
-        expect(secondItem.days.length).toBe(1);
-        expect(secondItem.days[0].dayOfMonth).toBe(23);
-        expect(secondItem.days[0].finished.length).toBe(1);
-        expect(secondItem.days[0].finished[0]).toEqual(entries[1]);
+        expect(result.length).toBe(5);
+
+        item = result[0];
+        expect(item.month).toEqual('2013-08');
+        expect(item.days.length).toBe(1);
+        expect(item.days[0].dayOfMonth).toBe(12);
+        expect(item.days[0].finished.length).toBe(1);
+        expect(item.days[0].finished[0]).toEqual(entries[3]);
+
+        item = result[1];
+        expect(item.month).toEqual('2013-07');
+        expect(item.days.length).toBe(1);
+        expect(item.days[0].dayOfMonth).toBe(1);
+        expect(item.days[0].finished.length).toBe(1);
+        expect(item.days[0].finished[0]).toEqual(entries[0]);
+
+        item = result[2];
+        expect(item.month).toEqual('2013-06');
+        expect(item.days.length).toBe(1);
+        expect(item.days[0].dayOfMonth).toBe(12);
+        expect(item.days[0].finished.length).toBe(1);
+        expect(item.days[0].finished[0]).toEqual(entries[4]);
+
+        item = result[3];
+        expect(item.month).toEqual('2013-05');
+        expect(item.days.length).toBe(1);
+        expect(item.days[0].dayOfMonth).toBe(23);
+        expect(item.days[0].finished.length).toBe(1);
+        expect(item.days[0].finished[0]).toEqual(entries[1]);
+
+        item = result[4];
+        expect(item.month).toEqual('2003-05');
+        expect(item.days.length).toBe(1);
+        expect(item.days[0].dayOfMonth).toBe(23);
+        expect(item.days[0].finished.length).toBe(1);
+        expect(item.days[0].finished[0]).toEqual(entries[2]);
       }));
 
       it('Partitions days', inject(function (calendarService) {
         var entries = [
           { date: '2013-07-02Tsdf', notes: 'lean' },
           { date: '2013-07-01Tsdf', notes: 'bananas' },
-          { date: '2013-07-01Tsdf', notes: 'fry' }
+          { date: '2013-07-01Tsdf', notes: 'fry' },
+          { date: '2013-07-27Tsdf', notes: 'clay' },
         ];
         var result = calendarService.partition(entries);
         expect(result.length).toBe(1);
         var month = result[0];
         expect(month.month).toEqual('2013-07');
-        expect(month.days.length).toBe(2);
+        expect(month.days.length).toBe(3);
         expect(month.days[0].dayOfMonth).toBe(1);
         expect(month.days[1].dayOfMonth).toBe(2);
+        expect(month.days[2].dayOfMonth).toBe(27);
         expect(month.days[0].finished.length).toBe(2);
         expect(month.days[0].finished[1]).toEqual(entries[2]);
         expect(month.days[0].finished[0]).toEqual(entries[1]);
         expect(month.days[1].finished.length).toBe(1);
         expect(month.days[1].finished[0]).toEqual(entries[0]);
+        expect(month.days[2].finished.length).toBe(1);
+        expect(month.days[2].finished[0]).toEqual(entries[3]);
       }));
 
       it('Sorts by time: oldest → newest', inject(function (calendarService) {

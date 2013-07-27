@@ -76,10 +76,10 @@ define(['app', 'angular'], function (app, angular) {
   Calendar.prototype.insertMonth = function (monthString) {
     var newMonth = new Month(monthString),
         insertIndex = indexOf(this.months, function (month) {
-          return month.month > newMonth;
+          return month.month < newMonth.month;
         });
 
-    if (insertIndex == -1) insertIndex = this.months.length;
+    insertIndex = (insertIndex == -1) ? this.months.length : insertIndex;
 
     this.months.splice(insertIndex, 0, newMonth);
     this.monthIndex = reIndex(this.monthIndex, monthString, insertIndex);
@@ -101,7 +101,7 @@ define(['app', 'angular'], function (app, angular) {
           return day.dayOfMonth > newDay.dayOfMonth;
         });
 
-    if (insertIndex == -1) insertIndex = 0;
+    if (insertIndex == -1) insertIndex = this.days.length;
 
     this.days.splice(insertIndex, 0, newDay);
     this.dayIndex = reIndex(this.dayIndex, dayString, insertIndex);
