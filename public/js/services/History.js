@@ -80,7 +80,8 @@ define(['app', 'angular'], function (app, angular) {
     }
 
     function sync (entries) {
-      userService.syncPomodori(entries).then(function () {
+      userService.syncPomodori(entries).then(function (synced) {
+        cache.set(syncedStorageKey, (cache.get(syncedStorageKey) || []).concat(synced));
         cache.remove(localStorageKey);
       });
     }
@@ -132,6 +133,13 @@ define(['app', 'angular'], function (app, angular) {
 
     this.saveToToday = function (newEntry) {
       return saveRemote(newEntry);
+    };
+
+    this.sync = function () {
+      var unsyncedEntries = cache.get(localStorageKey);
+      if (unsyncedEntries) {
+        sync(unsyncedEntries);
+      }
     };
   }]);
 });
