@@ -63,6 +63,8 @@ define(['app', 'angular'], function (app, angular) {
     this.months = [];
   }
   Calendar.prototype.insertEntry = function (pomodoro) {
+    if (!pomodoro || !pomodoro.date) return;
+
     var monthString = getMonthAndYear(pomodoro.date),
         dayString = getDayOfMonth(pomodoro.date),
         month = this.getMonth(monthString) || this.insertMonth(monthString),

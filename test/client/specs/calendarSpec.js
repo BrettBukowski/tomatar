@@ -11,6 +11,8 @@ define(['services/Calendar'], function () {
         expect(calendarService.partition()).toEqual([]);
         expect(calendarService.partition(0)).toEqual([]);
         expect(calendarService.partition([])).toEqual([]);
+        expect(calendarService.partition(
+          [null, undefined, 0, '', false, { notes: 'blah' }])).toEqual([]);
       }));
 
       it('Partitions months', inject(function (calendarService) {
