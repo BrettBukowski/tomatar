@@ -2,7 +2,7 @@ define(['app'], function (app) {
   "use strict";
 
   return app.service('userService', ['$http', '$cookies', '$q', function (http, cookies, Q) {
-    var signedIn = cookies.signin == 'true';
+    var signedIn = !!cookies.signin && /^[a-fA-F0-9]{10,}$/.test(cookies.signin);
 
     function guardUser (userFunc) {
       return function () {
@@ -18,6 +18,10 @@ define(['app'], function (app) {
     function defaultResponder (response) {
       return response.data.result;
     }
+
+    this.getUserHash = function () {
+      return cookies.signin;
+    };
 
     this.signedIn = function () {
       return signedIn;

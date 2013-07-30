@@ -21,7 +21,10 @@
     <div class="large-3 small-6 columns text-right header-links">
       <span class="pull-1" data-ng-controller="SignInController" data-ng-cloak>
         <a href="#" data-ng-hide="signedIn()" data-dropdown="signIn">Sign in</a>
-        <a href="#" data-ng-show="signedIn()" data-ng-click="signOut()">Sign out</a>
+        <span class="signedin" data-ng-show="signedIn()">
+          <img src="//www.gravatar.com/avatar/{{ userHash }}?s=26&d=identicon" alt="">
+          <a href="#" data-ng-click="signOut()">Sign out</a>
+        </span>
       </span>
       <a href="#" data-reveal-id="settings" class="settings">
         <i class="icon-cog"></i>Settings

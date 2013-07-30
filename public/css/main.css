@@ -126,7 +126,12 @@ footer > div {
 .header-links {
   font-size: smaller;
   margin-top: 5px;
-
+}
+.header-links .signedin img {
+  border-radius: 50%;
+  left: -5px;
+  position: relative;
+  top: -3px;
 }
 .settings {
   color: #818181;
@@ -257,6 +262,28 @@ footer > div {
   left: -10px;
   position: relative;
   top: 2px;
+}
+.github {
+  background: #222;
+  color: #FFF;
+}
+.github:hover,
+.github:focus {
+  background: #333;
+}
+.facebook {
+  background: #46629e;
+}
+.facebook:hover,
+.facebook:focus {
+  background: #5D80CA;
+}
+.google {
+  background: #3880f5;
+}
+.google:hover,
+.google:focus {
+  background: #4A8EFA;
 }
 .reveal-modal form {
     margin: 0;
@@ -475,8 +502,6 @@ only screen and (                min-resolution: 2dppx) {
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
 
-
-
 .icon-google:before { content: '\e811'; } /* '' */
 .icon-facebook:before { content: '\e810'; } /* '' */
 .icon-github:before { content: '\e80f'; } /* '' */
@@ -494,7 +519,12 @@ only screen and (                min-resolution: 2dppx) {
 .icon-ok:before { content: '\e805'; } /* '' */
 .icon-info-circled:before { content: '\e807'; } /* '' */
 .icon-bell:before { content: '\e80d'; } /* '' */
+.icon-heart-empty:before { content: '\e816'; } /* '' */
 .icon-cog:before { content: '\e808'; } /* '' */
+.icon-down-open:before { content: '\e812'; } /* '' */
+.icon-up-open:before { content: '\e815'; } /* '' */
+.icon-right-open:before { content: '\e814'; } /* '' */
+.icon-left-open:before { content: '\e813'; } /* '' */
 
 /** Animation **/
 

@@ -8,10 +8,26 @@
   </div>
   <div class="row">
     <div class="small-centered large-centered text-center columns">
-      <a data-ng-repeat="service in services" class="button" href="#" data-ng-click="signInWithStrategy()">
+      <a data-ng-repeat="service in services" class="button {{ service.name | lowercase }}" href="#" data-ng-click="signInWithStrategy()">
         <i class="icon-{{ service.name | lowercase }}"></i>
         {{ service.name }}
       </a>
+
+      <hr>
+
+      <div class="tos">
+        <a href="#" data-ng-click="toggleTOS()">Terms of Service <i data-ng-show="!tosExpanded" class="icon-down-open"></i><i data-ng-show="tosExpanded" class="icon-up-open"></i></a>
+
+        <div data-ng-show="tosExpanded">
+          <br>
+          <p>Your data is yours. Your personal info is yours. This website does not share or sell your information.</p>
+          <p>Facebook, Google, and Github do not transmit private data like passwords; information beyond what is needed for user authentication is not collected and stored.</p>
+          <p>You can download your data and delete your account at any time.</p>
+          <i class="icon-heart-empty"></i>
+          <i class="icon-heart-empty"></i>
+          <i class="icon-heart-empty"></i>
+        </div>
+      </div>
     </div>
   </div>
 </div>
