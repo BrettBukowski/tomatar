@@ -16,7 +16,7 @@ define(['app'], function (app) {
       display: function (labels) {
         if (this.available()) {
           new win.Notification(labels.title || 'Error Title', {
-            iconUrl: 'img/icon.png',
+            iconUrl: '/img/appicon.png',
             body:     labels.body || 'Error Body'
           });
         }
