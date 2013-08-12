@@ -4,3 +4,5 @@ node_modules
 /config/auth.json
 
 config/tables.sql
+
+public/css/*.css
