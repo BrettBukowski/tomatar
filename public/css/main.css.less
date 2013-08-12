@@ -65,12 +65,36 @@ footer > div {
 [data-ng-cloak] {
   display: none;
 }
+
+/* Foundation overrides */
+
 /* Foundation's -10 margin causes
    overflow scrollbar for small
    viewports. */
 [class*="block-grid-"] {
   margin: 0;
 }
+
+.joyride-tip-guide {
+  background: #EBF2FC;
+  border: 1px solid #EEE9E9;
+  color: #222;
+  h1, h2, h3, h4, h5, h6 {
+    color: #222;
+    margin: .5em 0;
+  }
+  .joyride-nub.top {
+    border-color: #EBF2FC;
+  }
+}
+.joyride-modal-bg {
+  background: rgba(224, 222, 222, .68)
+}
+.joyride-close-tip {
+  display: none;
+}
+
+
 .browsehappy {
   background: #e64000;
   color: #FFF;

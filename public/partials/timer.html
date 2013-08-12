@@ -1,6 +1,6 @@
 <div class="row" aria-role="main">
   <div class="small-centered large-centered columns text-center">
-    <div class="timer" role="button" tabindex="0" title="Click or SPACE BAR to start" data-ng-click="toggleTimer()" data-ng-class="toggleStatus" data-icon-play="" data-icon-pause="">
+    <div id="timer" class="timer" role="button" tabindex="0" title="Click or SPACE BAR to start" data-ng-click="toggleTimer()" data-ng-class="toggleStatus" data-icon-play="" data-icon-pause="">
       <div class="progress-elapsed" aria-role="presentation" style="height: {{ progress }}%"></div>
       <div class="progress-indicator" aria-role="presentation"></div>
       <div class="time" data-ng-bind-template="{{ timeLeft.minutes }}:{{ timeLeft.seconds|padSeconds }}" aria-live="polite"></div>

@@ -25,6 +25,12 @@ define(['jquery', 'angular', 'angular-cookies', 'foundation'], function ($, angu
           }
         });
 
+      // MONKEYPATCH ALERT: Foundation Joyride's loose usage of
+      // Modernizr throws a JS error.
+      Foundation.libs.joyride.is_phone = function () {
+        return $(window).width() < 767;
+      };
+
       // Initialize foundation. Options for ea. component aren't
       // granular, hence the workaround.
       $(document).foundation('reveal', {
@@ -37,7 +43,12 @@ define(['jquery', 'angular', 'angular-cookies', 'foundation'], function ($, angu
         close: function () {
           rootScope.$broadcast($(this).attr('id') + 'Closed');
         }
+      }).foundation('joyride', 'start', {
+        cookieMonster: true,
+        cookieExpires: 600,
+        cookieName: 'tour'
       }).foundation('dropdown');
 
+      // Zurb Foundation... NEVER AGAIN.
     }]);
 });
