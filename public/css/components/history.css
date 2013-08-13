@@ -1,0 +1,121 @@
+/* Mixins */
+/* Colors */
+.calendar .date {
+  background: #ebf2fc;
+  border-radius: 4px;
+  color: #222;
+  cursor: pointer;
+  display: block;
+  padding: 6px;
+  -webkit-transition: all 1s;
+  -ms-transition: all 1s;
+  -moz-transition: all 1s;
+  transition: all 1s;
+}
+.calendar .date .day {
+  display: block;
+  font-size: larger;
+  font-weight: bold;
+}
+.calendar .date .finished {
+  background: rgba(207, 30, 30, 0.57);
+  border-radius: 13px;
+  color: #555;
+  display: block;
+  margin: 0 34%;
+  position: relative;
+  top: -6px;
+  text-align: center;
+  -webkit-transition: all .8s;
+}
+.calendar .date .finished::before {
+  color: #FFF;
+  content: attr(data-hover);
+  position: absolute;
+  -webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
+  -moz-transition: -moz-transform 0.4s, opacity 0.4s;
+  transition: transform .4s, opacity .4s;
+}
+.calendar .date:hover,
+.calendar .date:focus {
+  background: #dee9fa;
+}
+.calendar .date:hover .finished,
+.calendar .date:focus .finished {
+  background: rgba(219, 18, 18, 0.57);
+}
+.calendar .date:hover .finished::before,
+.calendar .date:focus .finished::before {
+  -webkit-transform: scale(0.5);
+  -moz-transform: scale(0.5);
+  transform: scale(0.5);
+  opacity: 0;
+}
+.completed-pomodori {
+  margin-bottom: 1em;
+}
+.completed-pomodori > li {
+  -webkit-transition: all 0.4s;
+  -ms-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+  cursor: pointer;
+  margin-top: 1em;
+  padding: 1em;
+  word-wrap: break-word;
+}
+.completed-pomodori > li:focus,
+.completed-pomodori > li:hover {
+  background: #ebf2fc;
+}
+.completed-pomodori > li:focus .pom:after,
+.completed-pomodori > li:hover .pom:after,
+.completed-pomodori > li:focus .pom:after,
+.completed-pomodori > li:hover .pom:after {
+  background: #CF1E1E;
+  box-shadow: 0 0 0 3px #CF1E1E;
+  border: 4px solid #ebf2fc;
+  -webkit-transform: scale(0.85);
+  -moz-transform: scale(0.85);
+  -ms-transform: scale(0.85);
+  transform: scale(0.85);
+  z-index: 1;
+}
+.completed-pomodori > li .pom {
+  border-radius: 50%;
+  height: 60px;
+  margin: 0 auto .4em;
+  position: relative;
+  width: 60px;
+}
+.completed-pomodori > li .pom:after {
+  -webkit-transition: all 0.4s;
+  -ms-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+  background: rgba(207, 30, 30, 0.57);
+  border-radius: 50%;
+  color: #132E13;
+  content: '\e805';
+  /* OK icon */
+
+  font-family: fontello;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+.completed-pomodori > li .notes {
+  color: #858181;
+  font-size: smaller;
+}
+.completed-pomodori > li span {
+  display: block;
+}
+.history h3 {
+  background: rgba(255, 255, 255, 0.6);
+  border-bottom: 1px solid #E3E3E3;
+  color: #3F3E3E;
+  font-size: 1.5em;
+}

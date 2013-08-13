@@ -17,7 +17,7 @@
       <li data-ng-repeat="day in monthInterval.days">
         <span class="date" tabindex="0" data-ng-click="showDayDetail()">
           <span class="day">{{ day.dayOfMonth }}</span>
-          <span class="finished" title="{{ day.finished.length }} pomodoro completed">{{ day.finished.length }}</span>
+          <span class="finished" title="{{ day.finished.length }} pomodoro completed" data-hover="{{ day.finished.length }}">{{ day.finished.length }}</span>
         </span>
       </li>
     </ul>

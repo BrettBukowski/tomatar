@@ -1,0 +1,82 @@
+@font-fallbacks: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+
+body {
+  font-family: PTSansRegular @font-fallbacks;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: PTSansBold, @font-fallbacks;
+  font-weight: normal;
+  text-rendering: auto; // Override Foundation's optimizeLegibility.
+}
+h1 {
+  font-size: 1em;
+  &::first-letter {
+    letter-spacing: -1px;
+  }
+}
+header {
+  padding-top: .4em;
+}
+footer > div {
+  margin-bottom: 3em;
+}
+[data-ng-cloak] {
+  display: none;
+}
+nav {
+  margin-top: 1em;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.larger {
+  font-size: larger;
+}
+
+.content {
+  min-height: 300px;
+}
+
+.browsehappy {
+  background: #e64000;
+  color: #FFF;
+  text-align: center;
+  a {
+    color: #FFF;
+    text-decoration: underline;
+  }
+}
+
+
+/* Foundation overrides */
+
+/* Foundation's -10 margin causes
+   overflow scrollbar for small
+   viewports. */
+[class*="block-grid-"] {
+  margin: 0;
+}
+
+.joyride-tip-guide {
+  background: #EBF2FC;
+  border: 1px solid #EEE9E9;
+  color: #222;
+  h1, h2, h3, h4, h5, h6 {
+    color: #222;
+    margin: .5em 0;
+  }
+  .joyride-nub.top {
+    border-color: #EBF2FC;
+  }
+}
+.joyride-modal-bg {
+  background: rgba(224, 222, 222, .68)
+}
+.joyride-close-tip {
+  display: none;
+}
+.reveal-modal form {
+  margin: 0;
+}

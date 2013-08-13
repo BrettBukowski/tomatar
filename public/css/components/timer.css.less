@@ -1,0 +1,198 @@
+/* Mixins */
+
+.flex-box () {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+.flex-box-align (@align: center) {
+  -webkit-box-align: @align;
+  -moz-box-align: @align;
+  -ms-flex-align: @align;
+  -webkit-align-items: @align;
+  align-items: @align;
+}
+.flex-box-pack (@direction: center) {
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.no-select () {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+.timer {
+  cursor: pointer;
+  height: 200px;
+  margin: auto;
+  outline: 0;
+  overflow: hidden;
+  padding: 4px;
+  position: relative;
+  width: 200px;
+
+  .no-select;
+  .flex-box;
+  .flex-box-align;
+  .flex-box-pack;
+
+  .border {
+    border: 1px solid #CCC;
+    border-radius: 50%;
+    bottom: 0;
+    content: " ";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .progress-indicator {
+    background: #FF4700;
+    border-radius: 50%;
+    box-shadow: 0 0 9px rgba(0, 0, 0, 0.3) inset;
+    bottom: 4px;
+    left: 4px;
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    z-index: -1;
+  }
+
+  .progress-elapsed {
+    background: #FFF;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .time {
+    .flex-box;
+    .flex-box-align;
+    font-size: 2em;
+    z-index: 1;
+  }
+  &.play:before,
+  &.pause:before {
+    color: #444;
+    font-family: fontello;
+    opacity: 0;
+    position: absolute;
+    -webkit-animation-name: fadeOut;
+    -webkit-animation-duration: .6s;
+    -webkit-animation-fill-mode: both;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: fadeOut;
+    -moz-animation-duration: .6s;
+    -moz-animation-fill-mode: both;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-timing-function: linear;
+    -ms-animation-name: fadeOut;
+    -ms-animation-duration: .6s;
+    -ms-animation-fill-mode: both;
+    -ms-animation-iteration-count: 1;
+    -ms-animation-timing-function: linear;
+    animation-name: fadeOut;
+    animation-duration: .6s;
+    animation-fill-mode: both;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    top: 30%;
+    left: 45%;
+    z-index: 10;
+  }
+  &.play:before {
+    content: attr(data-icon-play);
+  }
+  &.pause:before {
+    content: attr(data-icon-pause);
+  }
+}
+
+/** Animation **/
+
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity: 0;
+    font-size: 1em;
+    -webkit-transform: translateY(0);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    font-size: 6em;
+    left: 40%;
+    -webkit-transform: translateY(-20px);
+  }
+}
+
+@-moz-keyframes fadeOut {
+  0% {
+    opacity: 0;
+    font-size: 1em;
+    -moz-transform: translateY(0);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    font-size: 6em;
+    left: 40%;
+    -moz-transform: translateY(0);
+  }
+}
+
+@-ms-keyframes fadeOut {
+  0% {
+    opacity: 0;
+    font-size: 1em;
+    -ms-transform: translateY(0);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    font-size: 6em;
+    left: 40%;
+    -ms-transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 0;
+    font-size: 1em;
+    transform: translateY(0);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    font-size: 6em;
+    left: 40%;
+    transform: translateY(0);
+  }
+}
