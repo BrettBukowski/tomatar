@@ -26,7 +26,7 @@
       <span class="pull-1" data-ng-controller="SignInController" data-ng-cloak>
         <a href="#" data-ng-hide="signedIn()" data-dropdown="signIn">Sign in</a>
         <span class="signedin" data-ng-show="signedIn()">
-          <img src="//www.gravatar.com/avatar/{{ userHash }}?s=26&d=identicon" alt="">
+          <img data-ng-src="{{ userAvatar }}" alt="">
           <a href="#" data-ng-click="signOut()">Sign out</a>
         </span>
       </span>
