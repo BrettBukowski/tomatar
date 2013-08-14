@@ -2,7 +2,8 @@ define(['app', 'jquery'], function (app, $) {
   "use strict";
 
   return app.controller('SettingsController',
-    ['$rootScope', '$scope', 'settingsService', 'notificationService', function (rootScope, scope, settingsService, notificationService) {
+    ['$rootScope', '$scope', 'settingsService', 'notificationService', 'userService',
+    function (rootScope, scope, settingsService, notificationService, userService) {
     var settingsKeys = [];
 
     function populateScopeFromSettings (settings) {
@@ -24,6 +25,8 @@ define(['app', 'jquery'], function (app, $) {
 
       return settings;
     }
+
+    scope.signedIn = userService.signedIn();
 
     scope.notificationsAreAvailable = function () {
       return notificationService.available();

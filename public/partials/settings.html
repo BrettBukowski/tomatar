@@ -3,7 +3,7 @@
 
   <form>
     <fieldset>
-      <legend><i class="icon-clock"></i>Time Intervals</legend>
+      <legend><i class="icon-clock" role="presentation"></i>Time Intervals</legend>
 
       <div class="row">
         <div class="small-12 large-8">
@@ -50,74 +50,89 @@
           </div>
         </div>
       </div>
-  </fieldset>
+    </fieldset>
 
-  <fieldset>
-    <legend><i class="icon-bell"></i>Alarms</legend>
+    <fieldset>
+      <legend><i class="icon-bell" role="presentation"></i>Alarms</legend>
 
-    <div class="row">
-      <div class="small-12 large-8">
-        <div class="row">
-          <div class="small-7 large-5 columns">
-            <label class="" for="notif">Browser Notification</label>
-          </div>
-          <div class="small-5 large-6 columns">
-            <input id="notif" name="notif" type="checkbox"
-                data-ng-change="toggleNotification()"
-                data-ng-model="alarms.notification"
-                data-ng-disabled="!notificationsAreAvailable()">
+      <div class="row">
+        <div class="small-12 large-8">
+          <div class="row">
+            <div class="small-7 large-5 columns">
+              <label class="" for="notif">Browser Notification</label>
+            </div>
+            <div class="small-5 large-6 columns">
+              <input id="notif" name="notif" type="checkbox"
+                  data-ng-change="toggleNotification()"
+                  data-ng-model="alarms.notification"
+                  data-ng-disabled="!notificationsAreAvailable()">
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="small-12 large-8">
-        <div class="row">
-          <div class="small-6 large-4 columns">
-            <label for="sound" class="">Sound Effect</label>
-          </div>
-          <div class="small-6 large-6 columns">
-            <select class="medium" id="sound"
-                data-ng-model="alarms.sounds.current"
-                data-ng-options="sound for sound in alarms.sounds.available"
-                data-ng-change="playSound()">
-              <option value="">None</option>
-            </select>
+      <div class="row">
+        <div class="small-12 large-8">
+          <div class="row">
+            <div class="small-6 large-4 columns">
+              <label for="sound" class="">Sound Effect</label>
+            </div>
+            <div class="small-6 large-6 columns">
+              <select class="medium" id="sound"
+                  data-ng-model="alarms.sounds.current"
+                  data-ng-options="sound for sound in alarms.sounds.available"
+                  data-ng-change="playSound()">
+                <option value="">None</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </fieldset>
+    </fieldset>
 
-  <fieldset>
-    <legend><i class="icon-website"></i>Interface</legend>
+    <fieldset>
+      <legend><i class="icon-website" role="presentation"></i>Interface</legend>
 
-    <div class="row">
-      <div class="small-12 large-8">
-        <div class="row">
-          <div class="small-4 large-4 columns">
-            <label>Hour Format</label>
-          </div>
-          <div class="small-3 large-3 columns">
-            <label for="12-hr" class="right text-center">12 hour</label>
-          </div>
-          <div class="small-1 large-1 columns">
-            <input id="12-hr" type="radio" name="hour-format" data-ng-model="ui.hours" value="12" data-ng-checked="ui.hours == 12">
-          </div>
-          <div class="small-3 large-3 columns">
-            <label for="24-hr" class="right text-center">24 hour</label>
-          </div>
-          <div class="small-1 large-1 columns">
-            <input id="24-hr" type="radio" name="hour-format" data-ng-model="ui.hours" value="24" data-ng-checked="ui.hours == 24">
+      <div class="row">
+        <div class="small-12 large-8">
+          <div class="row">
+            <div class="small-4 large-4 columns">
+              <label for="hours">Hour Format</label>
+            </div>
+            <div class="small-6 large-6 columns">
+              <select class="medium" id="hours"
+                data-ng-model="ui.hours"
+                data-ng-options="hour.value as hour.label for hour in [{label: '12 hour', value: 12}, {label: '24 hour', value: 24}]">
+              </select>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </fieldset>
+    </fieldset>
+
+    <fieldset data-ng-show="signedIn">
+      <legend><i class="icon-crown" role="presentation"></i>Account</legend>
+
+      <div class="row">
+        <div class="small-12 large-12">
+          <div class="row">
+            <div class="small-7 large-4 columns">
+              <span class="label">Download your data</span>
+            </div>
+            <div class="small-5 large-5 columns download-data">
+                <a href="data:text/csv;base64,blah">csv</a> |
+                <a href="data:text/json;base64,blah">json</a>
+            </div>
+            <div class="columns small-12 large-3">
+              <a href="javascript:;" class="tiny button delete-account">Delete account</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
 
     <div class="row">
-        <a href="javascript:;" class="small button" data-ng-click="save()">Save</a>
+      <a href="javascript:;" class="button" data-ng-click="save()">Save</a>
     </div>
   </form>
   <a class="close-reveal-modal" aria-label="close" href="javascript:;">&#215;</a>

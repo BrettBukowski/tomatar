@@ -32,9 +32,28 @@
   }
 }
 
-#settings i {
-  font-size: small;
-  margin-right: 3px;
+#settings {
+  i {
+    font-size: small;
+    margin-right: 3px;
+  }
+  .delete-account {
+    background: #777;
+    position: relative;
+    &:hover, &:focus {
+      background: #ce0019;
+    }
+    @media only screen {
+      top: 5px;
+    }
+    @media only screen and (min-width: 768px) {
+      top: -5px;
+    }
+  }
+  .download-data {
+    position: relative;
+    top: -2px;
+  }
 }
 #signIn {
   margin-top: 8px;
