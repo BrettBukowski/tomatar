@@ -64,5 +64,49 @@ define(['services/Storage'], function () {
         expect(storageService.getJSON('tales')).toEqual(input);
       }));
     });
+
+    describe('#saveTextFile', function () {
+      var mockLink, mockDoc;
+
+      beforeEach(module(function ($provide) {
+        mockLink = {
+          click: jasmine.createSpy(),
+          style: {}
+        };
+        $provide.value('$document', mockDoc = {
+          createElement: function () {}
+        });
+        $provide.value('$window', mockWindow = {
+          Blob: function () {},
+          webkitURL: { createObjectURL: function () {} }
+        });
+      }));
+
+      it('Builds a link constructed to download a file (webkit)', inject(function (storageService) {
+        spyOn(mockDoc, 'createElement').andReturn(mockLink);
+        spyOn(mockWindow, 'Blob').andReturn('foo');
+        spyOn(mockWindow.webkitURL, 'createObjectURL').andReturn('RESULT');
+        var result = storageService.saveTextFile('bananas', 'dance.md');
+        expect(result).toEqual('RESULT');
+        expect(mockLink.click).toHaveBeenCalled();
+      }));
+
+      it('Inserts the link into the DOM before clicking it (FF)', inject(function (storageService) {
+        mockWindow.URL = mockWindow.webkitURL;
+        mockWindow.webkitURL = null;
+
+        mockDoc.body = {
+          appendChild: jasmine.createSpy()
+        };
+
+        spyOn(mockDoc, 'createElement').andReturn(mockLink);
+        spyOn(mockWindow, 'Blob').andReturn('foo');
+        spyOn(mockWindow.URL, 'createObjectURL').andReturn('RESULT');
+        var result = storageService.saveTextFile('bananas', 'dance.md');
+        expect(result).toEqual('RESULT');
+        expect(mockDoc.body.appendChild).toHaveBeenCalledWith(mockLink);
+        expect(mockLink.click).toHaveBeenCalled();
+      }));
+    });
   });
 });

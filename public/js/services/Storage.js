@@ -1,7 +1,7 @@
 define(['app', 'angular'], function (app, angular) {
   "use strict";
 
-  return app.service('storageService', ['$window', function (win) {
+  return app.service('storageService', ['$window', '$document', function (win, doc) {
       this.available = 'localStorage' in win;
 
       this.get = function (key) {
@@ -22,6 +22,30 @@ define(['app', 'angular'], function (app, angular) {
 
       this.getJSON = function (key) {
         return angular.fromJson(this.get(key));
+      };
+
+      this.saveTextFile = function (text, fileName) {
+        var blob = new win.Blob([ text ], { type: 'text/plain' }),
+            link = doc.createElement('a');
+
+        link.download = fileName || 'download.txt';
+
+        if (win.webkitURL) {
+          link.href = win.webkitURL.createObjectURL(blob);
+        }
+        else {
+          link.href = win.URL.createObjectURL(blob);
+          // FF (and probably IE10) requires the link to exist in the DOM.
+          link.style.display = 'none';
+          link.onclick = function () {
+            doc.body.removeChild(link);
+            link = null;
+          };
+          doc.body.appendChild(link);
+        }
+        link.click();
+
+        return link.href;
       };
   }]);
 });
