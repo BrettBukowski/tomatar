@@ -26,7 +26,7 @@ define(['app', 'angular'], function (app, angular) {
 
       this.saveTextFile = function (text, fileName) {
         var blob = new win.Blob([ text ], { type: 'text/plain' }),
-            link = doc.createElement('a');
+            link = doc[0].createElement('a');
 
         link.download = fileName || 'download.txt';
 
@@ -38,10 +38,10 @@ define(['app', 'angular'], function (app, angular) {
           // FF (and probably IE10) requires the link to exist in the DOM.
           link.style.display = 'none';
           link.onclick = function () {
-            doc.body.removeChild(link);
+            doc[0].body.removeChild(link);
             link = null;
           };
-          doc.body.appendChild(link);
+          doc[0].body.appendChild(link);
         }
         link.click();
 

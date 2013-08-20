@@ -73,9 +73,9 @@ define(['services/Storage'], function () {
           click: jasmine.createSpy(),
           style: {}
         };
-        $provide.value('$document', mockDoc = {
+        $provide.value('$document', mockDoc = [{
           createElement: function () {}
-        });
+        }]);
         $provide.value('$window', mockWindow = {
           Blob: function () {},
           webkitURL: { createObjectURL: function () {} }
@@ -83,7 +83,7 @@ define(['services/Storage'], function () {
       }));
 
       it('Builds a link constructed to download a file (webkit)', inject(function (storageService) {
-        spyOn(mockDoc, 'createElement').andReturn(mockLink);
+        spyOn(mockDoc[0], 'createElement').andReturn(mockLink);
         spyOn(mockWindow, 'Blob').andReturn('foo');
         spyOn(mockWindow.webkitURL, 'createObjectURL').andReturn('RESULT');
         var result = storageService.saveTextFile('bananas', 'dance.md');
@@ -95,16 +95,16 @@ define(['services/Storage'], function () {
         mockWindow.URL = mockWindow.webkitURL;
         mockWindow.webkitURL = null;
 
-        mockDoc.body = {
+        mockDoc[0].body = {
           appendChild: jasmine.createSpy()
         };
 
-        spyOn(mockDoc, 'createElement').andReturn(mockLink);
+        spyOn(mockDoc[0], 'createElement').andReturn(mockLink);
         spyOn(mockWindow, 'Blob').andReturn('foo');
         spyOn(mockWindow.URL, 'createObjectURL').andReturn('RESULT');
         var result = storageService.saveTextFile('bananas', 'dance.md');
         expect(result).toEqual('RESULT');
-        expect(mockDoc.body.appendChild).toHaveBeenCalledWith(mockLink);
+        expect(mockDoc[0].body.appendChild).toHaveBeenCalledWith(mockLink);
         expect(mockLink.click).toHaveBeenCalled();
       }));
     });
