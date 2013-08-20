@@ -69,7 +69,7 @@ define(['services/Calendar'], function () {
           { date: '2013-07-02Tsdf', notes: 'lean' },
           { date: '2013-07-01Tsdf', notes: 'bananas' },
           { date: '2013-07-01Tsdf', notes: 'fry' },
-          { date: '2013-07-27Tsdf', notes: 'clay' },
+          { date: '2013-07-27Tsdf', notes: 'clay' }
         ];
         var result = calendarService.partition(entries);
         expect(result.length).toBe(1);

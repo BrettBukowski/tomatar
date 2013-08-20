@@ -22,7 +22,7 @@ define(['app'], function (app) {
         },
         // A view is required in order for the Controller to
         // get called.
-        template: 'Hello!',
+        template: 'Hello!'
       })
       .otherwise({ redirectTo: '/' });
   }]);
