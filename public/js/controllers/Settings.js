@@ -2,8 +2,8 @@ define(['app', 'jquery'], function (app, $) {
   "use strict";
 
   return app.controller('SettingsController',
-    ['$rootScope', '$scope', 'settingsService', 'notificationService', 'userService',
-    function (rootScope, scope, settingsService, notificationService, userService) {
+    ['$rootScope', '$scope', 'settingsService', 'notificationService', 'userService', 'historyService', 'dataExportService',
+    function (rootScope, scope, settingsService, notificationService, userService, historyService, dataExportService) {
     var settingsKeys = [];
 
     function populateScopeFromSettings (settings) {
@@ -26,7 +26,28 @@ define(['app', 'jquery'], function (app, $) {
       return settings;
     }
 
-    scope.signedIn = userService.signedIn();
+    // asType: 'json' or 'csv'
+    function downloadData (asType) {
+      historyService.getHistory().then(function (entries) {
+        var exporter = dataExportService.export(asType);
+
+        entries.forEach(function (month) {
+          month.days.forEach(function (day) {
+            exporter.addEntries(day.finished);
+          });
+        });
+
+        exporter.save();
+      });
+    }
+
+    if (scope.signedIn = userService.signedIn()) {
+      scope.download = downloadData;
+
+      scope.deleteAccount = function () {
+
+      };
+    }
 
     scope.notificationsAreAvailable = function () {
       return notificationService.available();

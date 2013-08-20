@@ -120,11 +120,11 @@
               <span class="label">Download your data</span>
             </div>
             <div class="small-5 large-5 columns download-data">
-                <a href="data:text/csv;base64,blah">csv</a> |
-                <a href="data:text/json;base64,blah">json</a>
+                <a data-ng-click="download('csv')" href="javascript:;">csv</a> |
+                <a data-ng-click="download('json')" href="javascript:;">json</a>
             </div>
             <div class="columns small-12 large-3">
-              <a href="javascript:;" class="tiny button delete-account">Delete account</a>
+              <a href="javascript:;" data-ng-click="deleteAccount()" class="tiny button delete-account">Delete account</a>
             </div>
           </div>
         </div>
