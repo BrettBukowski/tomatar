@@ -24,13 +24,13 @@
     </div>
     <div class="large-3 small-6 columns text-right header-links">
       <span class="pull-1" data-ng-controller="SignInController" data-ng-cloak>
-        <a href="#" data-ng-hide="signedIn()" data-dropdown="signIn">Sign in</a>
+        <a href="#" data-ng-hide="signedIn()" data-dropdown="signIn" role="button" aria-haspopup="true">Sign in</a>
         <span class="signedin" data-ng-show="signedIn()">
           <img data-ng-src="{{ userAvatar }}" alt="" height="26px" width="26px">
           <a href="#" data-ng-click="signOut()">Sign out</a>
         </span>
       </span>
-      <a href="#" data-reveal-id="settings" class="settings">
+      <a href="#" data-reveal-id="settings" class="settings" role="button" aria-haspopup="true">
         <i class="icon-cog"></i>Settings
       </a>
     </div>

@@ -15,7 +15,7 @@
     </div>
     <ul class="small-block-grid-2 large-block-grid-8 calendar">
       <li data-ng-repeat="day in monthInterval.days">
-        <span class="date" tabindex="0" data-ng-click="showDayDetail()">
+        <span class="date" tabindex="0" data-ng-click="showDayDetail()" role="button">
           <span class="day">{{ day.dayOfMonth }}</span>
           <span class="finished" title="{{ day.finished.length }} pomodoro completed" data-hover="{{ day.finished.length }}">{{ day.finished.length }}</span>
         </span>
@@ -29,7 +29,7 @@
     </div>
 
     <ul class="small-block-grid-2 large-block-grid-4 completed-pomodori">
-      <li class="text-center" data-ng-repeat="pomodori in dayDetail.details" tabindex="0" data-ng-click="showDetails()">
+      <li class="text-center" data-ng-repeat="pomodori in dayDetail.details" tabindex="0" data-ng-click="showDetails()" role="button" aria-haspopup="true">
         <span class="pom" role="presentation"></span>
         <span class="finished">
           <span class="visuallyhidden">Time interval:</span>
