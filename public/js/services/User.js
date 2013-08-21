@@ -52,5 +52,9 @@ define(['app'], function (app) {
     this.syncPomodori = guardUser(function (pomodori) {
       return http.post('/user/pomodoro/sync', { pomodori: pomodori }).then(defaultResponder);
     });
+
+    this.destroy = guardUser(function () {
+      return http.delete('/user').then(defaultResponder);
+    });
   }]);
 });

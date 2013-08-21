@@ -141,5 +141,10 @@ define(['app', 'angular'], function (app, angular) {
         sync(unsyncedEntries);
       }
     };
+
+    this.destroy = function () {
+      cache.remove(localStorageKey);
+      cache.remove(syncedStorageKey);
+    };
   }]);
 });

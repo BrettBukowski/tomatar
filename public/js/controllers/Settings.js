@@ -2,8 +2,8 @@ define(['app', 'jquery'], function (app, $) {
   "use strict";
 
   return app.controller('SettingsController',
-    ['$rootScope', '$scope', 'settingsService', 'notificationService', 'userService', 'historyService', 'dataExportService',
-    function (rootScope, scope, settingsService, notificationService, userService, historyService, dataExportService) {
+    ['$rootScope', '$scope', '$window', 'settingsService', 'notificationService', 'userService', 'historyService', 'dataExportService',
+    function (rootScope, scope, win, settingsService, notificationService, userService, historyService, dataExportService) {
     var settingsKeys = [];
 
     function populateScopeFromSettings (settings) {
@@ -41,12 +41,22 @@ define(['app', 'jquery'], function (app, $) {
       });
     }
 
+    function reshowSettingsDialog ($event) {
+      $event && $event.stopPropagation();
+      $('#settings').foundation('reveal', 'open');
+    }
+
+    function deleteAccount () {
+      userService.destroy().then(function () {
+        historyService.destroy();
+        win.location.reload();
+      });
+    }
+
     if (scope.signedIn = userService.signedIn()) {
       scope.download = downloadData;
-
-      scope.deleteAccount = function () {
-
-      };
+      scope.deleteAccount = deleteAccount;
+      scope.reshowSettingsDialog = reshowSettingsDialog;
     }
 
     scope.notificationsAreAvailable = function () {

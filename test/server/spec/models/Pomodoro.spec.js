@@ -29,7 +29,7 @@ describe('Pomodoro', function () {
   });
 
   after(function () {
-    User.destroy(user);
+    user.destroy();
   });
 
   describe('Constructor', function () {

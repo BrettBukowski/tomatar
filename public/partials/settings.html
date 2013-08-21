@@ -124,7 +124,7 @@
                 <a data-ng-click="download('json')" href="javascript:;">json</a>
             </div>
             <div class="columns small-12 large-3">
-              <a href="javascript:;" data-ng-click="deleteAccount()" class="tiny button delete-account">Delete account</a>
+              <a href="javascript:;" data-reveal-id="deleteAccountDialog" class="tiny button delete-account" role="button">Delete account</a>
             </div>
           </div>
         </div>
@@ -136,4 +136,14 @@
     </div>
   </form>
   <a class="close-reveal-modal" aria-label="close" href="javascript:;">&#215;</a>
+</div>
+
+<div id="deleteAccountDialog" role="presentation" class="reveal-modal small">
+  <h4>Delete your account</h4>
+  <p>You sure?</p>
+  <div class="row">
+    <a href="javascript:;" data-ng-click="deleteAccount()" class="small alert button" role="button">Yes, delete my account</a>
+    <a href="javascript:;" role="button" data-ng-click="reshowSettingsDialog()" class="cancel">Nah, just kidding</a>
+  </div>
+  <a class="close-reveal-modal" data-ng-click="reshowSettingsDialog($event)" aria-label="close" href="javascript:;">&#215;</a>
 </div>

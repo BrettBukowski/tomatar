@@ -126,7 +126,7 @@ describe('User', function () {
       });
       newUser.save().done(function (result) {
         expect(result.id).not.to.be.undefined;
-        User.destroy(newUser);
+        newUser.destroy();
         done();
       });
     });
@@ -174,13 +174,15 @@ describe('User', function () {
 
   describe('#destroy()', function () {
     it('Removes the given user', function (done) {
-      User.destroy(user).done(function () {
+      user.destroy().done(function () {
         done();
       });
     });
 
     it('Errors for invalid user', function (done) {
-      User.destroy({ id: (+ new Date()) }).fail(function (error) {
+      var someUser = new User();
+      someUser.id = (+ new Date());
+      someUser.destroy().fail(function (error) {
         expect(error).not.to.be.undefined;
         done();
       });
