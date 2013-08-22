@@ -152,5 +152,17 @@ define(['services/Settings'], function () {
       }));
     });
 
+    describe('#destroy', function () {
+      beforeEach(module(function ($provide) {
+        storageService = jasmine.createSpyObj('storageService', ['remove']);
+        provideServices($provide);
+      }));
+
+      it('Calls remove on the local storage service', inject(function (settingsService) {
+        settingsService.destroy();
+        expect(storageService.remove).toHaveBeenCalledWith('settings');
+      }));
+    });
+
   });
 });

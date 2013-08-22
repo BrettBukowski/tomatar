@@ -49,6 +49,7 @@ define(['app', 'jquery'], function (app, $) {
     function deleteAccount () {
       userService.destroy().then(function () {
         historyService.destroy();
+        settingsService.destroy();
         win.location.reload();
       });
     }

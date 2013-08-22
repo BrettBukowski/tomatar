@@ -80,6 +80,10 @@ define(['app', 'utils', 'angular'], function (app, utils, angular) {
         saveLocally(modifiedSettings);
         saveToServer(modifiedSettings);
         rootScope.$broadcast('settingsSaved', modifiedSettings);
+      },
+
+      destroy: function () {
+        storageService.remove(storageKey);
       }
     };
   }]);
