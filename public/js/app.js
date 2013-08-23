@@ -1,7 +1,7 @@
-define(['jquery', 'angular', 'angular-cookies', 'foundation'], function ($, angular) {
+define(['jquery', 'angular', 'angular-cookies', 'angular-animate', 'angular-route', 'foundation', 'foundation-cookie', 'foundation-joyride', 'foundation-reveal', 'foundation-dropdown'], function ($, angular) {
   "use strict";
 
-  return angular.module('tomatar', ['ngCookies'])
+  return angular.module('tomatar', ['ngCookies', 'ngAnimate', 'ngRoute'])
     .run(['$rootScope', 'timeService', 'notificationService', 'settingsService', '$route', '$location',
       function (rootScope, TimeMaster, notificationService, settingsService, route, location) {
         var session = new TimeMaster();
