@@ -15,7 +15,7 @@ define(['jquery', 'app'], function ($, app) {
   function timestamp () {
     var now = new Date();
 
-    return [now.getHours(), now.getMinutes()].join(':');
+    return [now.getHours(), doubleDigits(now.getMinutes())].join(':');
   }
 
   return app.controller('TodayController',
