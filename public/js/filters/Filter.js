@@ -39,6 +39,8 @@ define(['app', 'angular'], function (app, angular) {
     truncate: function (input, truncate) {
       var limit = truncate || TRUNCATION_LIMIT;
 
+      if (!input) return '';
+
       return (input.length <= limit)
         ? input
         : input.substr(0, limit - 1) + '…';

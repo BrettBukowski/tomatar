@@ -35,6 +35,13 @@ define(['filters/Filter'], function () {
     });
 
     describe('truncate', function () {
+      it('Converts falsey into empty string', inject(function (truncateFilter) {
+        expect(truncateFilter(null)).toBe('');
+        expect(truncateFilter('')).toBe('');
+        expect(truncateFilter(0)).toBe('');
+        expect(truncateFilter(false)).toBe('');
+      }));
+
       it('Does not touch <= 40 chars', inject(function (truncateFilter) {
         expect(truncateFilter('bananas')).toEqual('bananas');
         expect(truncateFilter(new Array(41).join('f')).length).toEqual(40);
