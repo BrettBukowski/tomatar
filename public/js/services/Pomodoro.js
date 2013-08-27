@@ -1,4 +1,4 @@
-define(['app', 'angular'], function (app) {
+define(['app', 'angular', 'services/Settings'], function (app) {
   "use strict";
 
   var intervals = {

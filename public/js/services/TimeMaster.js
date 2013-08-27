@@ -1,4 +1,4 @@
-define(['app', 'utils'], function (app, utils) {
+define(['app', 'utils', 'services/Pomodoro'], function (app, utils) {
   "use strict";
 
   // Labels for notification

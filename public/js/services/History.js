@@ -1,4 +1,4 @@
-define(['app', 'angular'], function (app, angular) {
+define(['app', 'angular', 'services/Storage', 'services/User', 'services/Calendar'], function (app, angular) {
   "use strict";
 
   var localStorageKey = 'local',

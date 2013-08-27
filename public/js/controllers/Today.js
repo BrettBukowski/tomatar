@@ -1,4 +1,4 @@
-define(['jquery', 'app'], function ($, app) {
+define(['jquery', 'app', 'services/History', 'services/Settings', 'services/Dialog'], function ($, app) {
   "use strict";
 
   function doubleDigits (value) {

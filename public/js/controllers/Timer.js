@@ -1,4 +1,4 @@
-define(['app', 'jquery', 'angular'], function (app, $, angular) {
+define(['app', 'jquery', 'angular', 'services/Pomodoro', 'services/Favicon'], function (app, $, angular) {
   "use strict";
 
   return app.controller('TimerController',

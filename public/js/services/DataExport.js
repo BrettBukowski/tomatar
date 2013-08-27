@@ -1,4 +1,4 @@
-define(['app', 'angular'], function (app, angular) {
+define(['app', 'angular', 'services/Storage'], function (app, angular) {
   "use strict";
 
   return app.service('dataExportService', ['storageService', function (storageService) {

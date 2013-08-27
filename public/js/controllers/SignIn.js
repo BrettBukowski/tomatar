@@ -1,4 +1,4 @@
-define(['app'], function (app) {
+define(['app', 'services/User'], function (app) {
   var services = [
     { name: 'Facebook' },
     { name: 'Github' },

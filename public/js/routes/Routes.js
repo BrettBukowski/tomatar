@@ -1,4 +1,4 @@
-define(['app'], function (app) {
+define(['app', 'controllers/Today', 'controllers/History', 'services/History'], function (app) {
   "use strict";
 
   return app.config(['$routeProvider', function (routes) {

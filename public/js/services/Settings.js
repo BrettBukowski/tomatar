@@ -1,4 +1,4 @@
-define(['app', 'utils', 'angular'], function (app, utils, angular) {
+define(['app', 'utils', 'angular', 'services/Storage', 'services/User'], function (app, utils, angular) {
   "use strict";
 
   var storageKey = 'settings';

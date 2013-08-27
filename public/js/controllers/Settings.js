@@ -1,4 +1,4 @@
-define(['app', 'jquery'], function (app, $) {
+define(['app', 'jquery', 'services/Settings', 'services/Notification', 'services/User', 'services/History', 'services/DataExport'], function (app, $) {
   "use strict";
 
   return app.controller('SettingsController',

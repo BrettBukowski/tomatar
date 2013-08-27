@@ -1,4 +1,4 @@
-define(['jquery', 'app'], function ($, app) {
+define(['jquery', 'app', 'services/Settings'], function ($, app) {
   "use strict";
 
   return app.controller('SoundController', ['$rootScope', '$scope', 'settingsService', function (rootScope, scope, settingsService) {
