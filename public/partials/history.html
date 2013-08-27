@@ -1,5 +1,5 @@
 <section class="history">
-  <div class="row">
+  <div class="row view-heading">
     <div class="columns large-10 small-9">
       <h2>History</h2>
     </div>
@@ -9,7 +9,7 @@
     </nav>
   </div>
 
-  <div data-ng-repeat="monthInterval in entries" class="row month-view" data-ng-hide="dayDetail.date" data-ng-animate="{show: 'showing', hide:'hiding'}">
+  <div data-ng-repeat="monthInterval in entries" class="row month-view" data-ng-hide="dayDetail.date">
     <div class="large-12 small-12 columns">
       <h3 class="sticky">{{ monthInterval.month|formatMonthAndYear }}</h3>
     </div>
@@ -23,10 +23,21 @@
     </ul>
   </div>
 
-  <div data-ng-show="dayDetail.date" data-ng-animate="{show: 'showing', hide:'hiding'}" class="row">
-    <div class="large-4 small-6 columns">
+  <div data-ng-show="dayDetail.date" class="row">
+    <div class="large-10 small-9 columns">
       <h4>{{ dayDetail.date|formatDate }}</h4>
     </div>
+
+    <nav class="large-2 small-3 columns text-right">
+      <a href="javascript:;" title="Previous day" class="back" role="button" data-ng-click="previousDay()">
+        <i class="icon-left-open" role="presentation"></i>
+        <span class="visuallyhidden">Previous day</span>
+      </a>
+      <a href="javascript:;" title="Next day" class="forward" role="button" data-ng-click="nextDay()">
+        <i class="icon-right-open" role="presentation"></i>
+        <span class="visuallyhidden">Next day</span>
+      </a>
+    </nav>
 
     <ul class="small-block-grid-2 large-block-grid-4 completed-pomodori">
       <li class="text-center" data-ng-repeat="pomodori in dayDetail.details" tabindex="0" data-ng-click="showDetails()" role="button" aria-haspopup="true">

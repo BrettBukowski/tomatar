@@ -76,6 +76,9 @@
 }
 
 .completed-pomodori {
+  &.loading {
+    opacity: 0;
+  }
   margin-bottom: 1em;
   > li {
     .transition;
@@ -132,9 +135,36 @@
   }
 }
 
-.history h3 {
-  background: rgba(255, 255, 255, .6);
-  border-bottom: 1px solid #E3E3E3;
-  color: #3F3E3E;
-  font-size: 1.5em;
+.history {
+  h3 {
+    background: rgba(255, 255, 255, .6);
+    border-bottom: 1px solid #E3E3E3;
+    color: #3F3E3E;
+    font-size: 1.5em;
+  }
+
+  .back,
+  .forward {
+    border: 1px solid #E6E6E6;
+    border-radius: 10px;
+    padding: 1px 0;
+    position: relative;
+    top: 5px;
+    .transition;
+    &:hover, &:focus {
+      background: #EFEFEF;
+    }
+    &:active {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .2) inset;
+    }
+  }
+  .back {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    right: -5px;
+  }
+  .forward {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
 }
