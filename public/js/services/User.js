@@ -54,7 +54,7 @@ define(['app'], function (app) {
     });
 
     this.destroy = guardUser(function () {
-      return http.delete('/user').then(defaultResponder);
+      return http['delete']('/user').then(defaultResponder);
     });
   }]);
 });

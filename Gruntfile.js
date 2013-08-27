@@ -21,7 +21,8 @@ module.exports = function(grunt) {
         laxbreak: true,
         eqeqeq: false,
         boss: true,
-        validthis: true
+        validthis: true,
+        eqnull: true
       }
     },
 
