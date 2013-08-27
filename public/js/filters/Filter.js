@@ -16,6 +16,7 @@ define(['app', 'angular'], function (app, angular) {
 
   var filters = {
     padSeconds: function (input) {
+      if (input == null) return input;
       if (typeof input === 'number') return pad(input);
 
       var split = input.split(':');

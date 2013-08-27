@@ -7,6 +7,11 @@ define(['filters/Filter'], function () {
     beforeEach(module('tomatar'));
 
     describe('padSeconds', function () {
+      it('Returns null and undefined', inject(function (padSecondsFilter) {
+        expect(padSecondsFilter(null)).toBe(null);
+        expect(padSecondsFilter(undefined)).toBeUndefined();
+      }));
+
       it('Handles numbers', inject(function (padSecondsFilter) {
         expect(padSecondsFilter(10)).toEqual(10);
         expect(padSecondsFilter(0)).toEqual('00');
