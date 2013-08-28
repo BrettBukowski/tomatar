@@ -1,7 +1,7 @@
 define(['jquery', 'app', 'services/Settings'], function ($, app) {
   "use strict";
 
-  return app.controller('SoundController', ['$rootScope', '$scope', 'settingsService', function (rootScope, scope, settingsService) {
+  return app.controller('SoundController', ['$rootScope', '$scope', '$sce', 'settingsService', function (rootScope, scope, sce, settingsService) {
     var path = 'audio',
         types = { mp3: 'audio/mp3', wav: 'audio/wav' };
 
@@ -32,7 +32,7 @@ define(['jquery', 'app', 'services/Settings'], function ($, app) {
         : '';
 
       if (newSource != scope.source) {
-        scope.source = newSource;
+        scope.source = sce.trustAsHtml(newSource);
       }
     };
 

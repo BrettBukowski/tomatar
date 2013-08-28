@@ -50,7 +50,7 @@
   <div data-ng-controller="SignInController" data-ng-include="'partials/signIn.html'"></div>
 
   <div class="hidden" data-ng-controller="SoundController">
-    <audio preload="auto" id="soundNotification" data-ng-bind-html-unsafe="source"></audio>
+    <audio preload="auto" id="soundNotification" data-ng-bind-html="source"></audio>
   </div>
 
   <script data-main="js/main" src="js/vendor/require.js"></script>
