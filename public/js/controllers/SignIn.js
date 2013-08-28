@@ -1,4 +1,4 @@
-define(['app', 'services/User'], function (app) {
+define(['jquery', 'app', 'services/User'], function ($, app) {
   var services = [
     { name: 'Facebook' },
     { name: 'Github' },
@@ -27,5 +27,13 @@ define(['app', 'services/User'], function (app) {
     scope.toggleTOS = function () {
       scope.tosExpanded = !scope.tosExpanded;
     };
+
+    $('#signIn')
+      .on('opened', function () {
+        $(this).find('button')[0].focus();
+      })
+      .on('closed', function () {
+        $('[data-dropdown="signIn"]').focus();
+      });
   }]);
 });

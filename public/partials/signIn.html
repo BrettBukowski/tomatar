@@ -8,10 +8,10 @@
   </div>
   <div class="row">
     <div class="small-centered large-centered text-center columns">
-      <a data-ng-repeat="service in services" class="button {{ service.name | lowercase }}" href="javascript:;" data-ng-click="signInWithStrategy()" role="button">
+      <button data-ng-repeat="service in services" class="button {{ service.name | lowercase }}" href="javascript:;" data-ng-click="signInWithStrategy()" role="button">
         <i class="icon-{{ service.name | lowercase }}" role="presentation"></i>
         {{ service.name }}
-      </a>
+      </button>
 
       <hr>
 
