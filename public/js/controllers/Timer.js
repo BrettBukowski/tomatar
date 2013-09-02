@@ -68,6 +68,7 @@ define(['app', 'jquery', 'angular', 'services/Pomodoro', 'services/Favicon'], fu
     scope.startTimer = function () {
       updateFavicon(scope.progress);
       intervalId = win.setInterval(updateTimer, 1000);
+      rootScope.$emit('timerStart');
     };
 
     scope.resetTimer = function () {

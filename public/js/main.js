@@ -33,14 +33,7 @@ require.config({
   priority: ['angular']
 });
 
-require(['jquery', 'angular', 'bootstrap'], function ($, angular, bootstrap) {
-  // Controllers called out in html.
-  var controllers = [
-    'SignIn', 'Settings', 'Sound', 'Timer'
-  ].map(function (i) { return "controllers/" + i; });
-
-  require(controllers, function () {
-    bootstrap();
-    angular.bootstrap(document, ['tomatar']);
-  });
+require(['jquery', 'angular', 'controllers/App'], function ($, angular, appController) {
+  appController();
+  angular.bootstrap(document, ['tomatar']);
 });

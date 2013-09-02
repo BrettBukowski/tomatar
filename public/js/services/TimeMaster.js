@@ -1,4 +1,4 @@
-define(['app', 'utils', 'services/Pomodoro'], function (app, utils) {
+define(['app', 'angular', 'services/Pomodoro'], function (app, angular) {
   "use strict";
 
   // Labels for notification
@@ -13,18 +13,24 @@ define(['app', 'utils', 'services/Pomodoro'], function (app, utils) {
     }
   };
 
-  return app.factory('timeService', ['pomodoroService', function (pomodoroService) {
+  return app.factory('timeService', ['pomodoroService', '$q', function (pomodoroService, Q) {
     function TimedSession () {
       this._completed = 0;
+      this.started = false;
       this.isPomo = true;
       this.autoStart = true;
       this._setTimeInterval('pomodoro');
       this.labels = labels.pomodoro;
     }
 
+    TimedSession.prototype.start = function () {
+      this.started = true;
+    };
+
     TimedSession.prototype.complete = function () {
       var directions = this._whenComplete[(this.isPomo) ? 'pomo' : 'break'];
 
+      this.started = false;
       this.autoStart = directions.autoStart;
       this.labels = labels[directions.labels];
       this.isPomo = !this.isPomo;
@@ -32,13 +38,21 @@ define(['app', 'utils', 'services/Pomodoro'], function (app, utils) {
     };
 
     TimedSession.prototype._setTimeInterval = function (intervalName) {
-      var self = this;
+      this.currentInterval = intervalName;
+      return pomodoroService[intervalName]().then(angular.bind(this, function (interval) {
+        this.timeInterval = interval;
 
-      return pomodoroService[intervalName]().then(function (interval) {
-        self.timeInterval = interval;
+        return this;
+      }));
+    };
 
-        return self;
-      });
+    TimedSession.prototype.refresh = function () {
+      if (this.started) {
+        var defer = Q.defer();
+        defer.reject('Cannot refresh already-started session');
+        return defer.promise;
+      }
+      return this._setTimeInterval(this.currentInterval);
     };
 
     TimedSession.prototype._whenComplete = {
