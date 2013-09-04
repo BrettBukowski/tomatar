@@ -2,15 +2,29 @@
 
 .transition (@duration: .4s) {
   -webkit-transition: all @duration;
-  -ms-transition: all @duration;
   -moz-transition: all @duration;
+  -ms-transition: all @duration;
   transition: all @duration;
+}
+
+.scale (@factor: .5) {
+  -webkit-transform: scale(@factor);
+  -moz-transform: scale(@factor);
+  -ms-transform: scale(@factor);
+  transform: scale(@factor);
 }
 
 /* Colors */
 
-@light-blue: rgba(207, 30, 30, .57);
-@faded-red: #ebf2fc;
+@faded-red: rgba(207, 30, 30, .57);
+@checkmark-green: #132E13;
+@pom-hover-text: #CF1E1E;
+@light-blue: #ebf2fc;
+@light-gray: #E3E3E3;
+@notes-gray: #858181;
+@medium-gray: #555;
+@date-gray: #222;
+@white: #FFF;
 
 .month-view {
   margin-bottom: 1em;
@@ -27,9 +41,9 @@
 
 .calendar {
   .date {
-    background: @faded-red;
+    background: @light-blue;
     border-radius: 4px;
-    color: #222;
+    color: @date-gray;
     cursor: pointer;
     display: block;
     padding: 6px;
@@ -42,33 +56,32 @@
     }
 
     .finished {
-      background: @light-blue;
+      background: @faded-red;
       border-radius: 13px;
-      color: #555;
+      color: @medium-gray;
       display: block;
       margin: 0 34%;
       position: relative;
       top: -6px;
       text-align: center;
-      -webkit-transition: all .8s;
-      &::before {
-        color: #FFF;
+      .transition(.8s);
+      &:before {
+        color: @white;
         content: attr(data-hover);
         position: absolute;
-        -webkit-transition: -webkit-transform .4s, opacity .4s;
+        -webkit-transition: -webkit-transform .8s, opacity .8s;
         -moz-transition: -moz-transform .4s, opacity .4s;
+        -ms-transition: -ms-transform .4s, opacity .4s;
         transition: transform .4s, opacity .4s;
       }
     }
     &:hover, &:focus {
-      background: darken(@faded-red, 3%);
+      background: darken(@light-blue, 3%);
       .finished {
-        background: saturate(@light-blue, 10%);
+        background: saturate(@faded-red, 10%);
       }
-      .finished::before {
-        -webkit-transform: scale(.5);
-        -moz-transform: scale(.5);
-        transform: scale(.5);
+      .finished:before {
+        .scale;
         opacity: 0;
       }
     }
@@ -89,16 +102,12 @@
 
     &:focus,
     &:hover {
-      background: #ebf2fc;
-      .pom:after,
+      background: @light-blue;
       .pom:after {
-        background: #CF1E1E;
-        box-shadow: 0 0 0 3px #CF1E1E;
-        border: 4px solid #ebf2fc;
-        -webkit-transform: scale(.85);
-        -moz-transform: scale(.85);
-        -ms-transform: scale(.85);
-        transform: scale(.85);
+        background: @pom-hover-text;
+        box-shadow: 0 0 0 3px @pom-hover-text;
+        border: 4px solid @light-blue;
+        .scale(.85);
         z-index: 1;
       }
     }
@@ -112,9 +121,9 @@
 
       &:after {
         .transition;
-        background: rgba(207, 30, 30, .57);
+        background: @faded-red;
         border-radius: 50%;
-        color: #132E13;
+        color: @checkmark-green;
         content: '\e805'; /* OK icon */
         font-family: fontello;
         height: 100%;
@@ -125,7 +134,7 @@
       }
     }
     .notes {
-      color: #858181;
+      color: @notes-gray;
       font-size: smaller;
     }
 
@@ -138,14 +147,14 @@
 .history {
   h3 {
     background: rgba(255, 255, 255, .6);
-    border-bottom: 1px solid #E3E3E3;
+    border-bottom: 1px solid @light-gray;
     color: #3F3E3E;
     font-size: 1.5em;
   }
 
   .back,
   .forward {
-    border: 1px solid #E6E6E6;
+    border: 1px solid @light-gray;
     border-radius: 10px;
     display: inline-block;
     padding: 1px 0;
@@ -153,7 +162,7 @@
     top: 5px;
     .transition;
     &:hover, &:focus {
-      background: #EFEFEF;
+      background: darken(@light-gray, 1%);
     }
     &:active {
       box-shadow: 0 1px 3px rgba(0, 0, 0, .2) inset;
