@@ -22,6 +22,7 @@ define(['jquery', 'app', 'services/History', 'services/Settings', 'services/Dial
     ['$rootScope', '$scope', 'historyService', 'settingsService', 'dialogService',
     function (rootScope, scope, historyService, settingsService, Dialog) {
     var finishedDialog = new Dialog($('#finishedDialog')),
+        lastLoaded = today(),
         detailsDialog;
 
     function completedTimeInterval (evt, wasPomo, howLong) {
@@ -52,6 +53,21 @@ define(['jquery', 'app', 'services/History', 'services/Settings', 'services/Dial
 
       // Reset dialog's notes field.
       scope.notes = '';
+
+      refreshWhenDayChanges();
+    }
+
+    function loadFromHistory () {
+      var now = today();
+      historyService.getDate(now).then(function (completed) {
+        scope.completed = completed;
+        lastLoaded = now;
+        !scope.$$phase && scope.$apply();
+      });
+    }
+
+    function refreshWhenDayChanges () {
+      if (lastLoaded != today()) loadFromHistory();
     }
 
     scope.closeDialog = function () {
@@ -76,10 +92,6 @@ define(['jquery', 'app', 'services/History', 'services/Settings', 'services/Dial
       scope.hourFormat = settings.ui.hours;
       !scope.$$phase && scope.$apply();
     });
-    historyService.getDate(today()).then(function (completed) {
-      scope.completed = completed;
-      !scope.$$phase && scope.$apply();
-    });
 
     // Dialog's notes field.
     scope.notes = '';
@@ -91,5 +103,9 @@ define(['jquery', 'app', 'services/History', 'services/Settings', 'services/Dial
     scope.$on('$includeContentLoaded', function () {
       detailsDialog = new Dialog($('#detailsDialog'));
     });
+
+    loadFromHistory();
+
+    $(window).on('focus', refreshWhenDayChanges);
   }]);
 });
