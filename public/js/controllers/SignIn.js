@@ -3,14 +3,11 @@ define(['jquery', 'app', 'services/User'], function ($, app) {
     { name: 'Facebook' },
     { name: 'Github' },
     { name: 'Google' }
-  ],
-  avatarUrl = '//www.gravatar.com/avatar/%s?s=26&d=identicon';
+  ];
 
   return app.controller('SignInController', ['$scope', '$window', 'userService', function (scope, win, User) {
     scope.services = services;
-
-    var userHash = User.getUserHash();
-    scope.userAvatar = (userHash) ? avatarUrl.replace('%s', userHash) : '';
+    scope.userAvatar = User.getUserHash() || '';
 
     scope.signInWithStrategy = function () {
       win.location = '/auth/' + this.service.name.toLowerCase();
