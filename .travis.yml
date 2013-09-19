@@ -5,7 +5,7 @@ node_js:
 services:
   - redis-server
 before_script:
-  - psql -c 'create database tomatar-test;' -U postgres
+  - psql -c 'create database "tomatar-test";' -U postgres
   - psql -f ./config/tables.sql -U postgres
   - npm install --quiet -g karma
   - npm install -g grunt-cli
