@@ -52,8 +52,11 @@ describe('User', function () {
   });
 
   describe('#saveStrategy()', function () {
-    it('Errors on an unsaved user', function () {
-      expect(function () { new User().saveStrategy(); }).to.throw();
+    it('Errors on an unsaved user', function (done) {
+      new User().saveStrategy().fail(function (error) {
+        expect(error).not.to.be.undefined;
+        done();
+      });
     });
   });
 
