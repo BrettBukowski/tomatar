@@ -14,8 +14,8 @@
     "passport-google": "~0.3.0",
     "connect-redis": "~1.4.5",
     "flatiron-passport": "git://github.com/BrettBukowski/flatiron-passport.git",
+    "thin-orm": "git://github.com/BrettBukowski/thin-orm.git",
     "pg": "~1.3.0",
-    "thin-orm": "~0.1.4",
     "q": "~0.9.6",
     "cookies": "~0.3.6"
   },

@@ -1,0 +1,8 @@
+{
+  "database": {
+    "user": "brettbukowski",
+    "host": "localhost",
+    "port": 5432,
+    "db": "tomatar-dev"
+  }
+}
