@@ -1,5 +1,6 @@
 define([
   'app',
+  'angular',
   'controllers/SignIn',
   'controllers/Settings',
   'controllers/Sound',
@@ -9,7 +10,7 @@ define([
   'services/Settings',
   'filters/Filter',
   'routes/Routes',
-  ], function (app) {
+], function (app, angular) {
   "use strict";
 
   return function () {

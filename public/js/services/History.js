@@ -1,4 +1,4 @@
-define(['app', 'angular', 'services/Storage', 'services/User', 'services/Calendar'], function (app, angular) {
+define(['app', 'services/Cache', 'services/User', 'services/Calendar'], function (app) {
   "use strict";
 
   var localStorageKey = 'local',
@@ -16,39 +16,8 @@ define(['app', 'angular', 'services/Storage', 'services/User', 'services/Calenda
     });
   }
 
-  function Cache (storage) {
-    this.entries = {};
-    this.storage = storage;
-  }
-  Cache.prototype.set = function (key, value) {
-    this.entries[key] = value;
-    this.storage.setJSON(key, value);
-    return value;
-  };
-  Cache.prototype.get = function (key) {
-    return this.entries[key] || (this.entries[key] = this.storage.getJSON(key));
-  };
-  Cache.prototype.add = function (key, value) {
-    var cachedSet = this.entries[key];
-    if (cachedSet) {
-      // Newest first.
-      cachedSet.unshift(value);
-      this.storage.setJSON(key, cachedSet);
-
-      return true;
-    }
-
-    return false;
-  };
-  Cache.prototype.remove = function (key) {
-    this.entries[key] = null;
-    this.storage.remove(key);
-  };
-
-  return app.service('historyService', ['$rootScope', 'storageService', 'userService', 'calendarService', '$q',
-    function (rootScope, storageService, userService, calendarService, Q) {
-
-    var cache = new Cache(storageService);
+  return app.service('historyService', ['$rootScope', 'cacheService', 'userService', 'calendarService', '$q',
+    function (rootScope, cache, userService, calendarService, Q) {
 
     function promise (resolved) {
       var deferred = Q.defer();
@@ -113,11 +82,12 @@ define(['app', 'angular', 'services/Storage', 'services/User', 'services/Calenda
     this.getHistory = function () {
       var cachedEntries = cache.get(syncedStorageKey);
       if (cachedEntries) {
+        cache.setTTL(syncedStorageKey);
         return promise(calendarService.partition(cachedEntries.concat(cache.get(localStorageKey))));
       }
 
       return userService.getPomodoro().then(function (results) {
-        cache.set(syncedStorageKey, cleanRemoteEntries(results));
+        cache.setWithTTL(syncedStorageKey, cleanRemoteEntries(results));
 
         var unsyncedEntries = cache.get(localStorageKey);
         if (unsyncedEntries) {

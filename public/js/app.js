@@ -9,7 +9,7 @@ define([
   'foundation-joyride',
   'foundation-reveal',
   'foundation-dropdown'
-  ], function ($, angular) {
+], function ($, angular) {
   "use strict";
 
   return angular.module('tomatar', ['ngCookies', 'ngAnimate', 'ngRoute']).run(['$rootScope', function (rootScope) {

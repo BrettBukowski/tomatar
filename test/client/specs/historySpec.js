@@ -1,4 +1,4 @@
-/* global describe,it,expect,inject,beforeEach,define,jasmine,spyOn */
+/* global describe,it,expect,inject,beforeEach,define,spyOn */
 'use strict';
 
 define(['services/History'], function () {
@@ -35,10 +35,9 @@ define(['services/History'], function () {
       }));
 
       it('Saves to local storage', inject(function (historyService) {
-        var now = new Date(),
-            expected = [{
-              bananas: true
-            }];
+        var expected = [{
+          bananas: true
+        }];
 
         historyService.saveToToday(expected[0]);
         expect(storageService.setJSON).toHaveBeenCalledWith('local', expected);
@@ -64,17 +63,16 @@ define(['services/History'], function () {
           savePomodoro: function () {}
         };
         spyOn(userService, 'savePomodoro').andCallFake(function () {
-          return { then: function(a, b) { a({ id: 'yes' }); } };
+          return { then: function(a) { a({ id: 'yes' }); } };
         });
 
         provideServices($provide);
       }));
 
       it('Saves to remote', inject(function (historyService) {
-        var now = new Date(),
-            input = {
-              bananas: true
-            };
+        var input = {
+          bananas: true
+        };
 
         historyService.saveToToday(input);
         expect(userService.savePomodoro).toHaveBeenCalledWith(input);
