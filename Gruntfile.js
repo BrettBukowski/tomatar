@@ -72,6 +72,25 @@ module.exports = function(grunt) {
           }],
           preserveLicenseComments: false
         }
+      },
+
+      combineCss: {
+        options: {
+          cssIn: './public/css/main.css',
+          out: './public/css/main.css'
+        }
+      }
+    },
+
+    less: {
+      compile: {
+        options: {
+          yuicompress: true,
+          strictImports: true
+        },
+        files: {
+          './public/css/main.css': './public/css/main.css.less'
+        }
       }
     }
 
@@ -82,8 +101,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-cafe-mocha');
   grunt.loadNpmTasks('grunt-requirejs');
+  grunt.loadNpmTasks('grunt-contrib-less');
 
   grunt.registerTask('lint', ['jshint']);
   grunt.registerTask('test', ['karma:single', 'cafemocha']);
-  grunt.registerTask('build', ['requirejs:compile']);
+  grunt.registerTask('build', ['requirejs:compile', 'less:compile', 'requirejs:combineCss']);
 };
