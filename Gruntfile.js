@@ -53,6 +53,26 @@ module.exports = function(grunt) {
 
     cafemocha: {
       specs: { src: 'test/server/**/*.js' }
+    },
+
+    requirejs: {
+      compile: {
+        options: {
+          out: './public/js/build/main.js',
+          name: 'main',
+          almond: true,
+          baseUrl: './public/js',
+          optimize: 'uglify2',
+          insertRequire: ['main'],
+          mainConfigFile: './public/js/main.js',
+          generateSourceMaps: true,
+          replaceRequireScript: [{
+            files: ['./public/index.html'],
+            modulePath: 'js/build/main'
+          }],
+          preserveLicenseComments: false
+        }
+      }
     }
 
   });
@@ -61,7 +81,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-cafe-mocha');
+  grunt.loadNpmTasks('grunt-requirejs');
 
   grunt.registerTask('lint', ['jshint']);
   grunt.registerTask('test', ['karma:single', 'cafemocha']);
+  grunt.registerTask('build', ['requirejs:compile']);
 };
