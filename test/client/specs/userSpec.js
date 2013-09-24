@@ -1,4 +1,4 @@
-/* global describe,it,expect,inject,beforeEach,define,jasmine,spyOn,angular */
+/* global describe,it,expect,inject,beforeEach,define,spyOn */
 'use strict';
 
 define(['services/User'], function () {
@@ -11,8 +11,8 @@ define(['services/User'], function () {
         return deferred.promise;
       };
       httpService = {
-        post:   defaultResponse,
-        delete: defaultResponse
+        'post':   defaultResponse,
+        'delete': defaultResponse
       };
       $provide.provider('$http', function () {
         this.$get = function () { return httpService; };
@@ -24,7 +24,7 @@ define(['services/User'], function () {
     }));
 
     describe('#signedIn', function () {
-      it('Reports on the signin cookie', inject(function (userService, $q, $rootScope) {
+      it('Reports on the signin cookie', inject(function (userService) {
         expect(userService.signedIn()).toBe(true);
       }));
     });
@@ -37,7 +37,7 @@ define(['services/User'], function () {
         });
       }));
 
-      it('Returns false if the cookie exists but does not match', inject(function (userService, $q, $rootScope) {
+      it('Returns false if the cookie exists but does not match', inject(function (userService) {
         expect(userService.signedIn()).toBe(false);
       }));
     });

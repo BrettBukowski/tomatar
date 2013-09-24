@@ -62,5 +62,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-cafe-mocha');
 
+  grunt.registerTask('lint', ['jshint']);
   grunt.registerTask('test', ['karma:single', 'cafemocha']);
 };

@@ -9,7 +9,7 @@ define([
   'services/Notification',
   'services/Settings',
   'filters/Filter',
-  'routes/Routes',
+  'routes/Routes'
 ], function (app, angular) {
   "use strict";
 

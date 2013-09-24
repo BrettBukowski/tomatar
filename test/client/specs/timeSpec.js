@@ -1,4 +1,4 @@
-/* global describe,it,expect,inject,beforeEach,define,jasmine,spyOn,angular */
+/* global describe,it,expect,inject,beforeEach,define,runs,waitsFor */
 'use strict';
 
 define(['services/TimeMaster'], function () {
@@ -13,7 +13,7 @@ define(['services/TimeMaster'], function () {
       pomodoroService = {
         pomodoro:   defaultResponse,
         shortBreak: defaultResponse,
-        longBreak:  defaultResponse,
+        longBreak:  defaultResponse
       };
       $provide.provider('pomodoroService', function () {
         this.$get = function () { return pomodoroService; };
