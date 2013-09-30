@@ -3,13 +3,13 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    Brett Bukowski -- developer -- @BrettBukowski
 
 # THANKS
 
-    <name>
+    People who make great software libraries
 
 # TECHNOLOGY COLOPHON
 
     HTML5, CSS3
-    Normalize.css, jQuery, Modernizr
+    Normalize.css, LESS, Foundation, jQuery, Boilerplate, AngularJS, FlatironJS, Passport, Thin ORM, Postgresql
