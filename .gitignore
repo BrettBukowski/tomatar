@@ -3,4 +3,4 @@ libpeerconnection.log
 node_modules
 /config/auth.json
 public/css/*.css
-/public/js/build/
+/public/js/1*/

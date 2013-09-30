@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
+    timestamp: +(new Date()),
 
     jshint: {
       all: [
@@ -58,7 +58,7 @@ module.exports = function(grunt) {
     requirejs: {
       compile: {
         options: {
-          out: './public/js/build/main.js',
+          out: './public/js/<%= timestamp %>/main.js',
           name: 'main',
           almond: true,
           baseUrl: './public/js',
@@ -68,7 +68,7 @@ module.exports = function(grunt) {
           generateSourceMaps: true,
           replaceRequireScript: [{
             files: ['./public/index.html'],
-            modulePath: 'js/build/main'
+            modulePath: 'js/<%= timestamp %>/main'
           }],
           preserveLicenseComments: false
         }
@@ -76,8 +76,8 @@ module.exports = function(grunt) {
 
       combineCss: {
         options: {
-          cssIn: './public/css/main.css',
-          out: './public/css/main.css'
+          cssIn: './public/css/<%= timestamp %>.css',
+          out: './public/css/<%= timestamp %>.css'
         }
       }
     },
@@ -89,7 +89,18 @@ module.exports = function(grunt) {
           strictImports: true
         },
         files: {
-          './public/css/main.css': './public/css/main.css.less'
+          './public/css/<%= timestamp %>.css': './public/css/main.css.less'
+        }
+      }
+    },
+
+    rewriteCssPath: {
+      all: {
+        options: {
+          files: ['./public/index.html'],
+          path: {
+            'css/main.css': 'css/<%= timestamp %>.css'
+          }
         }
       }
     }
@@ -105,5 +116,27 @@ module.exports = function(grunt) {
 
   grunt.registerTask('lint', ['jshint']);
   grunt.registerTask('test', ['karma:single', 'cafemocha']);
-  grunt.registerTask('build', ['requirejs:compile', 'less:compile', 'requirejs:combineCss']);
+  grunt.registerTask('build', ['requirejs:compile', 'less:compile', 'requirejs:combineCss', 'rewriteCssPath']);
+
+  grunt.registerMultiTask('rewriteCssPath', 'Rewrites the path in an html file to the css file', function () {
+    grunt.task.requires('less:compile');
+
+    var options = this.options(),
+        files = grunt.file.expand(options.files),
+        replacements = options.path;
+
+    function replace (content, search, replaceWith) {
+      return content.replace(new RegExp(search, 'g'), replaceWith);
+    }
+
+    files.forEach(function (file) {
+      var content = String(grunt.file.read(file, 'utf-8'));
+
+      for (var i in replacements) {
+        content = replace(content, i, replacements[i]);
+      }
+
+      grunt.file.write(file, content);
+    });
+  });
 };
