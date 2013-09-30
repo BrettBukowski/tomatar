@@ -33,7 +33,7 @@ require.config({
   priority: ['angular']
 });
 
-require(['jquery', 'angular', 'controllers/App'], function ($, angular, appController) {
+require(['angular', 'controllers/App'], function (angular, appController) {
   appController();
   angular.bootstrap(document, ['tomatar']);
 });
