@@ -1,6 +1,6 @@
 {
   "database": {
-    "user": "brettbukowski",
+    "user": "postgres",
     "host": "localhost",
     "port": 5432,
     "db": "tomatar-production"
