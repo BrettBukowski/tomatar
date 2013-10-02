@@ -8,8 +8,7 @@ var flatiron = require('flatiron'),
     authConfiguration = require('./lib/authConfiguration'),
     router = require('./lib/router'),
     secrets = require('./config/auth.json'),
-    app = flatiron.app,
-    cookieSettings = { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 365 /* one year */ };
+    app = flatiron.app;
 
 app.config.file({ file: __dirname + 'config/config.json' });
 
@@ -20,7 +19,10 @@ app.use(flatiron.plugins.http, {
       key:      'session',
       store:    new RedisStore(),
       secret:   secrets.session,
-      cookie:   cookieSettings
+      cookie:   {
+        httpOnly: true,
+        maxAge:   1000 * 60 * 60 * 24 * 365 /* one year */
+      }
     }),
     ecstatic(__dirname + '/public')
   ]
