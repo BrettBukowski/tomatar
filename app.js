@@ -8,6 +8,7 @@ var flatiron = require('flatiron'),
     authConfiguration = require('./lib/authConfiguration'),
     router = require('./lib/router'),
     secrets = require('./config/auth.json'),
+    configuration = require('./config/' + (process.env.NODE_ENV || 'development')),
     app = flatiron.app;
 
 app.config.file({ file: __dirname + 'config/config.json' });
@@ -28,7 +29,7 @@ app.use(flatiron.plugins.http, {
   ]
 });
 app.use(passport, { session: true });
-authConfiguration.configure();
+authConfiguration.configure(configuration.hostname);
 router(app.router);
 
 app.start(5000);
