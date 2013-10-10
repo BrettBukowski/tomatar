@@ -12,17 +12,13 @@ define(['app', 'controllers/Today', 'controllers/History', 'services/History'], 
         templateUrl: '/partials/history.html'
       })
       .when('/signedin', {
-        controller: function (location, historyService) {
+        controller: ['$location', 'historyService', function (location, historyService) {
           historyService.sync();
           location.url('/');
-        },
-        resolve: {
-          location:       '$location',
-          historyService: 'historyService'
-        },
+        }],
         // A view is required in order for the Controller to
         // get called.
-        template: 'Hello!'
+        template: '<span class="text-center">Hello!</span>'
       })
       .otherwise({ redirectTo: '/' });
   }]);
