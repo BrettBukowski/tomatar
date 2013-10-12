@@ -18,3 +18,9 @@ Pomodoro timer web app.
 ## License
 
 MIT
+
+## The name
+
+_tómatar_ (Icelandic for _tomato_)
+
+:tomato: :tomato: :tomato:
