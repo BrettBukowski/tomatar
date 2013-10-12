@@ -75,6 +75,51 @@ describe('User', function () {
         done();
       });
     });
+
+    it('Creates a new user if not found', function (done) {
+      var profile = {
+        id: +new Date(),
+        provider: 'github',
+        emails: [{ value: 'foo@bar.day' }],
+        displayName: 'hawaii'
+      };
+
+      User.findOrCreate(profile).done(function (newUser) {
+        expect(newUser.id).not.to.be.null;
+        expect(newUser.email).not.to.be.null;
+        newUser.destroy().done(function () {
+          done();
+        });
+
+      });
+    });
+
+    it('Creates a new strategy if finding existing user w/o that strategy', function (done) {
+      var profile = {
+        id: +new Date(),
+        provider: 'github',
+        emails: [{ value: 'foo@bar.day' }],
+        displayName: 'hawaii'
+      };
+
+      User.findOrCreate(profile).done(function (newUser) {
+        expect(newUser.id).not.to.be.null;
+        expect(newUser.email).not.to.be.null;
+        var newStrategy = {
+          id: +new Date(),
+          provider: 'facebook',
+          emails: profile.emails,
+          displayName: 'wind'
+        };
+        User.findOrCreate(newStrategy).done(function (newUser) {
+          expect(newUser.email).to.equal(profile.emails[0].value);
+
+          newUser.destroy();
+
+          done();
+        });
+      });
+    });
   });
 
   describe('#update()', function () {
