@@ -18,7 +18,7 @@ define(['app', 'controllers/Today', 'controllers/History', 'services/History'], 
         }],
         // A view is required in order for the Controller to
         // get called.
-        template: '<span class="text-center">Hello!</span>'
+        template: '<span class="ng-hide">Hello!</span>'
       })
       .otherwise({ redirectTo: '/' });
   }]);
