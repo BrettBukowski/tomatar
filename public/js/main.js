@@ -20,8 +20,8 @@ require.config({
     'angular-animate':      'vendor/angular-animate.min'
   },
   shim: {
-    'angular':              { exports: 'angular' },
-    'foundation':           { exports: 'Foundation' },
+    'angular':              { exports: 'angular', deps: ['jquery'] },
+    'foundation':           { exports: 'Foundation', deps: ['jquery'] },
     'angular-cookies':      ['angular'],
     'angular-route':        ['angular'],
     'angular-animate':      ['angular'],
