@@ -88,10 +88,23 @@
   }
 }
 
+
+.loading-add,
+.loading-remove {
+  -webkit-transition:all linear .2s;
+  -moz-transition:all linear .2s;
+  -o-transition:all linear .2s;
+  transition:all linear .2s;
+}
+.loading-add-active,
+.loading-remove-active {
+  opacity: .1;
+}
+.loading {
+  opacity: 0;
+}
+
 .completed-pomodori {
-  &.loading {
-    opacity: 0;
-  }
   margin-bottom: 1em;
   > li {
     .transition;
