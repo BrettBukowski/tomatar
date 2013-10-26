@@ -2,7 +2,7 @@
 
 Pomodoro timer web app.
 
-[![Build Status](https://travis-ci.org/BrettBukowski/tomatar.png?branch=master)](https://travis-ci.org/BrettBukowski/tomatar)
+[![Build Status](https://travis-ci.org/BrettBukowski/tomatar.png?branch=master)](https://travis-ci.org/BrettBukowski/tomatar) [![Code Climate](https://codeclimate.com/github/BrettBukowski/tomatar.png)](https://codeclimate.com/github/BrettBukowski/tomatar)
 
 ![](http://i.minus.com/iOsYBUXKJq1tS.png) <http://tomatar.com>
 
