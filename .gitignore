@@ -4,3 +4,4 @@ node_modules
 /config/auth.json
 public/css/*.css
 /public/js/1*/
+/public/js/vendor/
