@@ -13,7 +13,7 @@ files = [
   REQUIRE,
   REQUIRE_ADAPTER,
 
-  { pattern: 'public/js/vendor/angular.min.js', included: true },
+  { pattern: 'public/js/vendor/angular/angular.min.js', included: true },
   { pattern: 'test/client/lib/angular-mocks.js', included: true },
   { pattern: 'public/js/**/*.js', included: false },
   { pattern: 'test/client/specs/**/*.js', included: false },
@@ -23,7 +23,8 @@ files = [
 
 // list of files to exclude
 exclude = [
-  'js/main.js'
+  'js/main.js',
+  'public/js/vendor/foundation/**/*.js'
 ];
 
 

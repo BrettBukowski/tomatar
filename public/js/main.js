@@ -8,16 +8,16 @@
 
 require.config({
   paths: {
-    'jquery':               'vendor/jquery',
-    'foundation':           'vendor/foundation/foundation',
-    'foundation-joyride':   'vendor/foundation/foundation.joyride',
-    'foundation-cookie':    'vendor/foundation/foundation.cookie',
-    'foundation-dropdown':  'vendor/foundation/foundation.dropdown',
-    'foundation-reveal':    'vendor/foundation/foundation.reveal',
-    'angular':              'vendor/angular.min',
-    'angular-cookies':      'vendor/angular-cookies.min',
-    'angular-route':        'vendor/angular-route.min',
-    'angular-animate':      'vendor/angular-animate.min'
+    'jquery':               'vendor/foundation/js/vendor/jquery',
+    'foundation':           'vendor/foundation/js/foundation/foundation',
+    'foundation-joyride':   'vendor/foundation/js/foundation/foundation.joyride',
+    'foundation-cookie':    'vendor/foundation/js/foundation/foundation.cookie',
+    'foundation-dropdown':  'vendor/foundation/js/foundation/foundation.dropdown',
+    'foundation-reveal':    'vendor/foundation/js/foundation/foundation.reveal',
+    'angular':              'vendor/angular/angular',
+    'angular-cookies':      'vendor/angular-cookies/angular-cookies',
+    'angular-route':        'vendor/angular-route/angular-route',
+    'angular-animate':      'vendor/angular-animate/angular-animate'
   },
   shim: {
     'angular':              { exports: 'angular', deps: ['jquery'] },

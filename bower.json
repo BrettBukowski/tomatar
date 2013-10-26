@@ -1,0 +1,27 @@
+{
+  "name": "tomatar",
+  "version": "0.0.1",
+  "homepage": "https://github.com/BrettBukowski/tomatar",
+  "authors": [
+    "Brett Bukowski <brett.bukowski@gmail.com>"
+  ],
+  "description": "Pomodoro tracker",
+  "main": "app.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "~4.3.2",
+    "angular": "1.2.0-rc.2",
+    "angular-cookies": "1.2.0-rc.2",
+    "angular-animate": "1.2.0-rc.2",
+    "angular-route": "1.2.0-rc.2",
+    "requirejs": "~2.1.9"
+  }
+}

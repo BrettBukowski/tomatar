@@ -1,4 +1,4 @@
-define(function (app) {
+define(function () {
   var exports = {};
 
   function isArray (obj) {
