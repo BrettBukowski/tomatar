@@ -22,8 +22,7 @@ define(['app', 'utils', 'angular', 'services/Storage', 'services/User'], functio
 
   return app.factory('settingsService', ['$rootScope', 'storageService', 'userService', '$q',
     function (rootScope, storageService, userService, Q) {
-    var settings,
-        fetchedRemoteSettings = false;
+    var settings;
 
     function saveLocally (toSave) {
       storageService.setJSON(storageKey, toSave);
@@ -53,8 +52,6 @@ define(['app', 'utils', 'angular', 'services/Storage', 'services/User'], functio
             settings = local;
           }
           else {
-            var self = this;
-
             var noRemotePreferences = function () {
               settings = defaults;
               deferred.resolve(settings);
