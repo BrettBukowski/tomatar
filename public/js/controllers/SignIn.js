@@ -5,7 +5,8 @@ define(['jquery', 'app', 'services/User'], function ($, app) {
     { name: 'Google' }
   ];
 
-  return app.controller('SignInController', ['$scope', '$window', 'userService', function (scope, win, User) {
+  return app.controller('SignInController', ['$scope', '$window', 'userService', 'historyService', 'settingsService',
+    function (scope, win, User, historyService, settingsService) {
     scope.services = services;
     scope.userAvatar = User.getUserHash() || '';
 
@@ -18,7 +19,10 @@ define(['jquery', 'app', 'services/User'], function ($, app) {
     };
 
     scope.signOut = function () {
-      return User.signOut();
+      return User.signOut().then(function () {
+        historyService.destroy();
+        settingsService.destroy();
+      });
     };
 
     scope.toggleTOS = function () {
