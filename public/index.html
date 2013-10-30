@@ -38,7 +38,7 @@
     <hr>
   </header>
 
-  <div data-ng-controller="TimerController" data-ng-include="'partials/timer.html'"></div>
+  <div data-ng-include="'partials/timer.html'"></div>
 
   <div class="content" data-ng-view aria-live="polite"></div>
 
@@ -47,8 +47,8 @@
     <div class="text-right large-offset-10 small-offset-8"><small>Made by <a href="http://brettbukowski.com">Brett Bukowski</a></small></div>
   </footer>
 
-  <div data-ng-controller="SettingsController" data-ng-include="'partials/settings.html'"></div>
-  <div data-ng-controller="SignInController" data-ng-include="'partials/signIn.html'"></div>
+  <div data-ng-include="'partials/settings.html'"></div>
+  <div data-ng-include="'partials/signIn.html'"></div>
 
   <div class="hidden" data-ng-controller="SoundController">
     <audio preload="auto" id="soundNotification" data-ng-bind-html="source"></audio>

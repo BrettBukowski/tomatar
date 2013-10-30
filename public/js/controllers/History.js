@@ -51,21 +51,13 @@ define(['jquery', 'app', 'services/Settings', 'services/Dialog'], function ($, a
       }
 
       function setDayDetail (day, index, month) {
-        var container = $('.completed-pomodori'),
-            className = 'loading';
-
-        animateService.addClass(container, className, function () {
-          scope.dayDetail = {
-            // All finished sessions will share the same date.
-            date:     day.finished[0].date,
-            details:  day.finished,
-            index:    index,
-            month:    month
-          };
-          scope.$apply(function () {
-            animateService.removeClass(container, className);
-          });
-        });
+        scope.dayDetail = {
+          // All finished sessions will share the same date.
+          date:     day.finished[0].date,
+          details:  day.finished,
+          index:    index,
+          month:    month
+        };
       }
 
       settingsService.get().then(function (settings) {
