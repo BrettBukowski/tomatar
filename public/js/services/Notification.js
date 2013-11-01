@@ -1,8 +1,17 @@
-define(['app'], function (app) {
+define(['jquery', 'app'], function ($, app) {
   "use strict";
 
   return app.factory('notificationService', ['$window', function (win) {
+    var currentNotification;
     var factory = {
+      close: function () {
+        if (currentNotification) {
+          currentNotification.close();
+          currentNotification = null;
+          $(window).off('focus', this.close);
+        }
+      },
+
       available: function () {
         return 'Notification' in win;
       },
@@ -15,10 +24,11 @@ define(['app'], function (app) {
 
       display: function (labels) {
         if (this.available()) {
-          new win.Notification(labels.title || 'Error Title', {
+          currentNotification = new win.Notification(labels.title || 'Error Title', {
             iconUrl: '/img/appicon.png',
             body:     labels.body || 'Error Body'
           });
+          $(window).on('focus', this.close);
         }
       }
     };
