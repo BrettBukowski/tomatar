@@ -107,8 +107,13 @@
       letter-spacing: -3px;
     }
   }
-  img {
-    margin-right: -1.3em;
+  .noneCompleted {
+    background: url(/img/check1.png) no-repeat;
+    height: 174px;
+    margin: auto;
+    position: relative;
+    right: -1.1em;
+    width: 200px;
   }
 }
 
@@ -118,9 +123,10 @@ only screen and (   min--moz-device-pixel-ratio: 2),
 only screen and (        min-device-pixel-ratio: 2),
 only screen and (                min-resolution: 192dpi),
 only screen and (                min-resolution: 2dppx) {
-  .today img {
+  .today .noneCompleted {
     opacity: .7;
     background: url(../img/check1@2x.png) no-repeat;
+    background-size: 200px 174px;
   }
 }
 
