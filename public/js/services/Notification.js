@@ -28,6 +28,7 @@ define(['jquery', 'app'], function ($, app) {
             iconUrl: '/img/appicon.png',
             body:     labels.body || 'Error Body'
           });
+          currentNotification.onclick = function () { window.focus(); };
           $(window).on('focus', this.close);
         }
       }
