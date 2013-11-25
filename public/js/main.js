@@ -9,9 +9,9 @@
 require.config({
   paths: {
     'jquery':               'vendor/foundation/js/vendor/jquery',
+    'jquery-cookie':        'vendor/foundation/js/vendor/jquery.cookie',
     'foundation':           'vendor/foundation/js/foundation/foundation',
     'foundation-joyride':   'vendor/foundation/js/foundation/foundation.joyride',
-    'foundation-cookie':    'vendor/foundation/js/foundation/foundation.cookie',
     'foundation-dropdown':  'vendor/foundation/js/foundation/foundation.dropdown',
     'foundation-reveal':    'vendor/foundation/js/foundation/foundation.reveal',
     'angular':              'vendor/angular/angular',
@@ -25,8 +25,8 @@ require.config({
     'angular-cookies':      ['angular'],
     'angular-route':        ['angular'],
     'angular-animate':      ['angular'],
-    'foundation-cookie':    ['foundation'],
-    'foundation-joyride':   ['foundation', 'foundation-cookie'],
+    'jquery-cookie':        ['foundation'],
+    'foundation-joyride':   ['foundation', 'jquery-cookie'],
     'foundation-dropdown':  ['foundation'],
     'foundation-reveal':    ['foundation']
   },

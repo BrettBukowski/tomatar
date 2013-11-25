@@ -5,7 +5,7 @@ define([
   'angular-animate',
   'angular-route',
   'foundation',
-  'foundation-cookie',
+  'jquery-cookie',
   'foundation-joyride',
   'foundation-reveal',
   'foundation-dropdown'
@@ -13,20 +13,23 @@ define([
   "use strict";
 
   return angular.module('tomatar', ['ngCookies', 'ngAnimate', 'ngRoute']).run(['$rootScope', function (rootScope) {
-    $(document).foundation('reveal', {
-      // Focus on the first input field when the dialog
-      // displays.
-      opened: function () {
-        $(this).find('input,textarea,a')[0].focus();
+    $(document).foundation({
+      reveal: {
+        // Focus on the first input field when the dialog
+        // displays.
+        opened: function () {
+          $(this).find('input,textarea,a')[0].focus();
+        },
+        // Broadcast an event for the specific dialog.
+        close: function () {
+          rootScope.$broadcast($(this).attr('id') + 'Closed');
+        }
       },
-      // Broadcast an event for the specific dialog.
-      close: function () {
-        rootScope.$broadcast($(this).attr('id') + 'Closed');
+      joyride: {
+        cookie_monster: true,
+        cookie_expires: 600,
+        cookie_name: 'tour'
       }
-    }).foundation('joyride', 'start', {
-      cookieMonster: true,
-      cookieExpires: 600,
-      cookieName: 'tour'
-    }).foundation('dropdown');
+    }).foundation('joyride', 'start');
   }]);
 });

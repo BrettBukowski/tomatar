@@ -17,11 +17,11 @@
     "tests"
   ],
   "dependencies": {
-    "foundation": "~4.3.2",
     "angular": "1.2.0-rc.3",
     "angular-cookies": "1.2.0-rc.3",
     "angular-animate": "1.2.0-rc.3",
     "angular-route": "1.2.0-rc.3",
+    "foundation": "~5",
     "requirejs": "~2.1.9"
   }
 }
