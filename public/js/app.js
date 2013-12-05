@@ -5,7 +5,6 @@ define([
   'angular-animate',
   'angular-route',
   'foundation',
-  'jquery-cookie',
   'foundation-joyride',
   'foundation-reveal',
   'foundation-dropdown'

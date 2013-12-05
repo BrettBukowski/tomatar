@@ -60,6 +60,11 @@ define(['app', 'jquery', 'services/Settings', 'services/Notification', 'services
       scope.reshowSettingsDialog = reshowSettingsDialog;
     }
 
+    scope.show = function (e) {
+      e.preventDefault();
+      $('#settings').foundation('reveal', 'open');
+    };
+
     scope.notificationsAreAvailable = function () {
       return notificationService.available();
     };
@@ -80,10 +85,11 @@ define(['app', 'jquery', 'services/Settings', 'services/Notification', 'services
       rootScope.$broadcast('setSound', scope.alarms.sounds.current, 'playSoundToo');
     };
 
-    scope.save = function () {
+    scope.save = function (e) {
+      e.preventDefault();
       settingsService.save(populateSettingsFromScope(settingsKeys));
 
-      $('#settings .close-reveal-modal').click();
+      $('#settings').foundation('reveal', 'close');
     };
 
     settingsService.get().then(populateScopeFromSettings);

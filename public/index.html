@@ -31,10 +31,12 @@
           <a href="#" data-ng-click="signOut()" role="button">Sign out</a>
         </span>
       </span>
-      <a href="#" data-reveal-id="settings" class="settings" role="button" aria-haspopup="true">
-        <i class="icon-cog" role="presentation" aria-hidden="true"></i>
-        Settings
-      </a>
+      <span data-ng-controller="SettingsController">
+        <a href="#" data-ng-click="show($event)" class="settings" role="button" aria-haspopup="true">
+          <i class="icon-cog" role="presentation" aria-hidden="true"></i>
+          Settings
+        </a>
+      </span>
     </div>
     <hr>
   </header>
