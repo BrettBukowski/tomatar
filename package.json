@@ -4,18 +4,18 @@
   "private": true,
   "description": "Pomodoro app",
   "dependencies": {
-    "union": "~0.3.7",
+    "union": "~0.3.8",
     "flatiron": "~0.3.5",
     "ecstatic": "~0.4.5",
     "passport": "~0.1.17",
-    "connect": "~2.8.1",
-    "passport-github": "~0.1.5",
-    "passport-facebook": "~0.1.5",
+    "connect": "~2",
+    "passport-github": "~0.1",
+    "passport-facebook": "~1",
     "passport-google": "~0.3.0",
-    "connect-redis": "~1.4.5",
+    "connect-redis": "~1",
     "flatiron-passport": "git://github.com/BrettBukowski/flatiron-passport.git",
     "thin-orm": "git://github.com/BrettBukowski/thin-orm.git",
-    "pg": "~1.3.0",
+    "pg": "~2",
     "q": "~0.9.6",
     "cookies": "~0.3.6"
   },
@@ -33,7 +33,8 @@
     "grunt-cafe-mocha": "~0.1.7",
     "director-explorer": "~0.2.0",
     "grunt-requirejs": "~0.4.0",
-    "grunt-contrib-less": "~0.7.0"
+    "grunt-contrib-less": "~0.7.0",
+    "grunt-ssh": "~0.7.0"
   },
   "repository": {
     "type": "git",
